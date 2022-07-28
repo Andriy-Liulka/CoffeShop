@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeShop.Api", "CoffeShop.Api\CoffeShop.Api.csproj", "{5B75384C-D68E-43CC-95D7-D903391997E8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeShop.Api", "CoffeeShop.Api\CoffeeShop.Api.csproj", "{5B75384C-D68E-43CC-95D7-D903391997E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
