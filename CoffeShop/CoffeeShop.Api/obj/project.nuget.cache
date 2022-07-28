@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RgQ311znaRASpFZTY/PrcXfRknnH61m/rXJ7pR56u3MQ7V18Dhw8LuGkQntanJT39Cb6IEA2HtK9L+chDMXRYw==",
+  "dgSpecHash": "ku+UiJ+hdNUNHvWScX3Mh1EKR2UXlHQ2PTXE6DVALl0CLrJZ/DRV/4FgWFV5m8Q9dQpWhS78PvmKJZLN3RlETg==",
   "success": true,
-  "projectFilePath": "C:\\CoffeShop\\CoffeShop\\CoffeShop\\CoffeShop.Api\\CoffeShop.Api.csproj",
+  "projectFilePath": "C:\\CoffeShop\\CoffeShop\\CoffeShop\\CoffeeShop.Api\\CoffeeShop.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\andrii.liulka\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\andrii.liulka\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",

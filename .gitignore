@@ -1,0 +1,9 @@
+﻿CoffeShop/.idea/.idea.CoffeShop/.idea/workspace.xml
+*.dll
+*.exe
+*.pdb
+CoffeShop/CoffeShop.Api/obj/Debug/net6.0/staticwebassets.build.json
+CoffeShop/CoffeShop.Api/obj/Debug
+CoffeShop/CoffeShop.Api/obj
+CoffeShop/CoffeShop.Api/bin/Debug/net6.0/CoffeShop.Api.deps.json
+CoffeShop/CoffeShop.Api/bin/Debug/net6.0/CoffeShop.Api.runtimeconfig.json

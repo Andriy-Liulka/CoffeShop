@@ -214,11 +214,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\CoffeShop\\CoffeShop\\CoffeShop\\CoffeShop.Api\\CoffeShop.Api.csproj",
-      "projectName": "CoffeShop.Api",
-      "projectPath": "C:\\CoffeShop\\CoffeShop\\CoffeShop\\CoffeShop.Api\\CoffeShop.Api.csproj",
+      "projectUniqueName": "C:\\CoffeShop\\CoffeShop\\CoffeShop\\CoffeeShop.Api\\CoffeeShop.Api.csproj",
+      "projectName": "CoffeeShop.Api",
+      "projectPath": "C:\\CoffeShop\\CoffeShop\\CoffeShop\\CoffeeShop.Api\\CoffeeShop.Api.csproj",
       "packagesPath": "C:\\Users\\andrii.liulka\\.nuget\\packages\\",
-      "outputPath": "C:\\CoffeShop\\CoffeShop\\CoffeShop\\CoffeShop.Api\\obj\\",
+      "outputPath": "C:\\CoffeShop\\CoffeShop\\CoffeShop\\CoffeeShop.Api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
