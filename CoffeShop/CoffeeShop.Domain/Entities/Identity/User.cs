@@ -1,0 +1,20 @@
+﻿namespace CoffeeShop.Domain.Entities.Identity;
+
+public class User
+{
+    public long Id { get; set; }
+    
+    public virtual Role RoleId { get; set; }
+    
+    public string FirstName { get; set; }
+    
+    public string LastName { get; set; }
+
+    public string Email { get;set; }
+    
+    public string PasswordHash { get; set; }
+    
+    public bool IsBlocked { get; set; }
+    
+    public string AvatarImage { get; set; }
+}
