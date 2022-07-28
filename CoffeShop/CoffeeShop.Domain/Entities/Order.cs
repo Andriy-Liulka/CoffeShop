@@ -1,4 +1,5 @@
-﻿using CoffeeShop.Domain.Enums;
+﻿using CoffeeShop.Domain.Entities.Identity;
+using CoffeeShop.Domain.Enums;
 
 namespace CoffeeShop.Domain.Entities;
 
@@ -13,4 +14,8 @@ public class Order
     public bool IsDelivered { get; set; }
     
     public DeliveryWays DeliveryWay { get; set; }
+
+    public virtual User User { get; set; }
+
+    public virtual ICollection<Coffee> Coffees { get; set; }
 }

@@ -11,4 +11,8 @@ public class Coffee
     public decimal Price { get; set; }
     
     public string Provider { get; set; }
+
+    public virtual ICollection<Order> Orders { get; set; }
+    
+    public virtual ICollection<Discount> Discounts { get; set; }
 }
