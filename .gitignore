@@ -9,3 +9,6 @@ CoffeShop/CoffeShop.Api/bin/Debug/net6.0/CoffeShop.Api.deps.json
 CoffeShop/CoffeShop.Api/bin/Debug/net6.0/CoffeShop.Api.runtimeconfig.json
 CoffeShop/CoffeeShop.Api/obj
 CoffeShop/CoffeeShop.Api/bin
+CoffeShop/CoffeeShop.DataAccess/obj
+CoffeShop/CoffeeShop.Domain/obj
+*.sln
