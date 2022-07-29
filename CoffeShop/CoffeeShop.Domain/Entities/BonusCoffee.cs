@@ -6,5 +6,5 @@ public class BonusCoffees
     
     public long BonusCoffeeId { get; set; }
     
-    public BonusCoffees BonusCoffee { get; set; }
+    public Coffee BonusCoffee { get; set; }
 }
