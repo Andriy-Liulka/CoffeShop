@@ -12,3 +12,4 @@ CoffeShop/CoffeeShop.Api/bin
 CoffeShop/CoffeeShop.DataAccess/obj
 CoffeShop/CoffeeShop.Domain/obj
 *.sln
+CoffeShop/CoffeeShop.Domain/bin/Debug
