@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CoffeeShop.DataAccess;
 
-public class CoffeShopContext : DbContext
+public class CoffeeShopContext : DbContext
 {
-    public CoffeShopContext(DbContextOptions<CoffeShopContext> options) :base(options){ }
+    public CoffeeShopContext(DbContextOptions<CoffeeShopContext> options) :base(options){ }
     
     public virtual DbSet<User> Users { get; set; }
     public virtual DbSet<Role> Roles { get; set; }
