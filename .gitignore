@@ -13,3 +13,5 @@ CoffeShop/CoffeeShop.DataAccess/obj
 CoffeShop/CoffeeShop.Domain/obj
 *.sln
 CoffeShop/CoffeeShop.Domain/bin/Debug
+CoffeShop/.idea/.idea.CoffeShop/.idea/efCoreCommonOptions.xml
+CoffeShop/CoffeeShop.DataAccess/bin
