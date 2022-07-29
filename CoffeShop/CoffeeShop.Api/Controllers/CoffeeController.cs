@@ -4,16 +4,16 @@ namespace CoffeShop.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class WeatherForecastController : ControllerBase
+public class CoffeeController : ControllerBase
 {
     private static readonly string[] Summaries = new[]
     {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
 
-    private readonly ILogger<WeatherForecastController> _logger;
+    private readonly ILogger<CoffeeController> _logger;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    public CoffeeController(ILogger<CoffeeController> logger)
     {
         _logger = logger;
     }
