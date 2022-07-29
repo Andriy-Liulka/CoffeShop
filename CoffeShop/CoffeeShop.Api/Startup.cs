@@ -1,4 +1,7 @@
-﻿using Microsoft.OpenApi.Models;
+﻿
+using CoffeeShop.DataAccess;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 namespace CoffeShop.Api;
 
@@ -17,6 +20,10 @@ public class Startup
         services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc("v1", new OpenApiInfo {Title = "Coffee Shop", Version = "v1"});
+        });
+        services.AddDbContext<CoffeeShopContext>(option =>
+        {
+            option.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString") ?? String.Empty);
         });
     }
     
