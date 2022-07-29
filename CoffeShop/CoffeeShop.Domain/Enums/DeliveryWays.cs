@@ -3,5 +3,5 @@
 public enum DeliveryWays
 {
     InShop=1,
-    InPoint=2
+    InPoint
 }

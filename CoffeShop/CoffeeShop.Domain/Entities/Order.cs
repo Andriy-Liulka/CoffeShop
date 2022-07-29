@@ -15,7 +15,9 @@ public class Order
     
     public DeliveryWays DeliveryWay { get; set; }
 
+    public long UserId { get; set; }
+
     public virtual User User { get; set; }
 
-    public virtual ICollection<Coffee> Coffees { get; set; }
+    public virtual IList<Coffee> Coffees { get; set; }
 }
