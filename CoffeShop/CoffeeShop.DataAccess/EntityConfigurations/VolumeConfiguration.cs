@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using CoffeeShop.Domain.Entities;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CoffeeShop.DataAccess.EntityConfigurations;
 
-internal class VolumeConfiguration : IEntityConfiguration
+internal class VolumeConfiguration : IEntityConfiguration<Volume>
 {
-    public EntityTypeBuilder Configure(EntityTypeBuilder builder)
+    public EntityTypeBuilder<Volume> Configure(EntityTypeBuilder<Volume> builder)
     {
         throw new NotImplementedException();
     }

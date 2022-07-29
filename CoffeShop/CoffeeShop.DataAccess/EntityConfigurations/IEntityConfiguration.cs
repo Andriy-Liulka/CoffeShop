@@ -2,7 +2,7 @@
 
 namespace CoffeeShop.DataAccess.EntityConfigurations;
 
-public interface IEntityConfiguration
+public interface IEntityConfiguration<TEntityType>where TEntityType : class
 {
-    public EntityTypeBuilder Configure(EntityTypeBuilder builder);
+    public EntityTypeBuilder<TEntityType> Configure(EntityTypeBuilder<TEntityType> builder);
 }
