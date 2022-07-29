@@ -3,7 +3,6 @@
 public class Coffee
 {
     public long Id { get; set; }
-    
     public bool IsMilk { get; set; }
     
     public string Name { get; set; }
