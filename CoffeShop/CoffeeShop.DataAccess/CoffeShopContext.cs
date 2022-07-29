@@ -35,6 +35,7 @@ public class CoffeShopContext : DbContext
         modelBuilder.Entity<Discount>().Configure<DiscountConfiguration,Discount>();
         modelBuilder.Entity<Order>().Configure<OrderConfiguration,Order>();
         modelBuilder.Entity<Volume>().Configure<VolumeConfiguration,Volume>();
+        modelBuilder.Entity<BonusCoffee>().Configure<BonusCoffeeConfiguration,BonusCoffee>();
 
         base.OnModelCreating(modelBuilder);
     }
