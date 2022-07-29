@@ -9,7 +9,7 @@ internal class VolumeConfiguration : IEntityConfiguration<Volume>
 {
     public EntityTypeBuilder<Volume> Configure(EntityTypeBuilder<Volume> builder)
     {
-        builder.ToTable(TableNameCreator.CreateDefaultTableName<Volume>());
+        builder.ToTable(TableNameCreator.CreateDefaultTableName(()=>nameof(Volume)));
 
         return builder;
     }

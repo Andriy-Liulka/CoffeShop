@@ -9,8 +9,8 @@ internal class DiscountConfiguration :IEntityConfiguration<Discount>
 {
     public EntityTypeBuilder<Discount> Configure(EntityTypeBuilder<Discount> builder)
     {
-        builder.ToTable(TableNameCreator.CreateDefaultTableName<Discount>());
-
+        builder.ToTable(TableNameCreator.CreateDefaultTableName(()=>nameof(Discount)));
+        
         return builder;
     }
 }

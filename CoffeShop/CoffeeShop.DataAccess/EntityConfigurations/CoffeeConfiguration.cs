@@ -11,12 +11,13 @@ public class CoffeeConfiguration : IEntityConfiguration<Coffee>
 {
     public EntityTypeBuilder<Coffee> Configure(EntityTypeBuilder<Coffee> builder)
     {
-        builder.ToTable(TableNameCreator.CreateDefaultTableName<Coffee>());
+        builder.ToTable(TableNameCreator.CreateDefaultTableName(()=>nameof(Coffee)));
         
         builder.HasKey(x => x.Id);
 
         builder.Property(pr => pr.IsMilk).HasConversion<int>();
 
+        builder.Property(pr => pr.Price).HasColumnType("DECIMAL(15,7)");
         
         return builder;
     }

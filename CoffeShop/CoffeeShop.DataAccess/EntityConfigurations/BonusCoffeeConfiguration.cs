@@ -9,7 +9,7 @@ public class BonusCoffeeConfiguration : IEntityConfiguration<BonusCoffee>
 {
     public EntityTypeBuilder<BonusCoffee> Configure(EntityTypeBuilder<BonusCoffee> builder)
     {
-        builder.ToTable(TableNameCreator.CreateDefaultTableName<BonusCoffee>());
+        builder.ToTable(TableNameCreator.CreateDefaultTableName(()=>nameof(BonusCoffee)));
 
         return builder;
     }

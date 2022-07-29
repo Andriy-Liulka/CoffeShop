@@ -9,7 +9,7 @@ internal class UserConfiguration : IEntityConfiguration<User>
 {
     public EntityTypeBuilder<User> Configure(EntityTypeBuilder<User> builder)
     {
-        builder.ToTable(TableNameCreator.CreateDefaultTableName<User>());
+        builder.ToTable(TableNameCreator.CreateDefaultTableName(()=>nameof(User)));
 
         return builder;
     }

@@ -10,7 +10,7 @@ public class RoleConfiguration : IEntityConfiguration<Role>
 {
     public EntityTypeBuilder<Role> Configure(EntityTypeBuilder<Role> builder)
     {
-        builder.ToTable(TableNameCreator.CreateDefaultTableName<Role>());
+        builder.ToTable(TableNameCreator.CreateDefaultTableName(()=>nameof(Role)));
 
         return builder;
     }
