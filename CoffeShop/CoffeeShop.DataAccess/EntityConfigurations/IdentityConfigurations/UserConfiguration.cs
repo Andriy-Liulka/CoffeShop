@@ -11,6 +11,11 @@ internal class UserConfiguration : IEntityConfiguration<User>
     {
         builder.ToTable(TableNameCreator.CreateDefaultTableName(()=>nameof(User)));
 
+        builder
+            .HasOne(x => x.Role)
+            .WithMany(x => x.Users)
+            .HasForeignKey(x => x.RoleId);
+
         return builder;
     }
 }
