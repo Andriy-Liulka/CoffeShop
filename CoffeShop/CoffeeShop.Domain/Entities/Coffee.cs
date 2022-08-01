@@ -1,4 +1,6 @@
-﻿namespace CoffeeShop.Domain.Entities;
+﻿using CoffeeShop.Domain.Entities.MtM_IntermediateEntities;
+
+namespace CoffeeShop.Domain.Entities;
 
 public class Coffee
 {
@@ -12,8 +14,10 @@ public class Coffee
     public string Provider { get; set; }
     
     public long BonusesSize { get; set; }
-
-    public virtual IList<Order> Orders { get; set; }
     
-    public virtual IList<Discount> Discounts { get; set; }
+    public virtual IList<BonusCoffee> BonusCoffees { get; set; }
+
+    public virtual IList<Order_Coffee> Order_Coffees { get; set; }
+    
+    public virtual IList<Discount_Coffee> Discount_Coffees { get; set; }
 }

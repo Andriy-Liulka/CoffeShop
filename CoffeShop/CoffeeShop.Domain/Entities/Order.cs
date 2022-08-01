@@ -1,4 +1,5 @@
 ﻿using CoffeeShop.Domain.Entities.Identity;
+using CoffeeShop.Domain.Entities.MtM_IntermediateEntities;
 using CoffeeShop.Domain.Enums;
 
 namespace CoffeeShop.Domain.Entities;
@@ -19,5 +20,5 @@ public class Order
 
     public virtual User User { get; set; }
 
-    public virtual IList<Coffee> Coffees { get; set; }
+    public virtual IList<Order_Coffee> Order_Coffees { get; set; }
 }

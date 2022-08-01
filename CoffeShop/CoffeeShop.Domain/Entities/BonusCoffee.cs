@@ -4,7 +4,7 @@ public class BonusCoffee
 {
     public long Id { get; set; }
     
-    public long BonusCoffeeId { get; set; }
+    public long CoffeeId { get; set; }
     
     public Coffee Coffee { get; set; }
 }
