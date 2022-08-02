@@ -10,7 +10,12 @@ internal class DiscountConfiguration :IEntityConfiguration<Discount>
     public EntityTypeBuilder<Discount> Configure(EntityTypeBuilder<Discount> builder)
     {
         builder.ToTable(TableNameCreator.CreateDefaultTableName(()=>nameof(Discount)));
-        
+
+        builder
+            .HasMany(x => x.Discount_Coffees)
+            .WithOne(x => x.Discount)
+            .HasForeignKey(x => x.CoffeetId);
+
         return builder;
     }
 }

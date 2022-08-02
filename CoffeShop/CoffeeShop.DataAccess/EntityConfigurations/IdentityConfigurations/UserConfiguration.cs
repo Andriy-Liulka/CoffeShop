@@ -16,6 +16,11 @@ internal class UserConfiguration : IEntityConfiguration<User>
             .WithMany(x => x.Users)
             .HasForeignKey(x => x.RoleId);
 
+        builder
+            .HasMany(x => x.Orders)
+            .WithOne(x => x.User)
+            .HasForeignKey(x => x.UserId);
+        
         return builder;
     }
 }

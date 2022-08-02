@@ -11,6 +11,14 @@ internal class VolumeConfiguration : IEntityConfiguration<Volume>
     {
         builder.ToTable(TableNameCreator.CreateDefaultTableName(()=>nameof(Volume)));
 
+        builder.HasMany(x => x.Order_Volume_Coffees)
+            .WithOne(x => x.Volume)
+            .HasForeignKey(x => x.VolumeId);
+        
+        builder.HasMany(x => x.BonusCoffees)
+            .WithOne(x => x.Volume)
+            .HasForeignKey(x => x.VolumeId);
+
         return builder;
     }
 }

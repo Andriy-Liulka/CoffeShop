@@ -12,6 +12,11 @@ public class RoleConfiguration : IEntityConfiguration<Role>
     {
         builder.ToTable(TableNameCreator.CreateDefaultTableName(()=>nameof(Role)));
 
+        builder
+            .HasMany(x => x.Users)
+            .WithOne(x => x.Role)
+            .HasForeignKey(x=>x.RoleId);
+        
         return builder;
     }
 }

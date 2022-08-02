@@ -11,6 +11,16 @@ public class BonusCoffeeConfiguration : IEntityConfiguration<BonusCoffee>
     {
         builder.ToTable(TableNameCreator.CreateDefaultTableName(()=>nameof(BonusCoffee)));
 
+        builder
+            .HasOne(x => x.Coffee)
+            .WithMany(x => x.BonusCoffees)
+            .HasForeignKey(x => x.CoffeeId);
+        
+        builder
+            .HasOne(x => x.Volume)
+            .WithMany(x => x.BonusCoffees)
+            .HasForeignKey(x => x.VolumeId);
+        
         return builder;
     }
 }
