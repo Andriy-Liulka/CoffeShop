@@ -2,8 +2,10 @@
 using CoffeeShop.DataAccess.Configurations;
 using CoffeeShop.DataAccess.EntityConfigurations;
 using CoffeeShop.DataAccess.EntityConfigurations.IdentityConfigurations;
+using CoffeeShop.DataAccess.EntityConfigurations.MtM_IntermediateEntitiesConfigurations;
 using CoffeeShop.Domain.Entities;
 using CoffeeShop.Domain.Entities.Identity;
+using CoffeeShop.Domain.Entities.MtM_IntermediateEntities;
 using Microsoft.EntityFrameworkCore;
 
 namespace CoffeeShop.DataAccess;
@@ -36,6 +38,9 @@ public class CoffeeShopContext : DbContext
         modelBuilder.Entity<Order>().Configure<OrderConfiguration,Order>();
         modelBuilder.Entity<Volume>().Configure<VolumeConfiguration,Volume>();
         modelBuilder.Entity<BonusCoffee>().Configure<BonusCoffeeConfiguration,BonusCoffee>();
+        
+        modelBuilder.Entity<Discount_Coffee>().Configure<DiscountCoffeeConfiguration,Discount_Coffee>();
+        modelBuilder.Entity<Order_Volume_Coffee>().Configure<OrderVolumeCoffeeConfiguration,Order_Volume_Coffee>();
 
         base.OnModelCreating(modelBuilder);
     }

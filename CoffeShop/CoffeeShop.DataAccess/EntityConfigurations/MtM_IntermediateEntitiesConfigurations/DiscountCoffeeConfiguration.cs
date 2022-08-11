@@ -12,6 +12,8 @@ public class DiscountCoffeeConfiguration : IEntityConfiguration<Discount_Coffee>
     {
         builder.ToTable(TableNameCreator.CreateDefaultTableName(()=>nameof(Discount_Coffee)));
 
+        builder.HasKey(x=>new{x.CoffeetId,x.DiscountId});
+
         builder
             .HasOne(x => x.Discount)
             .WithMany(x => x.Discount_Coffees)

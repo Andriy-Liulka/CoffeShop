@@ -9,8 +9,9 @@ public class OrderVolumeCoffeeConfiguration : IEntityConfiguration<Order_Volume_
 {
     public EntityTypeBuilder<Order_Volume_Coffee> Configure(EntityTypeBuilder<Order_Volume_Coffee> builder)
     {
-        builder.ToTable(TableNameCreator.CreateDefaultTableName(()=>nameof(Order_Volume_Coffee)));
+        builder.ToTable(TableNameCreator.CreateDefaultTableName(() => nameof(Order_Volume_Coffee)));
 
+        builder.HasKey(x => new {x.OrderId, x.VolumeId, x.CoffeetId});
         builder
             .HasOne(x => x.Order)
             .WithMany(x => x.Order_Volume_Coffees)
@@ -25,7 +26,7 @@ public class OrderVolumeCoffeeConfiguration : IEntityConfiguration<Order_Volume_
             .HasOne(x => x.Coffee)
             .WithMany(x => x.Order_Volume_Coffees)
             .HasForeignKey(x => x.CoffeetId);
-        
+
         return builder;
     }
 }
