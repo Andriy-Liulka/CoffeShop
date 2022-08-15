@@ -2,11 +2,10 @@
 using CoffeeShop.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace CoffeeShop.DataAccess.EntityConfigurations;
 
-public class OrderConfiguration : IEntityConfiguration<Order>
+public class OrderConfiguration : IEntityConfiguration<Order>,IDefaultDataSetter<Order>
 {
     public EntityTypeBuilder<Order>Configure(EntityTypeBuilder<Order> builder)
     {
@@ -29,5 +28,10 @@ public class OrderConfiguration : IEntityConfiguration<Order>
             .HasForeignKey(x=>x.UserId);
         
         return builder;
+    }
+
+    public EntityTypeBuilder<Order> SetDefaultData(EntityTypeBuilder<Order> builder)
+    {
+        throw new NotImplementedException();
     }
 }

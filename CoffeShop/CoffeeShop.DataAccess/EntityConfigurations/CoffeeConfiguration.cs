@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Query;
 
 namespace CoffeeShop.DataAccess.EntityConfigurations;
 
-public class CoffeeConfiguration : IEntityConfiguration<Coffee>
+public class CoffeeConfiguration : IEntityConfiguration<Coffee>,IDefaultDataSetter<Coffee>
 {
     public EntityTypeBuilder<Coffee> Configure(EntityTypeBuilder<Coffee> builder)
     {
@@ -35,5 +35,10 @@ public class CoffeeConfiguration : IEntityConfiguration<Coffee>
             .HasForeignKey(x => x.CoffeetId);
         
         return builder;
+    }
+
+    public EntityTypeBuilder<Coffee> SetDefaultData(EntityTypeBuilder<Coffee> builder)
+    {
+        throw new NotImplementedException();
     }
 }

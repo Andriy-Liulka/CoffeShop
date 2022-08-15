@@ -31,7 +31,7 @@ public class CoffeeShopContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<User>().Configure<UserConfiguration,User>();
-        modelBuilder.Entity<Role>().Configure<RoleConfiguration,Role>();
+        modelBuilder.Entity<Role>().Configure<RoleConfiguration,Role>().SetDefaultData<RoleConfiguration,Role>();
         
         modelBuilder.Entity<Coffee>().Configure<CoffeeConfiguration,Coffee>();
         modelBuilder.Entity<Discount>().Configure<DiscountConfiguration,Discount>();

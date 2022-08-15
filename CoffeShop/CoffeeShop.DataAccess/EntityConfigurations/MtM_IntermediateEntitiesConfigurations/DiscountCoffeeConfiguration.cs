@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CoffeeShop.DataAccess.EntityConfigurations.MtM_IntermediateEntitiesConfigurations;
 
-public class DiscountCoffeeConfiguration : IEntityConfiguration<Discount_Coffee>
+public class DiscountCoffeeConfiguration : IEntityConfiguration<DiscountCoffee>,IDefaultDataSetter<DiscountCoffee>
 {
-    public EntityTypeBuilder<Discount_Coffee> Configure(EntityTypeBuilder<Discount_Coffee> builder)
+    public EntityTypeBuilder<DiscountCoffee> Configure(EntityTypeBuilder<DiscountCoffee> builder)
     {
-        builder.ToTable(TableNameCreator.CreateDefaultTableName(()=>nameof(Discount_Coffee)));
+        builder.ToTable(TableNameCreator.CreateDefaultTableName(()=>nameof(DiscountCoffee)));
 
         builder.HasKey(x=>new{x.CoffeetId,x.DiscountId});
 
@@ -25,5 +25,10 @@ public class DiscountCoffeeConfiguration : IEntityConfiguration<Discount_Coffee>
             .HasForeignKey(x => x.CoffeetId);
 
         return builder;
+    }
+
+    public EntityTypeBuilder<DiscountCoffee> SetDefaultData(EntityTypeBuilder<DiscountCoffee> builder)
+    {
+        throw new NotImplementedException();
     }
 }

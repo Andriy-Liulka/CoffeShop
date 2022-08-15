@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CoffeeShop.DataAccess.EntityConfigurations;
 
-public class BonusCoffeeConfiguration : IEntityConfiguration<BonusCoffee>
+public class BonusCoffeeConfiguration : IEntityConfiguration<BonusCoffee>,IDefaultDataSetter<BonusCoffee>
 {
     public EntityTypeBuilder<BonusCoffee> Configure(EntityTypeBuilder<BonusCoffee> builder)
     {
@@ -22,5 +22,10 @@ public class BonusCoffeeConfiguration : IEntityConfiguration<BonusCoffee>
             .HasForeignKey(x => x.VolumeId);
         
         return builder;
+    }
+
+    public EntityTypeBuilder<BonusCoffee> SetDefaultData(EntityTypeBuilder<BonusCoffee> builder)
+    {
+        throw new NotImplementedException();
     }
 }

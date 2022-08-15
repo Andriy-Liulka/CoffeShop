@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CoffeeShop.DataAccess.EntityConfigurations;
 
-internal class VolumeConfiguration : IEntityConfiguration<Volume>
+internal class VolumeConfiguration : IEntityConfiguration<Volume>,IDefaultDataSetter<Volume>
 {
     public EntityTypeBuilder<Volume> Configure(EntityTypeBuilder<Volume> builder)
     {
@@ -20,5 +20,10 @@ internal class VolumeConfiguration : IEntityConfiguration<Volume>
             .HasForeignKey(x => x.VolumeId);
 
         return builder;
+    }
+
+    public EntityTypeBuilder<Volume> SetDefaultData(EntityTypeBuilder<Volume> builder)
+    {
+        throw new NotImplementedException();
     }
 }

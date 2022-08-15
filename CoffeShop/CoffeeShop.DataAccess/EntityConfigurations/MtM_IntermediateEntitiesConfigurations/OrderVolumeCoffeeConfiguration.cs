@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CoffeeShop.DataAccess.EntityConfigurations.MtM_IntermediateEntitiesConfigurations;
 
-public class OrderVolumeCoffeeConfiguration : IEntityConfiguration<Order_Volume_Coffee>
+public class OrderVolumeCoffeeConfiguration : IEntityConfiguration<OrderVolumeCoffee>,IDefaultDataSetter<OrderVolumeCoffee>
 {
-    public EntityTypeBuilder<Order_Volume_Coffee> Configure(EntityTypeBuilder<Order_Volume_Coffee> builder)
+    public EntityTypeBuilder<OrderVolumeCoffee> Configure(EntityTypeBuilder<OrderVolumeCoffee> builder)
     {
-        builder.ToTable(TableNameCreator.CreateDefaultTableName(() => nameof(Order_Volume_Coffee)));
+        builder.ToTable(TableNameCreator.CreateDefaultTableName(() => nameof(OrderVolumeCoffee)));
 
         builder.HasKey(x => new {x.OrderId, x.VolumeId, x.CoffeetId});
         builder
@@ -28,5 +28,10 @@ public class OrderVolumeCoffeeConfiguration : IEntityConfiguration<Order_Volume_
             .HasForeignKey(x => x.CoffeetId);
 
         return builder;
+    }
+
+    public EntityTypeBuilder<OrderVolumeCoffee> SetDefaultData(EntityTypeBuilder<OrderVolumeCoffee> builder)
+    {
+        throw new NotImplementedException();
     }
 }

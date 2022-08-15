@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CoffeeShop.DataAccess.EntityConfigurations;
 
-internal class DiscountConfiguration :IEntityConfiguration<Discount>
+internal class DiscountConfiguration :IEntityConfiguration<Discount>,IDefaultDataSetter<Discount>
 {
     public EntityTypeBuilder<Discount> Configure(EntityTypeBuilder<Discount> builder)
     {
@@ -17,5 +17,10 @@ internal class DiscountConfiguration :IEntityConfiguration<Discount>
             .HasForeignKey(x => x.CoffeetId);
 
         return builder;
+    }
+
+    public EntityTypeBuilder<Discount> SetDefaultData(EntityTypeBuilder<Discount> builder)
+    {
+        throw new NotImplementedException();
     }
 }

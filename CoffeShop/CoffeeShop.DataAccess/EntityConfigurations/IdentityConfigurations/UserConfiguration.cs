@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CoffeeShop.DataAccess.EntityConfigurations.IdentityConfigurations;
 
-internal class UserConfiguration : IEntityConfiguration<User>
+internal class UserConfiguration : IEntityConfiguration<User>,IDefaultDataSetter<User>
 {
     public EntityTypeBuilder<User> Configure(EntityTypeBuilder<User> builder)
     {
@@ -22,5 +22,10 @@ internal class UserConfiguration : IEntityConfiguration<User>
             .HasForeignKey(x => x.UserId);
         
         return builder;
+    }
+
+    public EntityTypeBuilder<User> SetDefaultData(EntityTypeBuilder<User> builder)
+    {
+        throw new NotImplementedException();
     }
 }
