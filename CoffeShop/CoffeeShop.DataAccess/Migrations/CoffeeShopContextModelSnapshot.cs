@@ -155,7 +155,7 @@ namespace CoffeeShop.DataAccess.Migrations
                     b.ToTable("Users", (string)null);
                 });
 
-            modelBuilder.Entity("CoffeeShop.Domain.Entities.MtM_IntermediateEntities.Discount_Coffee", b =>
+            modelBuilder.Entity("CoffeeShop.Domain.Entities.MtM_IntermediateEntities.DiscountCoffee", b =>
                 {
                     b.Property<long>("CoffeetId")
                         .HasColumnType("bigint");
@@ -167,10 +167,10 @@ namespace CoffeeShop.DataAccess.Migrations
 
                     b.HasIndex("DiscountId");
 
-                    b.ToTable("Discount_Coffees", (string)null);
+                    b.ToTable("DiscountCoffees", (string)null);
                 });
 
-            modelBuilder.Entity("CoffeeShop.Domain.Entities.MtM_IntermediateEntities.Order_Volume_Coffee", b =>
+            modelBuilder.Entity("CoffeeShop.Domain.Entities.MtM_IntermediateEntities.OrderVolumeCoffee", b =>
                 {
                     b.Property<long>("OrderId")
                         .HasColumnType("bigint");
@@ -187,7 +187,7 @@ namespace CoffeeShop.DataAccess.Migrations
 
                     b.HasIndex("VolumeId");
 
-                    b.ToTable("Order_Volume_Coffees", (string)null);
+                    b.ToTable("OrderVolumeCoffees", (string)null);
                 });
 
             modelBuilder.Entity("CoffeeShop.Domain.Entities.Order", b =>
@@ -271,7 +271,7 @@ namespace CoffeeShop.DataAccess.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("CoffeeShop.Domain.Entities.MtM_IntermediateEntities.Discount_Coffee", b =>
+            modelBuilder.Entity("CoffeeShop.Domain.Entities.MtM_IntermediateEntities.DiscountCoffee", b =>
                 {
                     b.HasOne("CoffeeShop.Domain.Entities.Coffee", "Coffee")
                         .WithMany("Discount_Coffees")
@@ -290,7 +290,7 @@ namespace CoffeeShop.DataAccess.Migrations
                     b.Navigation("Discount");
                 });
 
-            modelBuilder.Entity("CoffeeShop.Domain.Entities.MtM_IntermediateEntities.Order_Volume_Coffee", b =>
+            modelBuilder.Entity("CoffeeShop.Domain.Entities.MtM_IntermediateEntities.OrderVolumeCoffee", b =>
                 {
                     b.HasOne("CoffeeShop.Domain.Entities.Coffee", "Coffee")
                         .WithMany("Order_Volume_Coffees")
