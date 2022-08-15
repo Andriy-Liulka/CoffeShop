@@ -10,7 +10,7 @@ public class Volume
     
     public string Name { get; set; }
     
-    public virtual IList<Order_Volume_Coffee> Order_Volume_Coffees { get; set; }
+    public virtual IList<OrderVolumeCoffee> Order_Volume_Coffees { get; set; }
     
     public virtual IList<BonusCoffee> BonusCoffees { get; set; }
 }

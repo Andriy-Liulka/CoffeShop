@@ -8,5 +8,5 @@ public class Discount
     
     public float Percent { get; set; }
 
-    public virtual IList<Discount_Coffee> Discount_Coffees { get; set; }
+    public virtual IList<DiscountCoffee> Discount_Coffees { get; set; }
 }
