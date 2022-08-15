@@ -1,6 +1,6 @@
 ﻿namespace CoffeeShop.Domain.Entities.MtM_IntermediateEntities;
 
-public class Order_Volume_Coffee
+public class OrderVolumeCoffee
 {
     public long OrderId { get; set; }
     public virtual Order Order { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace CoffeeShop.Domain.Entities.MtM_IntermediateEntities;
 
-public class Discount_Coffee
+public class DiscountCoffee
 {
     public long DiscountId { get; set; }
     public virtual Discount Discount { get; set; }
