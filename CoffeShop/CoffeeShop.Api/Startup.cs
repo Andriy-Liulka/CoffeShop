@@ -1,4 +1,5 @@
 ﻿
+using CoffeeShop.BusinessLogic.MainBusinessLogic;
 using CoffeeShop.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -25,6 +26,8 @@ public class Startup
         {
             option.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString") ?? String.Empty);
         });
+
+        services.AddScoped<ICoffeeBusinessLogic, CoffeeBusinessLogic>();
     }
     
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

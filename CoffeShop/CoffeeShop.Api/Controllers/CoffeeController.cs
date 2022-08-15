@@ -1,3 +1,4 @@
+using CoffeeShop.BusinessLogic.MainBusinessLogic;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeShop.Api.Controllers;
@@ -6,16 +7,17 @@ namespace CoffeShop.Api.Controllers;
 public class CoffeeController : ControllerBase
 {
     private readonly ILogger<CoffeeController> _logger;
-
-    public CoffeeController(ILogger<CoffeeController> logger)
+    private readonly ICoffeeBusinessLogic _businessLogic;
+    public CoffeeController(ILogger<CoffeeController> logger,ICoffeeBusinessLogic businessLogic)
     {
         _logger = logger;
+        _businessLogic = businessLogic;
     }
-
+    [Route("")]
     [HttpGet]
-    //[Rou]
-    public IActionResult Get([FromRoute]string id)
+    public async Task<IActionResult> GetAll()
     {
-        return Ok();
+        var data =await _businessLogic.GetAll();
+        return Ok(data);
     }
 }

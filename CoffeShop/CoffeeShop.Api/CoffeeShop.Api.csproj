@@ -23,6 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\CoffeeShop.BusinessLogic\CoffeeShop.BusinessLogic.csproj" />
       <ProjectReference Include="..\CoffeeShop.DataAccess\CoffeeShop.DataAccess.csproj" />
     </ItemGroup>
 
