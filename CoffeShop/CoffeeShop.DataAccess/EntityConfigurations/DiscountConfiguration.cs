@@ -21,6 +21,12 @@ internal class DiscountConfiguration :IEntityConfiguration<Discount>,IDefaultDat
 
     public EntityTypeBuilder<Discount> SetDefaultData(EntityTypeBuilder<Discount> builder)
     {
-        throw new NotImplementedException();
+        builder.HasData(
+            new Discount {Id = 1, Percent = 40},
+            new Discount{Id = 2, Percent = 30},
+            new Discount{Id = 3, Percent = 65},
+            new Discount{Id = 4, Percent = 24},
+            new Discount{Id = 4, Percent = 37});
+        return builder;
     }
 }
