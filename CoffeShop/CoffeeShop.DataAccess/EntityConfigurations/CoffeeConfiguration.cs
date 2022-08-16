@@ -17,8 +17,6 @@ public class CoffeeConfiguration : IEntityConfiguration<Coffee>,IDefaultDataSett
 
         builder.Property(pr => pr.IsMilk).HasConversion<int>();
 
-        builder.Property(pr => pr.Price).HasColumnType("DECIMAL(15,7)");
-
         builder
             .HasMany(x => x.BonusCoffees)
             .WithOne(x => x.Coffee)
@@ -39,6 +37,7 @@ public class CoffeeConfiguration : IEntityConfiguration<Coffee>,IDefaultDataSett
 
     public EntityTypeBuilder<Coffee> SetDefaultData(EntityTypeBuilder<Coffee> builder)
     {
-        throw new NotImplementedException();
+        builder.HasData(new Coffee{Id = 1, IsMilk = true, Name = "Latte", Provider = "United States", BonusesSize = 0});
+        return builder;
     }
 }

@@ -10,4 +10,5 @@ public class OrderVolumeCoffee
     
     public long CoffeetId { get; set; }
     public virtual Coffee Coffee { get; set; }
+    public decimal Price { get; set; }
 }

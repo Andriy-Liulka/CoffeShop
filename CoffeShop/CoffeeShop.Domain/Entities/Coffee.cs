@@ -8,9 +8,7 @@ public class Coffee
     public bool IsMilk { get; set; }
     
     public string Name { get; set; }
-    
-    public decimal Price { get; set; }
-    
+
     public string Provider { get; set; }
     
     public long BonusesSize { get; set; }
