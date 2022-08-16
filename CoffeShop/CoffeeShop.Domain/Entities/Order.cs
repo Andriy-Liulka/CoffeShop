@@ -12,6 +12,8 @@ public class Order
     
     public decimal TotalPrice { get; set; }
     
+    public decimal TotalBonusesSize { get; set; }
+    
     public bool IsDelivered { get; set; }
     
     public DeliveryWays DeliveryWay { get; set; }
