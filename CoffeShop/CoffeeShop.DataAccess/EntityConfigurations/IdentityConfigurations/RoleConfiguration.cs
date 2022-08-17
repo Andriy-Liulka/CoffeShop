@@ -12,6 +12,8 @@ public class RoleConfiguration : IEntityConfiguration<Role>,IDefaultDataSetter<R
     {
         builder.ToTable(TableNameCreator.CreateDefaultTableName(()=>nameof(Role)));
 
+        builder.HasKey(x => x.Id);
+
         builder
             .HasMany(x => x.Users)
             .WithOne(x => x.Role)
@@ -22,7 +24,11 @@ public class RoleConfiguration : IEntityConfiguration<Role>,IDefaultDataSetter<R
 
     public EntityTypeBuilder<Role> SetDefaultData(EntityTypeBuilder<Role> builder)
     {
-        builder.HasData(new Role {Id = 1, Name = "Admin"}, new Role {Id = 2, Name = "Customer"});
+        builder.HasData
+        (
+            new Role {Id = 1, Name = "Admin"},
+            new Role {Id = 2, Name = "Customer"}
+        );
         return builder;
     }
 }

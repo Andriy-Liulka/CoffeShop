@@ -10,6 +10,8 @@ public class OrderConfiguration : IEntityConfiguration<Order>,IDefaultDataSetter
     public EntityTypeBuilder<Order>Configure(EntityTypeBuilder<Order> builder)
     {
         builder.ToTable(TableNameCreator.CreateDefaultTableName(()=>nameof(Order)));
+
+        builder.HasKey(x=>x.Id);
         
         builder.Property(pr => pr.TotalPrice).HasColumnType("DECIMAL(20,10)");
         

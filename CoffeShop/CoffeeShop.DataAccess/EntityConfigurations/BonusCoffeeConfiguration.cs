@@ -11,6 +11,8 @@ public class BonusCoffeeConfiguration : IEntityConfiguration<BonusCoffee>,IDefau
     {
         builder.ToTable(TableNameCreator.CreateDefaultTableName(()=>nameof(BonusCoffee)));
 
+        builder.HasKey(x => x.Id);
+        
         builder
             .HasOne(x => x.Coffee)
             .WithMany(x => x.BonusCoffees)

@@ -11,6 +11,8 @@ internal class DiscountConfiguration :IEntityConfiguration<Discount>,IDefaultDat
     {
         builder.ToTable(TableNameCreator.CreateDefaultTableName(()=>nameof(Discount)));
 
+        builder.HasKey(x=>x.Id);
+        
         builder
             .HasMany(x => x.Discount_Coffees)
             .WithOne(x => x.Discount)

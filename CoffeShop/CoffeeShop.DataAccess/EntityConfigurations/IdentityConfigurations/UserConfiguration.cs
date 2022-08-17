@@ -11,6 +11,8 @@ internal class UserConfiguration : IEntityConfiguration<User>,IDefaultDataSetter
     {
         builder.ToTable(TableNameCreator.CreateDefaultTableName(()=>nameof(User)));
 
+        builder.HasKey(x => x.Id);
+        
         builder
             .HasOne(x => x.Role)
             .WithMany(x => x.Users)
