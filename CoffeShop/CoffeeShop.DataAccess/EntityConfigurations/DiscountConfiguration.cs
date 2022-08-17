@@ -26,7 +26,7 @@ internal class DiscountConfiguration :IEntityConfiguration<Discount>,IDefaultDat
             new Discount{Id = 2, Percent = 30},
             new Discount{Id = 3, Percent = 65},
             new Discount{Id = 4, Percent = 24},
-            new Discount{Id = 4, Percent = 37});
+            new Discount{Id = 5, Percent = 37});
         return builder;
     }
 }

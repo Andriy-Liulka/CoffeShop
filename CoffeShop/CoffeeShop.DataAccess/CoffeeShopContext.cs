@@ -33,13 +33,13 @@ public class CoffeeShopContext : DbContext
         modelBuilder.Entity<User>().Configure<UserConfiguration,User>();
         modelBuilder.Entity<Role>().Configure<RoleConfiguration,Role>().SetDefaultData<RoleConfiguration,Role>();
         
-        modelBuilder.Entity<Coffee>().Configure<CoffeeConfiguration,Coffee>();
-        modelBuilder.Entity<Discount>().Configure<DiscountConfiguration,Discount>();
+        modelBuilder.Entity<Coffee>().Configure<CoffeeConfiguration,Coffee>().SetDefaultData<CoffeeConfiguration,Coffee>();
+        modelBuilder.Entity<Discount>().Configure<DiscountConfiguration,Discount>().SetDefaultData<DiscountConfiguration,Discount>();
         modelBuilder.Entity<Order>().Configure<OrderConfiguration,Order>();
-        modelBuilder.Entity<Volume>().Configure<VolumeConfiguration,Volume>();
-        modelBuilder.Entity<BonusCoffee>().Configure<BonusCoffeeConfiguration,BonusCoffee>();
+        modelBuilder.Entity<Volume>().Configure<VolumeConfiguration,Volume>().SetDefaultData<VolumeConfiguration,Volume>();
+        modelBuilder.Entity<BonusCoffee>().Configure<BonusCoffeeConfiguration,BonusCoffee>().SetDefaultData<BonusCoffeeConfiguration,BonusCoffee>();
         
-        modelBuilder.Entity<DiscountCoffee>().Configure<DiscountCoffeeConfiguration,DiscountCoffee>();
+        modelBuilder.Entity<DiscountCoffee>().Configure<DiscountCoffeeConfiguration,DiscountCoffee>().SetDefaultData<DiscountCoffeeConfiguration,DiscountCoffee>();
         modelBuilder.Entity<OrderVolumeCoffee>().Configure<OrderVolumeCoffeeConfiguration,OrderVolumeCoffee>();
 
         base.OnModelCreating(modelBuilder);

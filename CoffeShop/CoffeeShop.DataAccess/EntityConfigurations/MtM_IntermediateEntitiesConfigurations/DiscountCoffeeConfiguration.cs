@@ -29,6 +29,15 @@ public class DiscountCoffeeConfiguration : IEntityConfiguration<DiscountCoffee>,
 
     public EntityTypeBuilder<DiscountCoffee> SetDefaultData(EntityTypeBuilder<DiscountCoffee> builder)
     {
-        throw new NotImplementedException();
+        builder.HasData
+        (
+            new DiscountCoffee{DiscountId = 1, CoffeetId = 1},
+            new DiscountCoffee{DiscountId = 5, CoffeetId = 2},
+            new DiscountCoffee{DiscountId = 4, CoffeetId = 5},
+            new DiscountCoffee{DiscountId = 2, CoffeetId = 6},
+            new DiscountCoffee{DiscountId = 3, CoffeetId = 3},
+            new DiscountCoffee{DiscountId = 2, CoffeetId = 7}
+        );
+        return builder;
     }
 }

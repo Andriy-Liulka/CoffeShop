@@ -24,6 +24,15 @@ internal class VolumeConfiguration : IEntityConfiguration<Volume>,IDefaultDataSe
 
     public EntityTypeBuilder<Volume> SetDefaultData(EntityTypeBuilder<Volume> builder)
     {
-        throw new NotImplementedException();
+        builder.HasData
+        (
+            new Volume{Id = 1, Capacity = 200, Name = "Small"},
+            new Volume{Id = 2, Capacity = 250, Name = "Small"},
+            new Volume{Id = 3, Capacity = 300, Name = "Average"},
+            new Volume{Id = 4, Capacity = 350, Name = "Average"},
+            new Volume{Id = 5, Capacity = 450, Name = "Large"},
+            new Volume{Id = 6, Capacity = 500, Name = "Large"}
+        );
+        return builder;
     }
 }
