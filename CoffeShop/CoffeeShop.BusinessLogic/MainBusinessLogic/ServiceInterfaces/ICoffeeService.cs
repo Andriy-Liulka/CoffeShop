@@ -2,7 +2,7 @@
 
 namespace CoffeeShop.BusinessLogic.MainBusinessLogic;
 
-public interface ICoffeeBusinessLogic
+public interface ICoffeeService
 {
     Task<List<Coffee>> GetAll();
 }
