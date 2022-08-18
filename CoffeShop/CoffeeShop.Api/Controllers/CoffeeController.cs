@@ -7,17 +7,17 @@ namespace CoffeShop.Api.Controllers;
 public class CoffeeController : ControllerBase
 {
     private readonly ILogger<CoffeeController> _logger;
-    private readonly ICoffeeBusinessLogic _businessLogic;
-    public CoffeeController(ILogger<CoffeeController> logger,ICoffeeBusinessLogic businessLogic)
+    private readonly ICoffeeService _service;
+    public CoffeeController(ILogger<CoffeeController> logger,ICoffeeService service)
     {
         _logger = logger;
-        _businessLogic = businessLogic;
+        _service = service;
     }
     [Route("")]
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        var data =await _businessLogic.GetAll();
+        var data =await _service.GetAll();
         return Ok(data);
     }
 }
