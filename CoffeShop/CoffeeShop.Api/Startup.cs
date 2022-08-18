@@ -31,7 +31,7 @@ public class Startup
             option.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString") ?? String.Empty);
         });
 
-        services.AddScoped<ICoffeeBusinessLogic, CoffeeBusinessLogic>();
+        services.AddScoped<ICoffeeService, CoffeeService>();
     }
     
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 namespace CoffeeShop.BusinessLogic.MainBusinessLogic;
 
 
-public class CoffeeBusinessLogic : ICoffeeBusinessLogic
+public class CoffeeService : ICoffeeService
 {
     private readonly CoffeeShopContext _context;
 
-    public CoffeeBusinessLogic(CoffeeShopContext context)
+    public CoffeeService(CoffeeShopContext context)
     {
         _context = context;
     }
