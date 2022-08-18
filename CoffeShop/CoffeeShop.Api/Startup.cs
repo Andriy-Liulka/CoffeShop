@@ -1,4 +1,5 @@
 ﻿
+using System.Text.Json.Serialization;
 using CoffeeShop.BusinessLogic.MainBusinessLogic;
 using CoffeeShop.DataAccess;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +18,10 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddLogging();
-        services.AddControllers();
+        services.AddControllers()
+            .AddJsonOptions(x =>
+            x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+        
         services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc("v1", new OpenApiInfo {Title = "Coffee Shop", Version = "v1"});
