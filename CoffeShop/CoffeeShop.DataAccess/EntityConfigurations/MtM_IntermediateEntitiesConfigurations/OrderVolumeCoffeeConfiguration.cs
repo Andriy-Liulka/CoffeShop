@@ -17,17 +17,17 @@ public class OrderVolumeCoffeeConfiguration : IEntityConfiguration<OrderVolumeCo
         
         builder
             .HasOne(x => x.Order)
-            .WithMany(x => x.Order_Volume_Coffees)
+            .WithMany(x => x.OrderVolumeCoffees)
             .HasForeignKey(x => x.OrderId);
 
         builder
             .HasOne(x => x.Volume)
-            .WithMany(x => x.Order_Volume_Coffees)
+            .WithMany(x => x.OrderVolumeCoffees)
             .HasForeignKey(x => x.VolumeId);
 
         builder
             .HasOne(x => x.Coffee)
-            .WithMany(x => x.Order_Volume_Coffees)
+            .WithMany(x => x.OrderVolumeCoffees)
             .HasForeignKey(x => x.CoffeetId);
 
         return builder;

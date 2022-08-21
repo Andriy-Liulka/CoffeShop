@@ -23,12 +23,12 @@ public class CoffeeConfiguration : IEntityConfiguration<Coffee>,IDefaultDataSett
             .HasForeignKey(x => x.CoffeeId);
 
         builder
-            .HasMany(x => x.Order_Volume_Coffees)
+            .HasMany(x => x.OrderVolumeCoffees)
             .WithOne(x => x.Coffee)
             .HasForeignKey(x => x.CoffeetId);
 
         builder
-            .HasMany(x => x.Discount_Coffees)
+            .HasMany(x => x.DiscountCoffees)
             .WithOne(x => x.Coffee)
             .HasForeignKey(x => x.CoffeetId);
         

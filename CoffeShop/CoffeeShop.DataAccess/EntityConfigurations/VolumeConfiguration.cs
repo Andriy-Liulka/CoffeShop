@@ -13,7 +13,7 @@ internal class VolumeConfiguration : IEntityConfiguration<Volume>,IDefaultDataSe
 
         builder.HasKey(x => x.Id);
         
-        builder.HasMany(x => x.Order_Volume_Coffees)
+        builder.HasMany(x => x.OrderVolumeCoffees)
             .WithOne(x => x.Volume)
             .HasForeignKey(x => x.VolumeId);
         

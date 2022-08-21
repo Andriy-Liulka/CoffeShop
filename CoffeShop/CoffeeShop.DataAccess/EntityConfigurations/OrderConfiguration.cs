@@ -20,7 +20,7 @@ public class OrderConfiguration : IEntityConfiguration<Order>,IDefaultDataSetter
         builder.Property(pr => pr.RegistrationDate).HasColumnType("DATETIMEOFFSET(4)");
 
         builder
-            .HasMany(x => x.Order_Volume_Coffees)
+            .HasMany(x => x.OrderVolumeCoffees)
             .WithOne(x => x.Order)
             .HasForeignKey(x => x.OrderId);
         
