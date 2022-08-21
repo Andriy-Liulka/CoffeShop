@@ -1,8 +1,9 @@
 ﻿using CoffeeShop.Domain.Entities;
 
-namespace CoffeeShop.BusinessLogic.MainBusinessLogic;
+namespace CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 
 public interface ICoffeeService
 {
-    Task<List<Coffee>> GetAll();
+    public Task<List<Coffee>> GetAll();
+    public Task<Coffee?> Get(int id);
 }
