@@ -1,4 +1,4 @@
-using CoffeeShop.BusinessLogic.MainBusinessLogic;
+using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeShop.Api.Controllers;
@@ -15,9 +15,10 @@ public class CoffeeController : ControllerBase
     }
     [Route("")]
     [HttpGet]
-    public async Task<IActionResult> GetAll()
-    {
-        var data =await _service.GetAll();
-        return Ok(data);
-    }
+    public async Task<IActionResult> GetAll() => Ok(await _service.GetAll());
+
+    [Route("{id}")]
+    [HttpGet]
+    public async Task<IActionResult> Get([FromRoute]int id) => Ok(await _service.Get(id));
+
 }
