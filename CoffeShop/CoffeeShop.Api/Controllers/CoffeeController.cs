@@ -15,10 +15,10 @@ public class CoffeeController : ControllerBase
     }
     [Route("")]
     [HttpGet]
-    public async Task<IActionResult> GetAll() => Ok(await _service.GetAll());
+    public async Task<IActionResult> GetAllAsync() => Ok(await _service.GetAllAsync());
 
     [Route("{id}")]
     [HttpGet]
-    public async Task<IActionResult> Get([FromRoute]int id) => Ok(await _service.Get(id));
+    public async Task<IActionResult> GetAsync([FromRoute]int id) => Ok(await _service.GetAsync(id));
 
 }

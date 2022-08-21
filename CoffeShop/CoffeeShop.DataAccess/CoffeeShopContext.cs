@@ -13,6 +13,7 @@ namespace CoffeeShop.DataAccess;
 public class CoffeeShopContext : DbContext
 {
     public CoffeeShopContext(DbContextOptions<CoffeeShopContext> options) :base(options){ }
+    public CoffeeShopContext(){}
     
     public virtual DbSet<User> Users { get; set; }
     public virtual DbSet<Role> Roles { get; set; }

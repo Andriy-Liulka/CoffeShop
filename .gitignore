@@ -20,3 +20,5 @@ CoffeShop/.idea/.idea.CoffeShop/.idea/dataSources/1b393452-a5e2-43f6-8ed3-2457f0
 CoffeShop/.idea/.idea.CoffeShop/.idea/dataSources
 CoffeShop/CoffeeShop.Tests/obj
 CoffeShop/CoffeShop.sln
+CoffeShop/CoffeeShop.Tests/bin/Debug
+*.user
