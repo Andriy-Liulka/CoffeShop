@@ -1,4 +1,5 @@
 using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
+using CoffeeShop.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeShop.Api.Controllers;
@@ -21,4 +22,7 @@ public class CoffeeController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAsync([FromRoute]int id) => Ok(await _service.GetAsync(id));
 
+    [Route("create")]
+    [HttpPost]
+    public async Task<IActionResult> CreateAsync([FromBody]Coffee coffee) => Ok(await _service.GetAsync(id));
 }

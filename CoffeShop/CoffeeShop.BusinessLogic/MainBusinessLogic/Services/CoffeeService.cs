@@ -16,10 +16,15 @@ public class CoffeeService : ICoffeeService
     }
 
     public async Task<List<Coffee>> GetAllAsync() => await _context.Coffees
-            .Include(x => x.DiscountCoffees)
-            .Include(x => x.OrderVolumeCoffees)
-            .Include(x => x.BonusCoffees)
-            .ToListAsync();
-    public async Task<Coffee?> GetAsync(int id) => await _context.Coffees.FirstOrDefaultAsync(x => x.Id.Equals(id));
+        .Include(x => x.DiscountCoffees)
+        .Include(x => x.OrderVolumeCoffees)
+        .Include(x => x.BonusCoffees)
+        .ToListAsync();
+
+    public async Task<Coffee?> GetAsync(int id) => await _context.Coffees
+        .Include(x => x.DiscountCoffees).ThenInclude(x=>x.)
+        .Include(x => x.OrderVolumeCoffees)
+        .Include(x => x.BonusCoffees)
+        .FirstOrDefaultAsync(x => x.Id.Equals(id));
 
 }
