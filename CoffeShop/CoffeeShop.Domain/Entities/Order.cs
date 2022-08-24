@@ -12,13 +12,13 @@ public class Order
     
     public decimal TotalPrice { get; set; }
     
-    public decimal TotalBonusesSize { get; set; }
+    public long TotalBonusesSize { get; set; }
     
     public bool IsDelivered { get; set; }
     
     public DeliveryWays DeliveryWay { get; set; }
 
-    public long UserId { get; set; }
+    public long? UserId { get; set; }
 
     public virtual User User { get; set; }
 
