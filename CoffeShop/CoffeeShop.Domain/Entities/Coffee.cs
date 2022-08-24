@@ -13,9 +13,9 @@ public class Coffee
     
     public long BonusesSize { get; set; }
     
-    public virtual IList<BonusCoffee> BonusCoffees { get; set; }
+    public virtual IList<BonusCoffee>? BonusCoffees { get; set; }
 
-    public virtual IList<OrderVolumeCoffee> OrderVolumeCoffees { get; set; }
+    public virtual IList<OrderVolumeCoffee>? OrderVolumeCoffees { get; set; }
     
-    public virtual IList<DiscountCoffee> DiscountCoffees { get; set; }
+    public virtual IList<DiscountCoffee>? DiscountCoffees { get; set; }
 }

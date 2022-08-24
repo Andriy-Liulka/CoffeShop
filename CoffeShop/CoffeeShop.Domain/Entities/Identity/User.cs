@@ -21,5 +21,5 @@ public class User
     public long Bonuses { get; set; }
     public long? RoleId { get; set; }
     public virtual Role Role { get; set; }
-    public virtual IList<Order> Orders { get; set; }
+    public virtual IList<Order>? Orders { get; set; }
 }

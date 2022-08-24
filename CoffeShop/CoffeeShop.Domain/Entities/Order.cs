@@ -22,5 +22,5 @@ public class Order
 
     public virtual User User { get; set; }
 
-    public virtual IList<OrderVolumeCoffee> OrderVolumeCoffees { get; set; }
+    public virtual IList<OrderVolumeCoffee>? OrderVolumeCoffees { get; set; }
 }
