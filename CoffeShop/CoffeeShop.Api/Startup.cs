@@ -3,7 +3,9 @@ using System.Text.Json.Serialization;
 using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.BusinessLogic.MainBusinessLogic.Services;
 using CoffeeShop.DataAccess;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.OpenApi.Models;
 
 namespace CoffeShop.Api;
@@ -31,8 +33,10 @@ public class Startup
         {
             option.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString") ?? String.Empty);
         });
+        services.AddHealthChecks();
 
         services.AddScoped<ICoffeeService, CoffeeService>();
+        
     }
     
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -53,6 +57,14 @@ public class Startup
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllerRoute(name:"default",pattern:"api/{controller}/{action}");
+            endpoints.MapHealthChecks("/health", new HealthCheckOptions()
+            {
+                ResultStatusCodes =
+                {
+                    [HealthStatus.Healthy]=StatusCodes.Status200OK,
+                    [HealthStatus.Unhealthy]=StatusCodes.Status500InternalServerError
+                }
+            });
         });
     }
 }
