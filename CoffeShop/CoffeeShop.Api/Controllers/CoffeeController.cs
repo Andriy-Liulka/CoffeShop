@@ -1,3 +1,5 @@
+using System.Data;
+using System.Net;
 using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -16,13 +18,41 @@ public class CoffeeController : ControllerBase
     }
     [Route("")]
     [HttpGet]
-    public async Task<IActionResult> GetAllAsync() => Ok(await _service.GetAllAsync());
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetAllAsync() 
+        => Ok(await _service.GetAllAsync());
 
     [Route("{id}")]
     [HttpGet]
-    public async Task<IActionResult> GetAsync([FromRoute]int id) => Ok(await _service.GetAsync(id));
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetAsync([FromRoute]int id) 
+    => Ok(await _service.GetAsync(id));
 
     [Route("create")]
     [HttpPost]
-    public async Task<IActionResult> CreateAsync([FromBody]Coffee coffee) => Ok(await _service.GetAsync(id));
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    public async Task<IActionResult> CreateAsync([FromBody]Coffee coffee)
+    {
+        await _service.CreateAsync(coffee);
+        return Created(String.Empty,coffee);
+        //return StatusCode((int) HttpStatusCode.Created);
+    }
+    
+    [Route("Update")]
+    [HttpPut]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<IActionResult> UpdateAsync([FromBody]Coffee coffee)
+    {
+        await _service.UpdateAsync(coffee);
+        return Ok();
+    }
+    
+    [Route("Delete")]
+    [HttpDelete]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<IActionResult> DeleteAsync([FromBody]Coffee coffee)
+    {
+        await _service.DeleteAsync(coffee);
+        return Ok();
+    }
 }
