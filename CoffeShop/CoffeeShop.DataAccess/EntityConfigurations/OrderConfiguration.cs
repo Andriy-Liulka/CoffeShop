@@ -13,17 +13,16 @@ public class OrderConfiguration : IEntityConfiguration<Order>,IDefaultDataSetter
 
         builder.HasKey(x=>x.Id);
         
+        builder.Ignore(x => x.OrderVolumeCoffees);
+
         builder.Property(pr => pr.TotalPrice).HasColumnType("DECIMAL(20,10)");
-        
         builder.Property(pr => pr.DeliveryWay).HasColumnType("VARCHAR(10)");
-        
         builder.Property(pr => pr.RegistrationDate).HasColumnType("DATETIMEOFFSET(4)");
 
         builder
             .HasMany(x => x.OrderVolumeCoffees)
             .WithOne(x => x.Order)
             .HasForeignKey(x => x.OrderId);
-        
         builder
             .HasOne(x=>x.User)
             .WithMany(x=>x.Orders)

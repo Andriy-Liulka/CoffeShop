@@ -13,6 +13,8 @@ public class RoleConfiguration : IEntityConfiguration<Role>,IDefaultDataSetter<R
         builder.ToTable(TableNameCreator.CreateDefaultTableName(()=>nameof(Role)));
 
         builder.HasKey(x => x.Id);
+        
+        builder.Ignore(x => x.Users);
 
         builder
             .HasMany(x => x.Users)

@@ -13,6 +13,8 @@ internal class DiscountConfiguration :IEntityConfiguration<Discount>,IDefaultDat
 
         builder.HasKey(x=>x.Id);
         
+        builder.Ignore(x => x.DiscountCoffees);
+
         builder
             .HasMany(x => x.DiscountCoffees)
             .WithOne(x => x.Discount)

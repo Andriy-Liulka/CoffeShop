@@ -19,17 +19,15 @@ public class OrderVolumeCoffeeConfiguration : IEntityConfiguration<OrderVolumeCo
             .HasOne(x => x.Order)
             .WithMany(x => x.OrderVolumeCoffees)
             .HasForeignKey(x => x.OrderId);
-
         builder
             .HasOne(x => x.Volume)
             .WithMany(x => x.OrderVolumeCoffees)
             .HasForeignKey(x => x.VolumeId);
-
         builder
             .HasOne(x => x.Coffee)
             .WithMany(x => x.OrderVolumeCoffees)
             .HasForeignKey(x => x.CoffeetId);
-
+        
         return builder;
     }
 

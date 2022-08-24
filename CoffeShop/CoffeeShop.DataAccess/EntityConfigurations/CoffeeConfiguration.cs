@@ -1,5 +1,6 @@
 ﻿
 using CoffeeShop.DataAccess.Common;
+using CoffeeShop.DataAccess.Configurations;
 using CoffeeShop.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -17,16 +18,18 @@ public class CoffeeConfiguration : IEntityConfiguration<Coffee>,IDefaultDataSett
 
         builder.Property(pr => pr.IsMilk).HasColumnType("INT");
 
+        builder.Ignore(x => x.BonusCoffees);
+        builder.Ignore(x => x.DiscountCoffees);
+        builder.Ignore(x => x.OrderVolumeCoffees);
+
         builder
             .HasMany(x => x.BonusCoffees)
             .WithOne(x => x.Coffee)
             .HasForeignKey(x => x.CoffeeId);
-
         builder
             .HasMany(x => x.OrderVolumeCoffees)
             .WithOne(x => x.Coffee)
             .HasForeignKey(x => x.CoffeetId);
-
         builder
             .HasMany(x => x.DiscountCoffees)
             .WithOne(x => x.Coffee)

@@ -18,7 +18,6 @@ public class DiscountCoffeeConfiguration : IEntityConfiguration<DiscountCoffee>,
             .HasOne(x => x.Discount)
             .WithMany(x => x.DiscountCoffees)
             .HasForeignKey(x => x.DiscountId);
-
         builder
             .HasOne(x => x.Coffee)
             .WithMany(x => x.DiscountCoffees)
