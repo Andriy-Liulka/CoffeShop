@@ -3,6 +3,7 @@ using System.Text.Json.Serialization;
 using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.BusinessLogic.MainBusinessLogic.Services;
 using CoffeeShop.DataAccess;
+using CoffeShop.Api.Configurations;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -33,6 +34,7 @@ public class Startup
         {
             option.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString") ?? String.Empty);
         });
+
         services.AddHealthChecks();
 
         services.AddScoped<ICoffeeService, CoffeeService>();
@@ -41,6 +43,8 @@ public class Startup
     
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
+        app.UpdateDatabase();
+        
         if (env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
