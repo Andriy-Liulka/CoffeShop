@@ -1,6 +1,6 @@
 ﻿namespace CoffeeShop.BusinessLogic.MainBusinessLogic;
 
-public class DiscountController
+public class DiscountService
 {
     
 }

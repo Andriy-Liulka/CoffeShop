@@ -1,6 +1,13 @@
-﻿namespace CoffeeShop.BusinessLogic.MainBusinessLogic;
+﻿using CoffeeShop.DataAccess;
 
-public class BonusCoffeeController
+namespace CoffeeShop.BusinessLogic.MainBusinessLogic;
+
+public class BonusCoffeeService
 {
-    
+    private readonly CoffeeShopContext _context;
+
+    public BonusCoffeeService(CoffeeShopContext context)
+    {   
+        _context = context;
+    }
 }

@@ -1,6 +1,6 @@
 ﻿namespace CoffeeShop.BusinessLogic.MainBusinessLogic;
 
-public class VolumeController
+public class VolumeService
 {
     
 }
