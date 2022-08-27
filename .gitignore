@@ -22,3 +22,6 @@ CoffeShop/CoffeeShop.Tests/obj
 CoffeShop/CoffeeShop.Tests/bin/Debug
 *.user
 CoffeShop/.idea/.idea.CoffeShop/.idea/dataSources.local.xml
+.vs/CoffeeShop/DesignTimeBuild
+.vs/ProjectEvaluation
+.vs/CoffeeShop/FileContentIndex
