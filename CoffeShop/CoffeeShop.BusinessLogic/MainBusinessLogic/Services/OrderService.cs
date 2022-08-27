@@ -1,13 +1,13 @@
-﻿using CoffeeShop.DataAccess;
+﻿using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
+using CoffeeShop.DataAccess;
 using CoffeeShop.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services;
 
-public class OrderService
+public class OrderService : IOrderService
 {
-    
-       private readonly CoffeeShopContext _context;
+    private readonly CoffeeShopContext _context;
        public OrderService(CoffeeShopContext context)
        {   
            _context = context;
