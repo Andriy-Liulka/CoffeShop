@@ -1,7 +1,7 @@
 ﻿using CoffeeShop.DataAccess;
 using Microsoft.EntityFrameworkCore;
 
-namespace CoffeShop.Api.Configurations;
+namespace CoffeShop.Api.Configurations.Middlewares;
 
 public static class DatabaseConfigurator
 {

@@ -2,7 +2,7 @@
 using CoffeeShop.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace CoffeeShop.BusinessLogic.MainBusinessLogic;
+namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services;
 
 public class BonusCoffeeService
 {

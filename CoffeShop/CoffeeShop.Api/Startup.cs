@@ -4,6 +4,7 @@ using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.BusinessLogic.MainBusinessLogic.Services;
 using CoffeeShop.DataAccess;
 using CoffeShop.Api.Configurations;
+using CoffeShop.Api.Configurations.Middlewares;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Diagnostics.HealthChecks;

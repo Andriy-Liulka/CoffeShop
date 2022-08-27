@@ -1,4 +1,4 @@
-﻿namespace CoffeeShop.BusinessLogic.MainBusinessLogic;
+﻿namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services.IdentityServices;
 
 public class UserService
 {
