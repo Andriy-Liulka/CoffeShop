@@ -24,7 +24,7 @@ public class CoffeeShopContext : DbContext
     public virtual DbSet<Volume> Volumes { get; set; }
     public virtual DbSet<BonusCoffee> BonusCoffees { get; set; }
     
-    public virtual DbSet<BonusCoffee> DiscBonusCoffees { get; set; }
+    public virtual DbSet<DiscountCoffee> DiscountCoffees { get; set; }
     public virtual DbSet<OrderVolumeCoffee> OrderVolumeCoffees { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
