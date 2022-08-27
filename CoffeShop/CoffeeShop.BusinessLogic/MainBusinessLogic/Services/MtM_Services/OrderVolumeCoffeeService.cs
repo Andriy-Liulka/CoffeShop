@@ -1,10 +1,11 @@
-﻿using CoffeeShop.DataAccess;
+﻿using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
+using CoffeeShop.DataAccess;
 using CoffeeShop.Domain.Entities.MtM_IntermediateEntities;
 using Microsoft.EntityFrameworkCore;
 
 namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services.MtM_Services;
 
-public class OrderVolumeCoffeeService
+public class OrderVolumeCoffeeService : IOrderVolumeCoffeeService
 {
     private readonly CoffeeShopContext _context;
     public OrderVolumeCoffeeService(CoffeeShopContext context)
@@ -17,14 +18,14 @@ public class OrderVolumeCoffeeService
         .Include(x=>x.Volume)
         .ToListAsync();
 
-    public async Task<OrderVolumeCoffee?> GetAsync(int orderId,int volumeId,int coffeetId) => await _context.OrderVolumeCoffees
+    public async Task<OrderVolumeCoffee?> GetAsync(int orderId,int volumeId,int coffeeId) => await _context.OrderVolumeCoffees
         .Include(x=>x.Coffee)
         .Include(x=>x.Order)
         .Include(x=>x.Volume)
         .FirstOrDefaultAsync(x => 
             x.OrderId.Equals(orderId) &&
             x.VolumeId.Equals(volumeId) && 
-            x.CoffeetId.Equals(coffeetId));
+            x.CoffeetId.Equals(coffeeId));
 
     public async Task CreateAsync(OrderVolumeCoffee orderVolumeCoffee)
     {

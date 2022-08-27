@@ -1,11 +1,12 @@
-﻿using CoffeeShop.DataAccess;
+﻿using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
+using CoffeeShop.DataAccess;
 using CoffeeShop.Domain.Entities.Identity;
 using CoffeeShop.Domain.Entities.MtM_IntermediateEntities;
 using Microsoft.EntityFrameworkCore;
 
 namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services.IdentityServices;
 
-public class UserService
+public class UserService : IUserService
 {
     private readonly CoffeeShopContext _context;
 

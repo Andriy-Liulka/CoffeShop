@@ -1,10 +1,11 @@
-﻿using CoffeeShop.DataAccess;
+﻿using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
+using CoffeeShop.DataAccess;
 using CoffeeShop.Domain.Entities.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services.IdentityServices;
 
-public class RoleService
+public class RoleService : IRoleService
 {
     private readonly CoffeeShopContext _context;
 

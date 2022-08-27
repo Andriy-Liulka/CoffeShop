@@ -1,10 +1,11 @@
-﻿using CoffeeShop.DataAccess;
+﻿using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
+using CoffeeShop.DataAccess;
 using CoffeeShop.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services;
 
-public class VolumeService
+public class VolumeService : IVolumeService
 {
     private readonly CoffeeShopContext _context;
     public VolumeService(CoffeeShopContext context)

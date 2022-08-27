@@ -1,10 +1,11 @@
-﻿using CoffeeShop.DataAccess;
+﻿using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
+using CoffeeShop.DataAccess;
 using CoffeeShop.Domain.Entities.MtM_IntermediateEntities;
 using Microsoft.EntityFrameworkCore;
 
 namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services.MtM_Services;
 
-public class DiscountCoffeeService
+public class DiscountCoffeeService : IDiscountCoffeeService
 {
     private readonly CoffeeShopContext _context;
 
