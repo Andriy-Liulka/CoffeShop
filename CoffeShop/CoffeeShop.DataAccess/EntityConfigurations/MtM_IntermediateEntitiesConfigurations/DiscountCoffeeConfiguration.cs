@@ -12,7 +12,7 @@ public class DiscountCoffeeConfiguration : IEntityConfiguration<DiscountCoffee>,
     {
         builder.ToTable(TableNameCreator.CreateDefaultTableName(()=>nameof(DiscountCoffee)));
 
-        builder.HasKey(x=>new{x.CoffeetId,x.DiscountId});
+        builder.HasKey(x=>new{ CoffeetId = x.CoffeeId,x.DiscountId});
 
         builder
             .HasOne(x => x.Discount)
@@ -21,7 +21,7 @@ public class DiscountCoffeeConfiguration : IEntityConfiguration<DiscountCoffee>,
         builder
             .HasOne(x => x.Coffee)
             .WithMany(x => x.DiscountCoffees)
-            .HasForeignKey(x => x.CoffeetId);
+            .HasForeignKey(x => x.CoffeeId);
 
         return builder;
     }
@@ -30,12 +30,12 @@ public class DiscountCoffeeConfiguration : IEntityConfiguration<DiscountCoffee>,
     {
         builder.HasData
         (
-            new DiscountCoffee{DiscountId = 1, CoffeetId = 1},
-            new DiscountCoffee{DiscountId = 5, CoffeetId = 2},
-            new DiscountCoffee{DiscountId = 4, CoffeetId = 5},
-            new DiscountCoffee{DiscountId = 2, CoffeetId = 6},
-            new DiscountCoffee{DiscountId = 3, CoffeetId = 3},
-            new DiscountCoffee{DiscountId = 2, CoffeetId = 7}
+            new DiscountCoffee{DiscountId = 1, CoffeeId = 1},
+            new DiscountCoffee{DiscountId = 5, CoffeeId = 2},
+            new DiscountCoffee{DiscountId = 4, CoffeeId = 5},
+            new DiscountCoffee{DiscountId = 2, CoffeeId = 6},
+            new DiscountCoffee{DiscountId = 3, CoffeeId = 3},
+            new DiscountCoffee{DiscountId = 2, CoffeeId = 7}
         );
         return builder;
     }

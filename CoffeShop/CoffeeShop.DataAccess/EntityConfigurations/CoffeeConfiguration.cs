@@ -33,7 +33,7 @@ public class CoffeeConfiguration : IEntityConfiguration<Coffee>,IDefaultDataSett
         builder
             .HasMany(x => x.DiscountCoffees)
             .WithOne(x => x.Coffee)
-            .HasForeignKey(x => x.CoffeetId);
+            .HasForeignKey(x => x.CoffeeId);
         
         return builder;
     }

@@ -22,7 +22,7 @@ public class DiscountCoffeeService : IDiscountCoffeeService
     public async Task<DiscountCoffee?> GetAsync(int discountId,int coffeetId) => await _context.DiscountCoffees
         .Include(x=>x.Coffee)
         .Include(x=>x.Discount)
-        .FirstOrDefaultAsync(x => x.DiscountId.Equals(discountId) && x.CoffeetId.Equals(coffeetId));
+        .FirstOrDefaultAsync(x => x.DiscountId.Equals(discountId) && x.CoffeeId.Equals(coffeetId));
 
     public async Task CreateAsync(DiscountCoffee discountCoffee)
     {

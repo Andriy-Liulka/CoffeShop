@@ -5,6 +5,6 @@ public class DiscountCoffee
     public long DiscountId { get; set; }
     public virtual Discount Discount { get; set; }
     
-    public long CoffeetId { get; set; }
+    public long CoffeeId { get; set; }
     public virtual Coffee Coffee { get; set; }
 }

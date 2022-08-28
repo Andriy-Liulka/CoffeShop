@@ -18,7 +18,7 @@ internal class DiscountConfiguration :IEntityConfiguration<Discount>,IDefaultDat
         builder
             .HasMany(x => x.DiscountCoffees)
             .WithOne(x => x.Discount)
-            .HasForeignKey(x => x.CoffeetId);
+            .HasForeignKey(x => x.CoffeeId);
 
         return builder;
     }
