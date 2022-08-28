@@ -18,17 +18,11 @@ public class DiscountService : IDiscountService
         .Include(x=>x.DiscountCoffees)
         .ThenInclude(x=>x.Coffee)
 
-        .Include(x=>x.DiscountCoffees)
-        .ThenInclude(x=>x.Discount)
-        
         .ToListAsync();
 
     public async Task<Discount?> GetAsync(int id) => await _context.Discounts
         .Include(x=>x.DiscountCoffees)
         .ThenInclude(x=>x.Coffee)
-
-        .Include(x=>x.DiscountCoffees)
-        .ThenInclude(x=>x.Discount)
 
         .FirstOrDefaultAsync(x => x.Id.Equals(id));
 
