@@ -3,8 +3,8 @@ using CoffeeShop.Domain.Entities.MtM_IntermediateEntities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeShop.Api.Controllers.MtM_Controllers;
-
 [ApiController]
+[Route("api/[controller]")]
 public class DiscountCoffeeController  : ControllerBase
 {
     private readonly ILogger<DiscountCoffeeController> _logger;
@@ -35,7 +35,7 @@ public class DiscountCoffeeController  : ControllerBase
         return Created(String.Empty,discountCoffee);
     }
     
-    [Route("Update")]
+    [Route("update")]
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> UpdateAsync([FromBody]DiscountCoffee discountCoffee)
@@ -44,7 +44,7 @@ public class DiscountCoffeeController  : ControllerBase
         return Ok();
     }
     
-    [Route("Delete")]
+    [Route("delete")]
     [HttpDelete]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> DeleteAsync([FromBody]DiscountCoffee discountCoffee)

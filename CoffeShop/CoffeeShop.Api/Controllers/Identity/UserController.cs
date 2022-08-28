@@ -3,8 +3,8 @@ using CoffeeShop.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeShop.Api.Controllers.Identity;
-
 [ApiController]
+[Route("api/[controller]")]
 public class UserController : ControllerBase
 { 
     private readonly ILogger<UserController> _logger;
@@ -35,7 +35,7 @@ public class UserController : ControllerBase
         return Created(String.Empty,user);
     }
     
-    [Route("Update")]
+    [Route("update")]
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> UpdateAsync([FromBody]User user)
@@ -44,7 +44,7 @@ public class UserController : ControllerBase
         return Ok();
     }
     
-    [Route("Delete")]
+    [Route("delete")]
     [HttpDelete]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> DeleteAsync([FromBody]User user)

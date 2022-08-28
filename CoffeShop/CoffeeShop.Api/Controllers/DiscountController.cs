@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeShop.Api.Controllers;
 [ApiController]
+[Route("api/[controller]")]
 public class DiscountController : ControllerBase
 {
     private readonly ILogger<DiscountController> _logger;
@@ -34,7 +35,7 @@ public class DiscountController : ControllerBase
         return Created(String.Empty,discount);
     }
     
-    [Route("Update")]
+    [Route("update")]
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> UpdateAsync([FromBody]Discount discount)
@@ -43,7 +44,7 @@ public class DiscountController : ControllerBase
         return Ok();
     }
     
-    [Route("Delete")]
+    [Route("delete")]
     [HttpDelete]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> DeleteAsync([FromBody]Discount discount)

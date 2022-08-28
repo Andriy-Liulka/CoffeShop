@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeShop.Api.Controllers.Identity;
-
 [ApiController]
+[Route("api/[controller]")]
 public class RoleController  : ControllerBase
 {
     private readonly ILogger<RoleController> _logger;
@@ -13,8 +13,8 @@ public class RoleController  : ControllerBase
         _logger = logger;
         _service = service;
     }
-    [Route("")]
     [HttpGet]
+    [Route("")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAllAsync() 
         => Ok(await _service.GetAllAsync());

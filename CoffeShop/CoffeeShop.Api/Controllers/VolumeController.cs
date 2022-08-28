@@ -3,8 +3,8 @@ using CoffeeShop.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeShop.Api.Controllers;
-
 [ApiController]
+[Route("api/[controller]")]
 public class VolumeController  : ControllerBase
 {
     private readonly ILogger<VolumeController> _logger;
@@ -35,7 +35,7 @@ public class VolumeController  : ControllerBase
         return Created(String.Empty,volume);
     }
     
-    [Route("Update")]
+    [Route("update")]
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> UpdateAsync([FromBody]Volume volume)
@@ -44,7 +44,7 @@ public class VolumeController  : ControllerBase
         return Ok();
     }
     
-    [Route("Delete")]
+    [Route("delete")]
     [HttpDelete]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> DeleteAsync([FromBody]Volume volume)

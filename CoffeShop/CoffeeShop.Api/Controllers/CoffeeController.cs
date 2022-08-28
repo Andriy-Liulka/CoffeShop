@@ -4,8 +4,8 @@ using CoffeeShop.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeShop.Api.Controllers;
-
 [ApiController]
+[Route("api/[controller]")]
 public class CoffeeController : ControllerBase
 {
     private readonly ILogger<CoffeeController> _logger;
@@ -37,7 +37,7 @@ public class CoffeeController : ControllerBase
         //return StatusCode((int) HttpStatusCode.Created);
     }
     
-    [Route("Update")]
+    [Route("update")]
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> UpdateAsync([FromBody]Coffee coffee)
@@ -46,7 +46,7 @@ public class CoffeeController : ControllerBase
         return Ok();
     }
     
-    [Route("Delete")]
+    [Route("delete")]
     [HttpDelete]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> DeleteAsync([FromBody]Coffee coffee)
