@@ -11,7 +11,7 @@ public class OrderVolumeCoffeeConfiguration : IEntityConfiguration<OrderVolumeCo
     {
         builder.ToTable(TableNameCreator.CreateDefaultTableName(() => nameof(OrderVolumeCoffee)));
 
-        builder.HasKey(x => new {x.OrderId, x.VolumeId, x.CoffeetId});
+        builder.HasKey(x =>x.Id);
         
         builder.Property(pr => pr.Price).HasColumnType("DECIMAL(15,7)");
         

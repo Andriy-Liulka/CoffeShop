@@ -12,7 +12,7 @@ public class DiscountCoffeeConfiguration : IEntityConfiguration<DiscountCoffee>,
     {
         builder.ToTable(TableNameCreator.CreateDefaultTableName(()=>nameof(DiscountCoffee)));
 
-        builder.HasKey(x=>new{ CoffeetId = x.CoffeeId,x.DiscountId});
+        builder.HasKey(x=>new{ CoffeetId = x.CoffeeId, DiscountId = x.DiscountId });
 
         builder
             .HasOne(x => x.Discount)
