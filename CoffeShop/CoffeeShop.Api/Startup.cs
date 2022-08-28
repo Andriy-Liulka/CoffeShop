@@ -1,9 +1,7 @@
 ﻿
 using System.Text.Json.Serialization;
-using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
-using CoffeeShop.BusinessLogic.MainBusinessLogic.Services;
+using CoffeeShop.BusinessLogic;
 using CoffeeShop.DataAccess;
-using CoffeShop.Api.Configurations;
 using CoffeShop.Api.Configurations.Middlewares;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
@@ -38,8 +36,8 @@ public class Startup
 
         services.AddHealthChecks();
 
-        services.AddScoped<ICoffeeService, CoffeeService>();
-        
+        services.AddBusinessLogicServices();
+
     }
     
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
