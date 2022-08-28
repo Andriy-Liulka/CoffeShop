@@ -25,21 +25,21 @@ public class UserService : IUserService
         .Include(x=>x.Role)
         .FirstOrDefaultAsync(x => x.Id.Equals(userId));
 
-    public async Task CreateAsync(DiscountCoffee discountCoffee)
+    public async Task CreateAsync(User user)
     {
-        await _context.DiscountCoffees.AddAsync(discountCoffee);
+        await _context.Users.AddAsync(user);
         await _context.SaveChangesAsync();
     }
 
-    public async Task UpdateAsync(DiscountCoffee discountCoffee)
+    public async Task UpdateAsync(User user)
     {
-        _context.DiscountCoffees.Update(discountCoffee);
+        _context.Users.Update(user);
         await _context.SaveChangesAsync();
     }
 
-    public async Task DeleteAsync(DiscountCoffee discountCoffee)
+    public async Task DeleteAsync(User user)
     {
-        _context.DiscountCoffees.Remove(discountCoffee);
+        _context.Users.Remove(user);
         await _context.SaveChangesAsync();
     }
 }

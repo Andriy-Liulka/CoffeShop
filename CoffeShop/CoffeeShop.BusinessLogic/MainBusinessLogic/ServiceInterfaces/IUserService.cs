@@ -9,9 +9,9 @@ public interface IUserService
 
     public Task<User?> GetAsync(int userId);
 
-    public  Task CreateAsync(DiscountCoffee discountCoffee);
+    public  Task CreateAsync(User user);
 
-    public Task UpdateAsync(DiscountCoffee discountCoffee);
+    public Task UpdateAsync(User user);
     
-    public Task DeleteAsync(DiscountCoffee discountCoffee);
+    public Task DeleteAsync(User user);
 }
