@@ -15,10 +15,7 @@ public class OrderService : IOrderService
        public async Task<List<Order>> GetAllAsync() => await _context.Orders
            .Include(x=>x.OrderVolumeCoffees)
            .ThenInclude(x=>x.Coffee)
-           
-           .Include(x=>x.OrderVolumeCoffees)
-           .ThenInclude(x=>x.Order)
-           
+
            .Include(x=>x.OrderVolumeCoffees)
            .ThenInclude(x=>x.Volume)
            
@@ -27,10 +24,7 @@ public class OrderService : IOrderService
        public async Task<Order?> GetAsync(int id) => await _context.Orders
            .Include(x=>x.OrderVolumeCoffees)
            .ThenInclude(x=>x.Coffee)
-           
-           .Include(x=>x.OrderVolumeCoffees)
-           .ThenInclude(x=>x.Order)
-           
+
            .Include(x=>x.OrderVolumeCoffees)
            .ThenInclude(x=>x.Volume)
 
