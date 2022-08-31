@@ -4,7 +4,7 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 
 public interface IRoleService
 {
-    Task<List<Role>> GetAllAsync();
+    Task<IEnumerable<Role>> GetAllAsync();
 
     Task<Role?> GetAsync(int userId);
 }

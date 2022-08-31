@@ -4,7 +4,7 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 
 public interface IOrderVolumeCoffeeService
 {
-    Task<List<OrderVolumeCoffee>> GetAllAsync();
+    Task<IEnumerable<OrderVolumeCoffee>> GetAllAsync();
 
     Task<OrderVolumeCoffee?> GetAsync(int orderId, int volumeId, int coffeeId);
 

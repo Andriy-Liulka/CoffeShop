@@ -5,7 +5,7 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 
 public interface IUserService
 {
-    Task<List<User>> GetAllAsync();
+    Task<IEnumerable<User>> GetAllAsync();
 
     Task<User?> GetAsync(int userId);
 

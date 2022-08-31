@@ -4,7 +4,7 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 
 public interface IOrderService
 {
-    Task<List<Order>> GetAllAsync();
+    Task<IEnumerable<Order>> GetAllAsync();
 
     Task<Order?> GetAsync(int id);
 

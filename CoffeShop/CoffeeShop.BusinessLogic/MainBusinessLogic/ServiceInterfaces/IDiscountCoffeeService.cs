@@ -4,7 +4,7 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 
 public interface IDiscountCoffeeService
 {
-    Task<List<DiscountCoffee>> GetAllAsync();
+    Task<IEnumerable<DiscountCoffee>> GetAllAsync();
 
     Task<DiscountCoffee?> GetAsync(int discountId, int coffeetId);
 

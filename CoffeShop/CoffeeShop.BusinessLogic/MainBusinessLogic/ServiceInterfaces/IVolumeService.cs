@@ -4,7 +4,7 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 
 public interface IVolumeService
 {
-    Task<List<Volume>> GetAllAsync() ;
+    Task<IEnumerable<Volume>> GetAllAsync() ;
 
     Task<Volume?> GetAsync(int id);
     
