@@ -4,6 +4,7 @@ using CoffeeShop.BusinessLogic;
 using CoffeeShop.DataAccess;
 using CoffeShop.Api.Configurations.Middlewares;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.OpenApi.Models;
@@ -21,7 +22,8 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddLogging();
-        services.AddControllers()
+        services
+            .AddControllers()
             .AddJsonOptions(x =>
             x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
         
@@ -31,7 +33,7 @@ public class Startup
         });
         services.AddDbContext<CoffeeShopContext>(option =>
         {
-            option.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString") ?? String.Empty);
+            option.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString") ?? throw new ArgumentNullException("ConnectionString","Your connection string is empty"));
         });
 
         services.AddHealthChecks();
@@ -43,7 +45,7 @@ public class Startup
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         app.UpdateDatabase();
-        
+
         if (env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();

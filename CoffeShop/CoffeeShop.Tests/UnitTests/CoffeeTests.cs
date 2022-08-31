@@ -51,6 +51,10 @@ public class UnitTest1
         Assert.Equal("Americano", coffeeService.GetAsync(2).Result?.Name);
         Assert.Equal("Australia",coffeeService.GetAsync(5).Result?.Provider);
         Assert.Equal("Efiopia",coffeeService.GetAsync(7).Result?.Provider);
+
+        var coffeService =(await coffeeService.GetAsync(2))?.Name;
+        //TODO unpacking tasks 
+        coffeService.Should().Be("Americano");
     }
 
     [Fact]
@@ -72,6 +76,8 @@ public class UnitTest1
     public void GetAllAsyncFixtureTest()
     {
         var coffees = _fixture.CreateMany<Coffee>();
+        
+       // _fixture.Create<Coffee>().
 
         coffees.Should().BeInAscendingOrder(x => x.Id);
     }
