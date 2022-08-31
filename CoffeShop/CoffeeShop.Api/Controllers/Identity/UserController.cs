@@ -23,8 +23,8 @@ public class UserController : ControllerBase
     [Route("{id}")]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetAsync([FromRoute]int userId) 
-        => Ok(await _service.GetAsync(userId));
+    public async Task<IActionResult> GetAsync([FromRoute]int id) 
+        => Ok(await _service.GetAsync(id));
 
     [Route("create")]
     [HttpPost]
