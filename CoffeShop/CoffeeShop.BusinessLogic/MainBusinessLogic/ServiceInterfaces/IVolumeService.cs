@@ -4,13 +4,13 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 
 public interface IVolumeService
 {
-    public Task<List<Volume>> GetAllAsync() ;
+    Task<List<Volume>> GetAllAsync() ;
 
-    public Task<Volume?> GetAsync(int id);
+    Task<Volume?> GetAsync(int id);
     
-    public Task CreateAsync(Volume volume);
+    Task CreateAsync(Volume volume);
 
-    public Task UpdateAsync(Volume volume);
+    Task UpdateAsync(Volume volume);
 
-    public Task DeleteAsync(Volume volume);
+    Task DeleteAsync(Volume volume);
 }
