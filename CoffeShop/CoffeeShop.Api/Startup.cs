@@ -2,6 +2,8 @@
 using System.Text.Json.Serialization;
 using CoffeeShop.BusinessLogic;
 using CoffeeShop.DataAccess;
+using CoffeeShop.DataAccess.Repositories;
+using CoffeeShop.DataAccess.Repositories.CustomRepositories;
 using CoffeShop.Api.Configurations.Middlewares;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Data.SqlClient;
@@ -40,6 +42,9 @@ public class Startup
 
         services.AddBusinessLogicServices();
 
+        services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+        
+        services.AddDataAccessServices();
     }
     
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
