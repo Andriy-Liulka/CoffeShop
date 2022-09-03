@@ -23,8 +23,8 @@ public class OrderVolumeCoffeeController : ControllerBase
     [Route("{id}")]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetAsync([FromRoute]int orderId,[FromRoute]int volumeId,[FromRoute]int coffeeId) 
-        => Ok(await _service.GetAsync(orderId, volumeId, coffeeId));
+    public async Task<IActionResult> GetAsync([FromRoute]int id) 
+        => Ok(await _service.GetAsync(id));
 
     [Route("create")]
     [HttpPost]
