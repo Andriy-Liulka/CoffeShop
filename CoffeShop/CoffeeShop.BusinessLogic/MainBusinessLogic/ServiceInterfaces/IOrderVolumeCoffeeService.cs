@@ -6,7 +6,7 @@ public interface IOrderVolumeCoffeeService
 {
     Task<IEnumerable<OrderVolumeCoffee>> GetAllAsync();
 
-    Task<OrderVolumeCoffee?> GetAsync(int orderId, int volumeId, int coffeeId);
+    public Task<OrderVolumeCoffee?> GetAsync(int id);
 
     Task CreateAsync(OrderVolumeCoffee orderVolumeCoffee);
 

@@ -1,5 +1,7 @@
 ﻿using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.DataAccess;
+using CoffeeShop.DataAccess.Repositories;
+using CoffeeShop.DataAccess.Repositories.CustomRepositories.VolumeRepositories;
 using CoffeeShop.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,44 +9,27 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services;
 
 public class VolumeService : IVolumeService
 {
-    private readonly CoffeeShopContext _context;
-    public VolumeService(CoffeeShopContext context)
-    {   
-        _context = context;
-    } 
-    public async Task<List<Volume>> GetAllAsync() => await _context.Volumes
-        .Include(x=>x.BonusCoffees)
-        .ThenInclude(x=>x.Coffee)    
-        
-        .Include(x=>x.OrderVolumeCoffees)
-        .ThenInclude(x=>x.Order)
-        
-        .ToListAsync();
+    private readonly IRepository<Volume> _repository;
+    private readonly IVolumeRepository _orderRepository;
 
-    public async Task<Volume?> GetAsync(int id) => await _context.Volumes
-        .Include(x=>x.BonusCoffees)
-        .ThenInclude(x=>x.Coffee)    
-        
-        .Include(x=>x.OrderVolumeCoffees)
-        .ThenInclude(x=>x.Order)
-        
-        .FirstOrDefaultAsync(x => x.Id.Equals(id));
+    public VolumeService(IRepository<Volume> repository,IVolumeRepository orderRepository)
+    {
+        _repository = repository;
+        _orderRepository = orderRepository;
+    }
+
+    public async Task<IEnumerable<Volume>> GetAllAsync()
+        => await _repository.GetAllAsync();
+
+    public async Task<Volume?> GetAsync(int id)
+        => await _orderRepository.GetAsync(id);
 
     public async Task CreateAsync(Volume volume)
-    {
-        await _context.Volumes.AddAsync(volume);
-        await _context.SaveChangesAsync();
-    }
+        => await _repository.CreateAsync(volume);
 
     public async Task UpdateAsync(Volume volume)
-    {
-        _context.Volumes.Update(volume);
-        await _context.SaveChangesAsync();
-    }
+        => await _repository.UpdateAsync(volume);
 
     public async Task DeleteAsync(Volume volume)
-    {
-        _context.Volumes.Remove(volume);
-        await _context.SaveChangesAsync();
-    }
+        => await _repository.DeleteAsync(volume);
 }

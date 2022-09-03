@@ -1,5 +1,7 @@
 ﻿using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.DataAccess;
+using CoffeeShop.DataAccess.Repositories;
+using CoffeeShop.DataAccess.Repositories.CustomRepositories.DiscountRepositories;
 using CoffeeShop.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,40 +9,26 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services;
 
 public class DiscountService : IDiscountService
 {
-    private readonly CoffeeShopContext _context;
+    private readonly IRepository<Discount> _repository;
+    private readonly IDiscountRepository _discountRepository;
 
-    public DiscountService(CoffeeShopContext context)
-    {   
-        _context = context;
-    }
-    
-    public async Task<List<Discount>> GetAllAsync() => await _context.Discounts
-        .Include(x=>x.DiscountCoffees)
-        .ThenInclude(x=>x.Coffee)
-
-        .ToListAsync();
-
-    public async Task<Discount?> GetAsync(int id) => await _context.Discounts
-        .Include(x=>x.DiscountCoffees)
-        .ThenInclude(x=>x.Coffee)
-
-        .FirstOrDefaultAsync(x => x.Id.Equals(id));
-
-    public async Task CreateAsync(Discount discount)
+    public DiscountService(IRepository<Discount> repository,IDiscountRepository discountRepository)
     {
-        await _context.Discounts.AddAsync(discount);
-        await _context.SaveChangesAsync();
+        _repository = repository;
+        _discountRepository = discountRepository;
     }
+
+    public async Task<IEnumerable<Discount>> GetAllAsync()
+        => await _repository.GetAllAsync();
+
+    public async Task<Discount?> GetAsync(int id)
+        => await _discountRepository.GetAsync(id);
+    public async Task CreateAsync(Discount discount)
+        => await _repository.CreateAsync(discount);
 
     public async Task UpdateAsync(Discount discount)
-    {
-        _context.Discounts.Update(discount);
-        await _context.SaveChangesAsync();
-    }
+        => await _repository.UpdateAsync(discount);
 
     public async Task DeleteAsync(Discount discount)
-    {
-        _context.Discounts.Remove(discount);
-        await _context.SaveChangesAsync();
-    }
+        => await _repository.DeleteAsync(discount);
 }
