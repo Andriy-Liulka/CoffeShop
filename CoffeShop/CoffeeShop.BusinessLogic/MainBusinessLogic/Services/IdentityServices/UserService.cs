@@ -1,5 +1,7 @@
 ﻿using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.DataAccess;
+using CoffeeShop.DataAccess.Repositories;
+using CoffeeShop.DataAccess.Repositories.CustomRepositories.UserRepositories;
 using CoffeeShop.Domain.Entities.Identity;
 using CoffeeShop.Domain.Entities.MtM_IntermediateEntities;
 using Microsoft.EntityFrameworkCore;
@@ -8,38 +10,25 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services.IdentityServices;
 
 public class UserService : IUserService
 {
-    private readonly CoffeeShopContext _context;
-
-    public UserService(CoffeeShopContext context)
-    {   
-        _context = context;
-    }
-    
-    public async Task<List<User>> GetAllAsync() => await _context.Users
-        .Include(x=>x.Orders)
-        .Include(x=>x.Role)
-        .ToListAsync();
-
-    public async Task<User?> GetAsync(int userId) => await _context.Users
-        .Include(x=>x.Orders)
-        .Include(x=>x.Role)
-        .FirstOrDefaultAsync(x => x.Id.Equals(userId));
-
-    public async Task CreateAsync(User user)
+    private readonly IRepository<User> _repository;
+    private readonly IUserRepository _userRepository;
+    public UserService(IRepository<User> repository,IUserRepository userRepository)
     {
-        await _context.Users.AddAsync(user);
-        await _context.SaveChangesAsync();
+        _repository = repository;
+        _userRepository = userRepository;
     }
+
+    public async Task<IEnumerable<User>> GetAllAsync()
+        => await _repository.GetAllAsync();
+
+    public async Task<User?> GetAsync(int id)
+        => await _userRepository.GetAsync(id);
+    public async Task CreateAsync(User user)
+        => await _repository.CreateAsync(user);
 
     public async Task UpdateAsync(User user)
-    {
-        _context.Users.Update(user);
-        await _context.SaveChangesAsync();
-    }
+        => await _repository.UpdateAsync(user);
 
     public async Task DeleteAsync(User user)
-    {
-        _context.Users.Remove(user);
-        await _context.SaveChangesAsync();
-    }
+        => await _repository.DeleteAsync(user);
 }

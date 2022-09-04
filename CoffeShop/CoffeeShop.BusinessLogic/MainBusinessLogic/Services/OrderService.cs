@@ -1,5 +1,7 @@
 ﻿using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.DataAccess;
+using CoffeeShop.DataAccess.Repositories;
+using CoffeeShop.DataAccess.Repositories.CustomRepositories.OrderRepositories;
 using CoffeeShop.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,44 +9,27 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services;
 
 public class OrderService : IOrderService
 {
-    private readonly CoffeeShopContext _context;
-       public OrderService(CoffeeShopContext context)
-       {   
-           _context = context;
-       } 
-       public async Task<List<Order>> GetAllAsync() => await _context.Orders
-           .Include(x=>x.OrderVolumeCoffees)
-           .ThenInclude(x=>x.Coffee)
+    private readonly IRepository<Order> _repository;
+    private readonly IOrderRepository _orderRepository;
 
-           .Include(x=>x.OrderVolumeCoffees)
-           .ThenInclude(x=>x.Volume)
-           
-           .ToListAsync();
+    public OrderService(IRepository<Order> repository,IOrderRepository orderRepository)
+    {
+        _repository = repository;
+        _orderRepository = orderRepository;
+    }
 
-       public async Task<Order?> GetAsync(int id) => await _context.Orders
-           .Include(x=>x.OrderVolumeCoffees)
-           .ThenInclude(x=>x.Coffee)
+    public async Task<IEnumerable<Order>> GetAllAsync() 
+        => await _repository.GetAllAsync();
 
-           .Include(x=>x.OrderVolumeCoffees)
-           .ThenInclude(x=>x.Volume)
-
-           .FirstOrDefaultAsync(x => x.Id.Equals(id));
+    public async Task<Order?> GetAsync(int id) 
+        => await _orderRepository.GetAsync(id);
 
        public async Task CreateAsync(Order order)
-       {
-           await _context.Orders.AddAsync(order);
-           await _context.SaveChangesAsync();
-       }
+           => await _repository.CreateAsync(order);
 
        public async Task UpdateAsync(Order order)
-       {
-           _context.Orders.Update(order);
-           await _context.SaveChangesAsync();
-       }
+           => await _repository.UpdateAsync(order);
 
        public async Task DeleteAsync(Order order)
-       {
-           _context.Orders.Remove(order);
-           await _context.SaveChangesAsync();
-       }
+           => await _repository.DeleteAsync(order);
 }

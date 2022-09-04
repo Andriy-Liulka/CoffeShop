@@ -1,5 +1,7 @@
 ﻿using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.DataAccess;
+using CoffeeShop.DataAccess.Repositories;
+using CoffeeShop.DataAccess.Repositories.CustomRepositories.CoffeeRepositories;
 using CoffeeShop.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,58 +10,26 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services;
 
 public class CoffeeService : ICoffeeService
 {
-    private readonly CoffeeShopContext _context;
-
-    public CoffeeService(CoffeeShopContext context)
-    {   
-        _context = context;
+    private readonly IRepository<Coffee> _repository;
+    private readonly ICoffeeRepository _coffeeRepository;
+    public CoffeeService(IRepository<Coffee> repository, ICoffeeRepository coffeeRepository)
+    {
+        _repository = repository;
+        _coffeeRepository = coffeeRepository;
     }
 
-    public async Task<List<Coffee>> GetAllAsync() => await _context.Coffees
-        .Include(x => x.DiscountCoffees)
-        .ThenInclude(x=>x.Discount)
-
-        .Include(x => x.OrderVolumeCoffees)
-        .ThenInclude(x=>x.Order)
-        
-        .Include(x => x.OrderVolumeCoffees)
-        .ThenInclude(x=>x.Volume)
-
-        .Include(x => x.BonusCoffees)
-        .ThenInclude(x=>x.Volume)
-        
-        .ToListAsync();
-
-    public async Task<Coffee?> GetAsync(int id) => await _context.Coffees
-        .Include(x => x.DiscountCoffees)
-        .ThenInclude(x=>x.Discount)
-
-        .Include(x => x.OrderVolumeCoffees)
-        .ThenInclude(x=>x.Order)
-        
-        .Include(x => x.OrderVolumeCoffees)
-        .ThenInclude(x=>x.Volume)
-
-        .Include(x => x.BonusCoffees)
-        .ThenInclude(x=>x.Volume)
-        
-        .FirstOrDefaultAsync(x => x.Id.Equals(id));
+    public async Task<IEnumerable<Coffee>> GetAllAsync() 
+        => await _repository.GetAllAsync();
+    
+    public async Task<Coffee?> GetAsync(int id)
+        => await _coffeeRepository.GetAsync(id);
 
     public async Task CreateAsync(Coffee coffee)
-    {
-        await _context.Coffees.AddAsync(coffee);
-        await _context.SaveChangesAsync();
-    }
+        => await _repository.CreateAsync(coffee);
 
     public async Task UpdateAsync(Coffee coffee)
-    {
-        _context.Coffees.Update(coffee);
-        await _context.SaveChangesAsync();
-    }
-
+        => await _repository.UpdateAsync(coffee);
+    
     public async Task DeleteAsync(Coffee coffee)
-    {
-        _context.Coffees.Remove(coffee);
-        await _context.SaveChangesAsync();
-    }
+        => await _repository.DeleteAsync(coffee);
 }

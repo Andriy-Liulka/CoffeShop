@@ -1,5 +1,8 @@
 ﻿using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.DataAccess;
+using CoffeeShop.DataAccess.Repositories;
+using CoffeeShop.DataAccess.Repositories.CustomRepositories.DiscountCoffeeRepositories;
+using CoffeeShop.Domain.Entities.Identity;
 using CoffeeShop.Domain.Entities.MtM_IntermediateEntities;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,38 +10,26 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services.MtM_Services;
 
 public class DiscountCoffeeService : IDiscountCoffeeService
 {
-    private readonly CoffeeShopContext _context;
+    private readonly IRepository<DiscountCoffee> _repository;
+    private readonly IDiscountCoffeeRepository _discountCoffeeRepository;
 
-    public DiscountCoffeeService(CoffeeShopContext context)
-    {   
-        _context = context;
+    public DiscountCoffeeService(IRepository<DiscountCoffee> repository,IDiscountCoffeeRepository discountCoffeeRepository)
+    {
+        _repository = repository;
+        _discountCoffeeRepository = discountCoffeeRepository;
     }
-    
-    public async Task<List<DiscountCoffee>> GetAllAsync() => await _context.DiscountCoffees
-        .Include(x=>x.Coffee)
-        .Include(x=>x.Discount)
-        .ToListAsync();
 
-    public async Task<DiscountCoffee?> GetAsync(int discountId,int coffeetId) => await _context.DiscountCoffees
-        .Include(x=>x.Coffee)
-        .Include(x=>x.Discount)
-        .FirstOrDefaultAsync(x => x.DiscountId.Equals(discountId) && x.CoffeeId.Equals(coffeetId));
+    public async Task<IEnumerable<DiscountCoffee>> GetAllAsync()
+        => await _repository.GetAllAsync();
+
+    public async Task<DiscountCoffee?> GetAsync(int discountId,int coffeetId)
+        => await _discountCoffeeRepository.GetAsync(discountId,coffeetId);
 
     public async Task CreateAsync(DiscountCoffee discountCoffee)
-    {
-        await _context.DiscountCoffees.AddAsync(discountCoffee);
-        await _context.SaveChangesAsync();
-    }
-
+        => await _repository.CreateAsync(discountCoffee);
     public async Task UpdateAsync(DiscountCoffee discountCoffee)
-    {
-        _context.DiscountCoffees.Update(discountCoffee);
-        await _context.SaveChangesAsync();
-    }
+        => await _repository.UpdateAsync(discountCoffee);
 
     public async Task DeleteAsync(DiscountCoffee discountCoffee)
-    {
-        _context.DiscountCoffees.Remove(discountCoffee);
-        await _context.SaveChangesAsync();
-    }
+        => await _repository.DeleteAsync(discountCoffee);
 }
