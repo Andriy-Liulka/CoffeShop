@@ -20,7 +20,7 @@ public class DiscountCoffeeController  : ControllerBase
     public async Task<IActionResult> GetAllAsync() 
         => Ok(await _service.GetAllAsync());
 
-    [Route("{id}")]
+    [Route("{coffeeId}/{discountId}")]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAsync([FromRoute]int coffeeId,[FromRoute]int discountId) 
