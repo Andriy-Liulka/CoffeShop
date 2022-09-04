@@ -40,11 +40,9 @@ public class Startup
 
         services.AddHealthChecks();
 
-        services.AddBusinessLogicServices();
-
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-        
-        services.AddDataAccessServices();
+
+        services.AddCustomServices(services.AddDataAccessServices,services.AddBusinessLogicServices);
     }
     
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
