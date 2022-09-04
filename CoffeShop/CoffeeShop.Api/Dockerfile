@@ -5,11 +5,11 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["./CoffeShop/CoffeeShop.Api/CoffeeShop.Api.csproj", "CoffeeShop.Api/"]
-COPY ["./CoffeShop/CoffeeShop.BusinessLogic/CoffeeShop.BusinessLogic.csproj", "CoffeeShop.BusinessLogic/"]
-COPY ["./CoffeShop/CoffeeShop.DataAccess/CoffeeShop.DataAccess.csproj", "CoffeeShop.DataAccess/"]
-COPY ["./CoffeShop/CoffeeShop.Domain/CoffeeShop.Domain.csproj", "CoffeeShop.Domain/"]
-RUN dotnet restore "./CoffeeShop.Api/CoffeeShop.Api.csproj"
+COPY ["CoffeShop/CoffeeShop.Api/CoffeeShop.Api.csproj", "CoffeeShop.Api/"]
+COPY ["CoffeShop/CoffeeShop.Domain/CoffeeShop.Domain.csproj", "CoffeeShop.Domain/"]
+COPY ["CoffeShop/CoffeeShop.BusinessLogic/CoffeeShop.BusinessLogic.csproj", "CoffeeShop.BusinessLogic/"]
+COPY ["CoffeShop/CoffeeShop.DataAccess/CoffeeShop.DataAccess.csproj", "CoffeeShop.DataAccess/"]
+RUN dotnet restore "CoffeShop/CoffeeShop.Api/CoffeeShop.Api.csproj"
 COPY . .
 WORKDIR "/src/CoffeeShop.Api"
 RUN dotnet build "CoffeeShop.Api.csproj" -c Release -o /app/build

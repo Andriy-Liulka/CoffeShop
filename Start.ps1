@@ -11,9 +11,11 @@ dotnet ef database update -s ..\CoffeeShop.Api
 cd ..\..
 
 
- docker build  -f ".\CoffeShop\CoffeeShop.Api\Dockerfile"  -t aspnetcont:dev .
+docker build -f 'CoffeShop\CoffeeShop.Api\Dockerfile' '..' -t aspnetcont --target base
 
-docker run -d -p 8080:80 --name myapp aspnetcont:dev 
+
+
+docker run -d -p 8080:80 --name myapp aspnetcont
 
 
 
