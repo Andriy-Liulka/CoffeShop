@@ -33,10 +33,12 @@ namespace CoffeeShop.DataAccess.Migrations
                     b.Property<long>("BonusPrice")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("CoffeeId")
+                    b.Property<long?>("CoffeeId")
+                        .IsRequired()
                         .HasColumnType("bigint");
 
-                    b.Property<long>("VolumeId")
+                    b.Property<long?>("VolumeId")
+                        .IsRequired()
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
@@ -46,6 +48,43 @@ namespace CoffeeShop.DataAccess.Migrations
                     b.HasIndex("VolumeId");
 
                     b.ToTable("BonusCoffees", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            BonusPrice = 200L,
+                            CoffeeId = 1L,
+                            VolumeId = 1L
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            BonusPrice = 250L,
+                            CoffeeId = 7L,
+                            VolumeId = 3L
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            BonusPrice = 310L,
+                            CoffeeId = 4L,
+                            VolumeId = 5L
+                        },
+                        new
+                        {
+                            Id = 4L,
+                            BonusPrice = 435L,
+                            CoffeeId = 2L,
+                            VolumeId = 4L
+                        },
+                        new
+                        {
+                            Id = 5L,
+                            BonusPrice = 500L,
+                            CoffeeId = 7L,
+                            VolumeId = 6L
+                        });
                 });
 
             modelBuilder.Entity("CoffeeShop.Domain.Entities.Coffee", b =>
@@ -60,14 +99,11 @@ namespace CoffeeShop.DataAccess.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<int>("IsMilk")
-                        .HasColumnType("int");
+                        .HasColumnType("INT");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("DECIMAL(15,7)");
 
                     b.Property<string>("Provider")
                         .IsRequired()
@@ -76,6 +112,64 @@ namespace CoffeeShop.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Coffees", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            BonusesSize = 0L,
+                            IsMilk = 1,
+                            Name = "Latte",
+                            Provider = "United States"
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            BonusesSize = 10L,
+                            IsMilk = 0,
+                            Name = "Americano",
+                            Provider = "North USA"
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            BonusesSize = 6L,
+                            IsMilk = 1,
+                            Name = "Capuchino",
+                            Provider = "Italia"
+                        },
+                        new
+                        {
+                            Id = 4L,
+                            BonusesSize = 15L,
+                            IsMilk = 0,
+                            Name = "Ekspresso",
+                            Provider = "USA"
+                        },
+                        new
+                        {
+                            Id = 5L,
+                            BonusesSize = 20L,
+                            IsMilk = 1,
+                            Name = "Flat-White",
+                            Provider = "Australia"
+                        },
+                        new
+                        {
+                            Id = 6L,
+                            BonusesSize = 30L,
+                            IsMilk = 0,
+                            Name = "Mokachino",
+                            Provider = "USA"
+                        },
+                        new
+                        {
+                            Id = 7L,
+                            BonusesSize = 3L,
+                            IsMilk = 0,
+                            Name = "Black coffee",
+                            Provider = "Efiopia"
+                        });
                 });
 
             modelBuilder.Entity("CoffeeShop.Domain.Entities.Discount", b =>
@@ -92,6 +186,33 @@ namespace CoffeeShop.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Discounts", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            Percent = 40f
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            Percent = 30f
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            Percent = 65f
+                        },
+                        new
+                        {
+                            Id = 4L,
+                            Percent = 24f
+                        },
+                        new
+                        {
+                            Id = 5L,
+                            Percent = 37f
+                        });
                 });
 
             modelBuilder.Entity("CoffeeShop.Domain.Entities.Identity.Role", b =>
@@ -109,6 +230,18 @@ namespace CoffeeShop.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Roles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            Name = "Admin"
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            Name = "Customer"
+                        });
                 });
 
             modelBuilder.Entity("CoffeeShop.Domain.Entities.Identity.User", b =>
@@ -145,7 +278,8 @@ namespace CoffeeShop.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("RoleId")
+                    b.Property<long?>("RoleId")
+                        .IsRequired()
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
@@ -157,33 +291,76 @@ namespace CoffeeShop.DataAccess.Migrations
 
             modelBuilder.Entity("CoffeeShop.Domain.Entities.MtM_IntermediateEntities.DiscountCoffee", b =>
                 {
-                    b.Property<long>("CoffeetId")
+                    b.Property<long>("CoffeeId")
                         .HasColumnType("bigint");
 
                     b.Property<long>("DiscountId")
                         .HasColumnType("bigint");
 
-                    b.HasKey("CoffeetId", "DiscountId");
+                    b.HasKey("CoffeeId", "DiscountId");
 
                     b.HasIndex("DiscountId");
 
                     b.ToTable("DiscountCoffees", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            CoffeeId = 1L,
+                            DiscountId = 1L
+                        },
+                        new
+                        {
+                            CoffeeId = 2L,
+                            DiscountId = 5L
+                        },
+                        new
+                        {
+                            CoffeeId = 5L,
+                            DiscountId = 4L
+                        },
+                        new
+                        {
+                            CoffeeId = 6L,
+                            DiscountId = 2L
+                        },
+                        new
+                        {
+                            CoffeeId = 3L,
+                            DiscountId = 3L
+                        },
+                        new
+                        {
+                            CoffeeId = 7L,
+                            DiscountId = 2L
+                        });
                 });
 
             modelBuilder.Entity("CoffeeShop.Domain.Entities.MtM_IntermediateEntities.OrderVolumeCoffee", b =>
                 {
-                    b.Property<long>("OrderId")
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    b.Property<long>("VolumeId")
-                        .HasColumnType("bigint");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<long>("CoffeetId")
                         .HasColumnType("bigint");
 
-                    b.HasKey("OrderId", "VolumeId", "CoffeetId");
+                    b.Property<long>("OrderId")
+                        .HasColumnType("bigint");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("DECIMAL(15,7)");
+
+                    b.Property<long>("VolumeId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("CoffeetId");
+
+                    b.HasIndex("OrderId");
 
                     b.HasIndex("VolumeId");
 
@@ -208,10 +385,14 @@ namespace CoffeeShop.DataAccess.Migrations
                     b.Property<DateTimeOffset>("RegistrationDate")
                         .HasColumnType("DATETIMEOFFSET(4)");
 
+                    b.Property<long>("TotalBonusesSize")
+                        .HasColumnType("bigint");
+
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("DECIMAL(20,10)");
 
-                    b.Property<long>("UserId")
+                    b.Property<long?>("UserId")
+                        .IsRequired()
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
@@ -239,6 +420,44 @@ namespace CoffeeShop.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Volumes", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            Capacity = 200,
+                            Name = "Small"
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            Capacity = 250,
+                            Name = "Small"
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            Capacity = 300,
+                            Name = "Average"
+                        },
+                        new
+                        {
+                            Id = 4L,
+                            Capacity = 350,
+                            Name = "Average"
+                        },
+                        new
+                        {
+                            Id = 5L,
+                            Capacity = 450,
+                            Name = "Large"
+                        },
+                        new
+                        {
+                            Id = 6L,
+                            Capacity = 500,
+                            Name = "Large"
+                        });
                 });
 
             modelBuilder.Entity("CoffeeShop.Domain.Entities.BonusCoffee", b =>
@@ -274,13 +493,13 @@ namespace CoffeeShop.DataAccess.Migrations
             modelBuilder.Entity("CoffeeShop.Domain.Entities.MtM_IntermediateEntities.DiscountCoffee", b =>
                 {
                     b.HasOne("CoffeeShop.Domain.Entities.Coffee", "Coffee")
-                        .WithMany("Discount_Coffees")
-                        .HasForeignKey("CoffeetId")
+                        .WithMany("DiscountCoffees")
+                        .HasForeignKey("CoffeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("CoffeeShop.Domain.Entities.Discount", "Discount")
-                        .WithMany("Discount_Coffees")
+                        .WithMany("DiscountCoffees")
                         .HasForeignKey("DiscountId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -293,19 +512,19 @@ namespace CoffeeShop.DataAccess.Migrations
             modelBuilder.Entity("CoffeeShop.Domain.Entities.MtM_IntermediateEntities.OrderVolumeCoffee", b =>
                 {
                     b.HasOne("CoffeeShop.Domain.Entities.Coffee", "Coffee")
-                        .WithMany("Order_Volume_Coffees")
+                        .WithMany("OrderVolumeCoffees")
                         .HasForeignKey("CoffeetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("CoffeeShop.Domain.Entities.Order", "Order")
-                        .WithMany("Order_Volume_Coffees")
+                        .WithMany("OrderVolumeCoffees")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("CoffeeShop.Domain.Entities.Volume", "Volume")
-                        .WithMany("Order_Volume_Coffees")
+                        .WithMany("OrderVolumeCoffees")
                         .HasForeignKey("VolumeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -332,14 +551,14 @@ namespace CoffeeShop.DataAccess.Migrations
                 {
                     b.Navigation("BonusCoffees");
 
-                    b.Navigation("Discount_Coffees");
+                    b.Navigation("DiscountCoffees");
 
-                    b.Navigation("Order_Volume_Coffees");
+                    b.Navigation("OrderVolumeCoffees");
                 });
 
             modelBuilder.Entity("CoffeeShop.Domain.Entities.Discount", b =>
                 {
-                    b.Navigation("Discount_Coffees");
+                    b.Navigation("DiscountCoffees");
                 });
 
             modelBuilder.Entity("CoffeeShop.Domain.Entities.Identity.Role", b =>
@@ -354,14 +573,14 @@ namespace CoffeeShop.DataAccess.Migrations
 
             modelBuilder.Entity("CoffeeShop.Domain.Entities.Order", b =>
                 {
-                    b.Navigation("Order_Volume_Coffees");
+                    b.Navigation("OrderVolumeCoffees");
                 });
 
             modelBuilder.Entity("CoffeeShop.Domain.Entities.Volume", b =>
                 {
                     b.Navigation("BonusCoffees");
 
-                    b.Navigation("Order_Volume_Coffees");
+                    b.Navigation("OrderVolumeCoffees");
                 });
 #pragma warning restore 612, 618
         }
