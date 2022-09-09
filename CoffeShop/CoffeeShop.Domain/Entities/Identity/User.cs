@@ -4,10 +4,13 @@ namespace CoffeeShop.Domain.Entities.Identity;
 
 public class User
 {
-    public long Id { get; set; }
+    public string Login
+    {
+        get => $"{FirstName}{LastName}";
+        set => value = $"{FirstName}{LastName}";
+    }
 
     public string FirstName { get; set; }
-    
     public string LastName { get; set; }
 
     public string Email { get;set; }

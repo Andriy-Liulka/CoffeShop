@@ -11,7 +11,7 @@ internal class UserConfiguration : IEntityConfiguration<User>,IDefaultDataSetter
     {
         builder.ToTable(TableNameCreator.CreateDefaultTableName(()=>nameof(User)));
 
-        builder.HasKey(x => x.Id);
+        builder.HasKey(x => x.Login);
         
         builder.Ignore(x => x.Orders);
         
@@ -22,7 +22,7 @@ internal class UserConfiguration : IEntityConfiguration<User>,IDefaultDataSetter
         builder
             .HasMany(x => x.Orders)
             .WithOne(x => x.User)
-            .HasForeignKey(x => x.UserId);
+            .HasForeignKey(x => x.UserLogin);
         
         return builder;
     }
