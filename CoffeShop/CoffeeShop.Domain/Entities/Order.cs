@@ -20,7 +20,7 @@ public class Order
 
     public string UserLogin { get; set; }
 
-    public virtual User User { get; set; }
+    public virtual User? User { get; set; }
 
     public virtual IList<OrderVolumeCoffee>? OrderVolumeCoffees { get; set; }
 }
