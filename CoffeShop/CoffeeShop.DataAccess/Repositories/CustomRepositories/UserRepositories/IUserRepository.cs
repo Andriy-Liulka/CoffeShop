@@ -4,5 +4,5 @@ namespace CoffeeShop.DataAccess.Repositories.CustomRepositories.UserRepositories
 
 public interface IUserRepository
 {
-    Task<User> GetAsync(int id);
+    Task<User> GetAsync(string login);
 }
