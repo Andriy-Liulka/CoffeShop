@@ -18,7 +18,7 @@ public class Order
     
     public DeliveryWays DeliveryWay { get; set; }
 
-    public long? UserId { get; set; }
+    public string UserLogin { get; set; }
 
     public virtual User User { get; set; }
 
