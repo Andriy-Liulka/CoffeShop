@@ -26,7 +26,7 @@ public class OrderConfiguration : IEntityConfiguration<Order>,IDefaultDataSetter
         builder
             .HasOne(x=>x.User)
             .WithMany(x=>x.Orders)
-            .HasForeignKey(x=>x.UserLogin);
+            .HasForeignKey(x=>x.UserId);
         
         return builder;
     }

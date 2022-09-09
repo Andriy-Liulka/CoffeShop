@@ -11,7 +11,7 @@ public class UserRepository : IUserRepository
         _context = context;
     }
 
-    public async Task<User> GetAsync(string login)
-        => await _context.Users.FirstOrDefaultAsync(x=>x.Login.Equals(login)) 
+    public async Task<User> GetAsync(int id)
+        => await _context.Users.FirstOrDefaultAsync(x=>x.Id.Equals(id)) 
            ?? throw new NullReferenceException();
 }
