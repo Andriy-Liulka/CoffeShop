@@ -20,11 +20,11 @@ public class UserController : ControllerBase
     public async Task<IActionResult> GetAllAsync() 
         => Ok(await _service.GetAllAsync());
 
-    [Route("{id}")]
+    [Route("{login}")]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetAsync([FromRoute]int id) 
-        => Ok(await _service.GetAsync(id));
+    public async Task<IActionResult> GetAsync([FromRoute]string login) 
+        => Ok(await _service.GetAsync(login));
 
     [Route("create")]
     [HttpPost]

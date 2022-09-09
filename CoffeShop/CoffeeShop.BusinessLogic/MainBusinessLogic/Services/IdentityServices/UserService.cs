@@ -21,8 +21,8 @@ public class UserService : IUserService
     public async Task<IEnumerable<User>> GetAllAsync()
         => await _repository.GetAllAsync();
 
-    public async Task<User?> GetAsync(int id)
-        => await _userRepository.GetAsync(id);
+    public async Task<User?> GetAsync(string login)
+        => await _userRepository.GetAsync(login);
     public async Task CreateAsync(User user)
         => await _repository.CreateAsync(user);
 
