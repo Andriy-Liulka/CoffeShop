@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 public class ApplicationDbContext :IdentityDbContext<ApplicationSecurityUser>
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) {}
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options): base(options) {}
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
