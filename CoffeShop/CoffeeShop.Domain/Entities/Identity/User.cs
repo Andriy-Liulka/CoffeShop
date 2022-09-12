@@ -17,6 +17,9 @@ public class User
     
     public string PasswordHash { get; set; }
     
+    public long? IdentityCredentialId { get; set; }
+    public virtual IdentityCredential? IdentityCredential { get; set; }
+    
     public bool IsBlocked { get; set; }
     
     public string AvatarImage { get; set; }

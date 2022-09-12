@@ -1,4 +1,5 @@
 ﻿using CoffeeShop.DataAccess.Common;
+using CoffeeShop.Domain.Constants;
 using CoffeeShop.Domain.Entities;
 using CoffeeShop.Domain.Entities.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -28,8 +29,8 @@ public class RoleConfiguration : IEntityConfiguration<Role>,IDefaultDataSetter<R
     {
         builder.HasData
         (
-            new Role {Id = 1, Name = "Admin"},
-            new Role {Id = 2, Name = "Customer"}
+            new Role {Id = 1, Name = Roles.Customer},
+            new Role {Id = 2, Name = Roles.Admin}
         );
         return builder;
     }

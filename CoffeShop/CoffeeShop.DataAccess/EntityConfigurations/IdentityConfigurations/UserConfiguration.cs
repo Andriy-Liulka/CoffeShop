@@ -24,6 +24,11 @@ internal class UserConfiguration : IEntityConfiguration<User>,IDefaultDataSetter
             .WithOne(x => x.User)
             .HasForeignKey(x => x.UserLogin);
         
+        builder
+            .HasOne(x => x.IdentityCredential)
+            .WithOne(x => x.User)
+            .HasForeignKey<User>(x=>x.IdentityCredentialId);
+        
         return builder;
     }
 
