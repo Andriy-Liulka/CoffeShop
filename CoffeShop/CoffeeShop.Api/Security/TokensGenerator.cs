@@ -7,7 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace CoffeShop.Api.Security;
 
-internal sealed class TokensGenerator
+public sealed class TokensGenerator
 {
     private readonly IConfiguration _configuration;
     public TokensGenerator(IConfiguration configuration)

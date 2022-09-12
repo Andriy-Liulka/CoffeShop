@@ -20,7 +20,7 @@ public class AuthenticateController : ControllerBase
     private readonly IConfiguration _configuration;
     private readonly TokensGenerator _tokensGenerator;
 
-    internal AuthenticateController(
+    public AuthenticateController(
         UserManager<ApplicationSecurityUser> userManager,
         RoleManager<IdentityRole> roleManager,
         IConfiguration configuration,
@@ -32,9 +32,9 @@ public class AuthenticateController : ControllerBase
         _tokensGenerator = tokensGenerator;
         
         if (! _roleManager.RoleExistsAsync("User").Result)
-             _roleManager.CreateAsync(new IdentityRole("User"));
+            _roleManager.CreateAsync(new IdentityRole("User"));
         if (! _roleManager.RoleExistsAsync("Admin").Result)
-             _roleManager.CreateAsync(new IdentityRole("Admin"));
+            _roleManager.CreateAsync(new IdentityRole("Admin"));
     }
 
     [HttpPost]
@@ -45,7 +45,7 @@ public class AuthenticateController : ControllerBase
 
         if (user == null || !await _userManager.CheckPasswordAsync(user, loginModel.Password))
             return Unauthorized();
-
+        
         var userRoles = await _userManager.GetRolesAsync(user);
 
         var accessToken = _tokensGenerator.CreateToken(new UserClaimsDto
@@ -96,6 +96,15 @@ public class AuthenticateController : ControllerBase
             {
                 Status = "Error", 
                 Message = "User creation failed! Please check user details and try again."
+            });
+        
+        var roleResult = await  _userManager.AddToRoleAsync(user,"User");
+        
+        if(!roleResult.Succeeded)
+            return StatusCode(StatusCodes.Status500InternalServerError, new ResponseModel
+            {
+                Status = "Error", 
+                Message = "User role assigning failed"
             });
         
         return Ok(new ResponseModel
