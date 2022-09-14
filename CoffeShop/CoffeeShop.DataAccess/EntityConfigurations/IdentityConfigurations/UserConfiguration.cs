@@ -43,6 +43,7 @@ internal class UserConfiguration : IEntityConfiguration<User>,IDefaultDataSetter
             IsBlocked = false,
             RoleName = Roles.Admin,
             Bonuses = 0,
+            IdentityCredentialLogin = "AdminAdmin",
             PasswordHash = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"
         });
         return builder;
