@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Serilog;
 
 namespace CoffeShop.Api;
 
@@ -28,6 +29,7 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddLogging();
+
         services
             .AddControllers()
             .AddJsonOptions(x =>
@@ -109,7 +111,8 @@ public class Startup
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Coffee Shop v1"));
         }
-
+        app.UseSerilogRequestLogging();
+        
         app.UseHttpsRedirection();
 
         app.UseRouting();
