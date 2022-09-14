@@ -11,7 +11,12 @@ public class UserRepository : IUserRepository
         _context = context;
     }
 
-    public async Task<User> GetAsync(string login)
-        => await _context.Users.FirstOrDefaultAsync(x=>x.Login.Equals(login)) 
-           ?? throw new NullReferenceException();
+    public async Task<User?> GetAsync(string login)
+        => await _context.Users.FirstOrDefaultAsync(x=>x.Login.Equals(login));
+
+    public async Task<User?> GetFullAsync(string login)
+    =>await _context.Users
+        .Include(x=>x.Role)
+        .Include(x=>x.IdentityCredential)
+        .FirstOrDefaultAsync(x=>x.Login.Equals(login));
 }

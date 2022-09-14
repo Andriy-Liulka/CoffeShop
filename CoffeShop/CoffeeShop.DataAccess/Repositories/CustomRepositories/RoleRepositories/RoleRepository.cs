@@ -11,7 +11,7 @@ public class RoleRepository : IRoleRepository
         _context = context;
     }
 
-    public async Task<Role> GetAsync(int id)
-        => await _context.Roles.FirstOrDefaultAsync(x=>x.Id.Equals(id)) 
+    public async Task<Role> GetAsync(string name)
+        => await _context.Roles.FirstOrDefaultAsync(x=>x.Name.Equals(name)) 
            ?? throw new NullReferenceException();
 }
