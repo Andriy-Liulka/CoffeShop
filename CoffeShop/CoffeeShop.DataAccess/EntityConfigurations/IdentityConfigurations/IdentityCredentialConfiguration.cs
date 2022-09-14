@@ -25,6 +25,13 @@ public class IdentityCredentialConfiguration : IEntityConfiguration<IdentityCred
 
     public EntityTypeBuilder<IdentityCredential> SetDefaultData(EntityTypeBuilder<IdentityCredential> builder)
     {
-        throw new NotImplementedException();
+        builder.HasData(new IdentityCredential
+        {
+            Id = 1,
+            RefreshToken = null,
+            ValidTo = null,
+            Login = "AdminAdmin"
+        });
+        return builder;
     }
 }
