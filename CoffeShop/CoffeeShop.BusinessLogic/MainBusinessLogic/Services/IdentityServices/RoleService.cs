@@ -22,6 +22,6 @@ public class RoleService : IRoleService
     public async Task<IEnumerable<Role>> GetAllAsync()
         => await _repository.GetAllAsync(); 
 
-    public async Task<Role?> GetAsync(int userId) 
-    => await _roleRepository.GetAsync(userId); 
+    public async Task<Role?> GetAsync(string name) 
+    => await _roleRepository.GetAsync(name); 
 }
