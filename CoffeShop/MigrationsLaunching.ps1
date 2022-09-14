@@ -8,3 +8,5 @@ Remove-Item Migrations
 dotnet ef migrations add Migration1 -s  ..\CoffeeShop.Api\
 
 dotnet ef database update -s ..\CoffeeShop.Api\
+
+cd ..
