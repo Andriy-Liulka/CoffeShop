@@ -36,6 +36,29 @@ public class Startup
         services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc("v1", new OpenApiInfo {Title = "Coffee Shop", Version = "v1"});
+            var securityDefinitionId = "JwtAuth";
+            var securityDefinition = new OpenApiSecurityScheme()
+            {
+                Description = "Jwt access tokens",
+                Name = securityDefinitionId,
+                In=ParameterLocation.Header,
+                Scheme = "Bearer",
+                Type = SecuritySchemeType.Http
+            };
+            var securityScheme = new OpenApiSecurityScheme()
+            {
+                Reference = new OpenApiReference()
+                {
+                    Id = securityDefinitionId,
+                    Type = ReferenceType.SecurityScheme
+                }
+            };
+            var securityRequirements = new OpenApiSecurityRequirement()
+            {
+                {securityScheme,new string[]{}}
+            };
+            c.AddSecurityDefinition(securityDefinitionId,securityDefinition);
+            c.AddSecurityRequirement(securityRequirements);
         });
         services.AddDbContext<CoffeeShopContext>(option =>
         {
