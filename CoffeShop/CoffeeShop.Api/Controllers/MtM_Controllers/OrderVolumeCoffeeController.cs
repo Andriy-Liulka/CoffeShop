@@ -1,10 +1,12 @@
 ﻿using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.Domain.Entities.MtM_IntermediateEntities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeShop.Api.Controllers.MtM_Controllers;
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class OrderVolumeCoffeeController : ControllerBase
 {
     private readonly ILogger<OrderVolumeCoffeeController> _logger;

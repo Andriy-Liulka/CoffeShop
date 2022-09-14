@@ -1,11 +1,13 @@
 
 using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeShop.Api.Controllers;
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class CoffeeController : ControllerBase
 {
     private readonly ILogger<CoffeeController> _logger;
