@@ -77,7 +77,7 @@ public class AuthenticateService : IAuthenticateService
             FirstName = model.FirstName,
             LastName = model.LastName,
             PasswordHash = model.Password,
-            IdentityCredentialLogin = user.Login,
+            IdentityCredentialLogin = model.Login,
             IdentityCredential = new IdentityCredential(),
             Role = await _roleRepository.GetAsync(Roles.Customer)
         });
