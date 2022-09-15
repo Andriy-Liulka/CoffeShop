@@ -4,6 +4,7 @@ using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.BusinessLogic.MainBusinessLogic.Services.IdentityServices.Security;
 using CoffeeShop.BusinessLogic.MainBusinessLogic.Services.IdentityServices.Security.dto.Authenticate;
 using CoffeeShop.DataAccess.Repositories;
+using CoffeeShop.DataAccess.Repositories.CustomRepositories.IdentityCredentialRepositories;
 using CoffeeShop.DataAccess.Repositories.CustomRepositories.RoleRepositories;
 using CoffeeShop.DataAccess.Repositories.CustomRepositories.UserRepositories;
 using CoffeeShop.Domain.Constants;
@@ -15,23 +16,20 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services.IdentityServices;
 public class AuthenticateService : IAuthenticateService
 {
     private readonly IUserRepository _userRepository;
-    private readonly IRepository<IdentityCredential> _authenticateRepository;
-    private readonly IRepository<User> _userBaseRepository;
     private readonly IRoleRepository _roleRepository;
+    private readonly IIdentityCredentialRepository _identityCredentialRepository;
     private readonly TokenGenerator _tokenGenerator;
     
     public AuthenticateService(
-        IRepository<IdentityCredential> authenticateRepository,
-        IRepository<User> userBaseRepository,
         IUserRepository userRepository,
         IRoleRepository roleRepository,
+        IIdentityCredentialRepository identityCredentialRepository,
         TokenGenerator tokenGenerator)
     {
         _userRepository = userRepository;
-        _authenticateRepository = authenticateRepository;
         _tokenGenerator = tokenGenerator;
-        _userBaseRepository = userBaseRepository;
         _roleRepository = roleRepository;
+        _identityCredentialRepository = identityCredentialRepository;
     }
 
     public async Task<object> Login(LoginModel model)
@@ -55,7 +53,7 @@ public class AuthenticateService : IAuthenticateService
             ValidTo = refreshTokenModel.ValidTo
         });
 
-        await _authenticateRepository.UpdateAsync(user.IdentityCredential);
+        await _identityCredentialRepository.UpdateAsync(user.IdentityCredential);
         
         return new
         {
@@ -71,7 +69,7 @@ public class AuthenticateService : IAuthenticateService
         if (user is not null)
             return new {Message="Such user exist"};
 
-        await _userBaseRepository.CreateAsync(new User
+        await _userRepository.CreateAsync(new User
         {
             Email = model.Email,
             FirstName = model.FirstName,
@@ -106,7 +104,7 @@ public class AuthenticateService : IAuthenticateService
             ValidTo = newRefreshTokenModel.ValidTo
         });
 
-        await _authenticateRepository.UpdateAsync(user.IdentityCredential);
+        await _identityCredentialRepository.UpdateAsync(user.IdentityCredential);
         
         return new
         {

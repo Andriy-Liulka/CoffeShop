@@ -10,25 +10,23 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services.IdentityServices;
 
 public class UserService : IUserService
 {
-    private readonly IRepository<User> _repository;
     private readonly IUserRepository _userRepository;
-    public UserService(IRepository<User> repository,IUserRepository userRepository)
+    public UserService(IUserRepository userRepository)
     {
-        _repository = repository;
         _userRepository = userRepository;
     }
 
     public async Task<IEnumerable<User>> GetAllAsync()
-        => await _repository.GetAllAsync();
+        => await _userRepository.GetAllAsync();
 
     public async Task<User?> GetAsync(string login)
         => await _userRepository.GetAsync(login);
     public async Task CreateAsync(User user)
-        => await _repository.CreateAsync(user);
+        => await _userRepository.CreateAsync(user);
 
     public async Task UpdateAsync(User user)
-        => await _repository.UpdateAsync(user);
+        => await _userRepository.UpdateAsync(user);
 
     public async Task DeleteAsync(User user)
-        => await _repository.DeleteAsync(user);
+        => await _userRepository.DeleteAsync(user);
 }

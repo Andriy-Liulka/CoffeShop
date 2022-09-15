@@ -11,27 +11,25 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services;
 
 public class BonusCoffeeService : IBonusCoffeeService
 {
-    private readonly IRepository<BonusCoffee> _repository;
     private readonly IBonusCoffeeRepository _bonusCoffeeRepository;
 
-    public BonusCoffeeService(IRepository<BonusCoffee> repository,IBonusCoffeeRepository bonusCoffeeRepository)
+    public BonusCoffeeService(IBonusCoffeeRepository bonusCoffeeRepository)
     {
-        _repository = repository;
         _bonusCoffeeRepository = bonusCoffeeRepository;
     }
 
     public async Task<IEnumerable<BonusCoffee>> GetAllAsync()
-        => await _repository.GetAllAsync();
+        => await _bonusCoffeeRepository.GetAllAsync();
 
     public async Task<BonusCoffee?> GetAsync(int id)
         => await _bonusCoffeeRepository.GetAsync(id);
 
     public async Task CreateAsync(BonusCoffee bonusCoffee)
-        => await _repository.CreateAsync(bonusCoffee);
+        => await _bonusCoffeeRepository.CreateAsync(bonusCoffee);
 
     public async Task UpdateAsync(BonusCoffee bonusCoffee)
-        => await _repository.UpdateAsync(bonusCoffee);
+        => await _bonusCoffeeRepository.UpdateAsync(bonusCoffee);
 
     public async Task DeleteAsync(BonusCoffee bonusCoffee)
-        => await _repository.DeleteAsync(bonusCoffee);
+        => await _bonusCoffeeRepository.DeleteAsync(bonusCoffee);
 }
