@@ -2,7 +2,7 @@
 
 namespace CoffeeShop.DataAccess.Repositories.CustomRepositories.VolumeRepositories;
 
-public interface IVolumeRepository
+public interface IVolumeRepository : IRepository<Volume>
 {
     Task<Volume> GetAsync(int id);
 }

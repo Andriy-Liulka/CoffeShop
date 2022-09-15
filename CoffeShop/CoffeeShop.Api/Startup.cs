@@ -94,8 +94,6 @@ public class Startup
 
         services.AddHealthChecks();
 
-        services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-
         services.AddCustomServices(services.AddDataAccessServices,services.AddBusinessLogicServices);
 
         services.AddAutoMapper(typeof(AppMappingProfile));

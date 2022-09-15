@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CoffeeShop.DataAccess.Repositories.CustomRepositories.DiscountRepositories;
 
-public class DiscountRepository : IDiscountRepository
+public class DiscountRepository : Repository<Discount>,IDiscountRepository
 {
     private readonly CoffeeShopContext _context;
-    public DiscountRepository(CoffeeShopContext context)
+    public DiscountRepository(CoffeeShopContext context):base(context)
     {
         _context = context;
     }
