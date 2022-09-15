@@ -9,27 +9,25 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services.MtM_Services;
 
 public class OrderVolumeCoffeeService : IOrderVolumeCoffeeService
 {
-    private readonly IRepository<OrderVolumeCoffee> _repository;
     private readonly IOrderVolumeCoffeeRepository _orderVolumeCoffeeRepository;
 
-    public OrderVolumeCoffeeService(IRepository<OrderVolumeCoffee> repository,IOrderVolumeCoffeeRepository orderVolumeCoffeeRepository)
+    public OrderVolumeCoffeeService(IOrderVolumeCoffeeRepository orderVolumeCoffeeRepository)
     {
-        _repository = repository;
         _orderVolumeCoffeeRepository = orderVolumeCoffeeRepository;
     }
 
     public async Task<IEnumerable<OrderVolumeCoffee>> GetAllAsync()
-        => await _repository.GetAllAsync(); 
+        => await _orderVolumeCoffeeRepository.GetAllAsync(); 
 
     public async Task<OrderVolumeCoffee?> GetAsync(int id) 
         => await _orderVolumeCoffeeRepository.GetAsync(id);
 
     public async Task CreateAsync(OrderVolumeCoffee orderVolumeCoffee)
-        => await _repository.CreateAsync(orderVolumeCoffee);
+        => await _orderVolumeCoffeeRepository.CreateAsync(orderVolumeCoffee);
 
     public async Task UpdateAsync(OrderVolumeCoffee orderVolumeCoffee)
-        => await _repository.UpdateAsync(orderVolumeCoffee);
+        => await _orderVolumeCoffeeRepository.UpdateAsync(orderVolumeCoffee);
 
     public async Task DeleteAsync(OrderVolumeCoffee orderVolumeCoffee)
-        => await _repository.DeleteAsync(orderVolumeCoffee);
+        => await _orderVolumeCoffeeRepository.DeleteAsync(orderVolumeCoffee);
 }

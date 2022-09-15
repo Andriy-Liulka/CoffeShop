@@ -2,7 +2,8 @@
 
 namespace CoffeeShop.DataAccess.Repositories.CustomRepositories.RoleRepositories;
 
-public interface IRoleRepository
+public interface IRoleRepository : IRepository<Role>
 {
-    Task<Role> GetAsync(int id);
+    Task<Role> GetAsync(string name);
+
 }

@@ -16,6 +16,7 @@ public class CoffeeShopContext : DbContext
     public CoffeeShopContext(){}
     
     public virtual DbSet<User> Users { get; set; }
+    public virtual DbSet<IdentityCredential> IdentityCredentials { get; set; }
     public virtual DbSet<Role> Roles { get; set; }
     
     public virtual DbSet<Coffee> Coffees { get; set; }
@@ -34,7 +35,8 @@ public class CoffeeShopContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<User>().Configure<UserConfiguration,User>();
+        modelBuilder.Entity<User>().Configure<UserConfiguration,User>().SetDefaultData<UserConfiguration,User>();
+        modelBuilder.Entity<IdentityCredential>().Configure<IdentityCredentialConfiguration,IdentityCredential>().SetDefaultData<IdentityCredentialConfiguration,IdentityCredential>();
         modelBuilder.Entity<Role>().Configure<RoleConfiguration,Role>().SetDefaultData<RoleConfiguration,Role>();
         
         modelBuilder.Entity<Coffee>().Configure<CoffeeConfiguration,Coffee>().SetDefaultData<CoffeeConfiguration,Coffee>();

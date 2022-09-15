@@ -9,26 +9,24 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services;
 
 public class DiscountService : IDiscountService
 {
-    private readonly IRepository<Discount> _repository;
     private readonly IDiscountRepository _discountRepository;
 
-    public DiscountService(IRepository<Discount> repository,IDiscountRepository discountRepository)
+    public DiscountService(IDiscountRepository discountRepository)
     {
-        _repository = repository;
         _discountRepository = discountRepository;
     }
 
     public async Task<IEnumerable<Discount>> GetAllAsync()
-        => await _repository.GetAllAsync();
+        => await _discountRepository.GetAllAsync();
 
     public async Task<Discount?> GetAsync(int id)
         => await _discountRepository.GetAsync(id);
     public async Task CreateAsync(Discount discount)
-        => await _repository.CreateAsync(discount);
+        => await _discountRepository.CreateAsync(discount);
 
     public async Task UpdateAsync(Discount discount)
-        => await _repository.UpdateAsync(discount);
+        => await _discountRepository.UpdateAsync(discount);
 
     public async Task DeleteAsync(Discount discount)
-        => await _repository.DeleteAsync(discount);
+        => await _discountRepository.DeleteAsync(discount);
 }

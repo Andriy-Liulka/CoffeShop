@@ -1,10 +1,12 @@
 ﻿using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeShop.Api.Controllers;
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class DiscountController : ControllerBase
 {
     private readonly ILogger<DiscountController> _logger;

@@ -9,27 +9,25 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services;
 
 public class VolumeService : IVolumeService
 {
-    private readonly IRepository<Volume> _repository;
     private readonly IVolumeRepository _orderRepository;
 
-    public VolumeService(IRepository<Volume> repository,IVolumeRepository orderRepository)
+    public VolumeService(IVolumeRepository orderRepository)
     {
-        _repository = repository;
         _orderRepository = orderRepository;
     }
 
     public async Task<IEnumerable<Volume>> GetAllAsync()
-        => await _repository.GetAllAsync();
+        => await _orderRepository.GetAllAsync();
 
     public async Task<Volume?> GetAsync(int id)
         => await _orderRepository.GetAsync(id);
 
     public async Task CreateAsync(Volume volume)
-        => await _repository.CreateAsync(volume);
+        => await _orderRepository.CreateAsync(volume);
 
     public async Task UpdateAsync(Volume volume)
-        => await _repository.UpdateAsync(volume);
+        => await _orderRepository.UpdateAsync(volume);
 
     public async Task DeleteAsync(Volume volume)
-        => await _repository.DeleteAsync(volume);
+        => await _orderRepository.DeleteAsync(volume);
 }

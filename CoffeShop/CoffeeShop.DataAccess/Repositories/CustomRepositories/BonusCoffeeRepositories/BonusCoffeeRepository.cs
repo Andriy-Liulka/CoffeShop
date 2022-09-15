@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CoffeeShop.DataAccess.Repositories.CustomRepositories.BonusCoffeeRepositories;
 
-public class BonusCoffeeRepository : IBonusCoffeeRepository
+public class BonusCoffeeRepository : Repository<BonusCoffee>,IBonusCoffeeRepository
 {
     private readonly CoffeeShopContext _context;
 
-    public BonusCoffeeRepository(CoffeeShopContext context)
+    public BonusCoffeeRepository(CoffeeShopContext context):base(context)
     {
         _context = context;
     }

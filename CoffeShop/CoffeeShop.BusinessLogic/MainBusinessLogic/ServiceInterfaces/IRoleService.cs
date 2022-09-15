@@ -6,5 +6,5 @@ public interface IRoleService
 {
     Task<IEnumerable<Role>> GetAllAsync();
 
-    Task<Role?> GetAsync(int userId);
+    Task<Role?> GetAsync(string name);
 }

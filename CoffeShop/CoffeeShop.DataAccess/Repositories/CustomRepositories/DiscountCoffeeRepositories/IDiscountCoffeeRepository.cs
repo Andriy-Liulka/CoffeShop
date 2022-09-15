@@ -2,7 +2,7 @@
 
 namespace CoffeeShop.DataAccess.Repositories.CustomRepositories.DiscountCoffeeRepositories;
 
-public interface IDiscountCoffeeRepository
+public interface IDiscountCoffeeRepository : IRepository<DiscountCoffee>
 {
     public Task<DiscountCoffee> GetAsync(int discountId, int coffeetId);
 }

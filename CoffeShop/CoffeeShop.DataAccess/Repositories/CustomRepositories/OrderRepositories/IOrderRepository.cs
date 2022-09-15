@@ -2,7 +2,7 @@
 
 namespace CoffeeShop.DataAccess.Repositories.CustomRepositories.OrderRepositories;
 
-public interface IOrderRepository
+public interface IOrderRepository : IRepository<Order>
 {
     public Task<Order> GetAsync(int id);
 }

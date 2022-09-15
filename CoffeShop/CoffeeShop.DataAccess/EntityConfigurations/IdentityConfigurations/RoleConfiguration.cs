@@ -1,4 +1,5 @@
 ﻿using CoffeeShop.DataAccess.Common;
+using CoffeeShop.Domain.Constants;
 using CoffeeShop.Domain.Entities;
 using CoffeeShop.Domain.Entities.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -12,14 +13,14 @@ public class RoleConfiguration : IEntityConfiguration<Role>,IDefaultDataSetter<R
     {
         builder.ToTable(TableNameCreator.CreateDefaultTableName(()=>nameof(Role)));
 
-        builder.HasKey(x => x.Id);
+        builder.HasKey(x => x.Name);
         
         builder.Ignore(x => x.Users);
 
         builder
             .HasMany(x => x.Users)
             .WithOne(x => x.Role)
-            .HasForeignKey(x=>x.RoleId);
+            .HasForeignKey(x=>x.RoleName);
         
         return builder;
     }
@@ -28,8 +29,8 @@ public class RoleConfiguration : IEntityConfiguration<Role>,IDefaultDataSetter<R
     {
         builder.HasData
         (
-            new Role {Id = 1, Name = "Admin"},
-            new Role {Id = 2, Name = "Customer"}
+            new Role {Name = Roles.Customer},
+            new Role {Name = Roles.Admin}
         );
         return builder;
     }

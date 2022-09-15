@@ -10,18 +10,16 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services.IdentityServices;
 
 public class RoleService : IRoleService
 {
-    private readonly IRepository<Role> _repository;
     private readonly IRoleRepository _roleRepository;
 
-    public RoleService(IRepository<Role> repository,IRoleRepository roleRepository)
+    public RoleService(IRoleRepository roleRepository)
     {
-        _repository = repository;
         _roleRepository = roleRepository;
     }
 
     public async Task<IEnumerable<Role>> GetAllAsync()
-        => await _repository.GetAllAsync(); 
+        => await _roleRepository.GetAllAsync(); 
 
-    public async Task<Role?> GetAsync(int userId) 
-    => await _roleRepository.GetAsync(userId); 
+    public async Task<Role?> GetAsync(string name) 
+    => await _roleRepository.GetAsync(name); 
 }

@@ -17,12 +17,15 @@ public class User
     
     public string PasswordHash { get; set; }
     
+    public string? IdentityCredentialLogin { get; set; }
+    public virtual IdentityCredential? IdentityCredential { get; set; }
+    
     public bool IsBlocked { get; set; }
     
-    public string AvatarImage { get; set; }
+    public string? AvatarImage { get; set; }
     
     public long Bonuses { get; set; }
-    public long? RoleId { get; set; }
+    public string? RoleName { get; set; }
     public virtual Role? Role { get; set; }
     public virtual IList<Order>? Orders { get; set; }
 }
