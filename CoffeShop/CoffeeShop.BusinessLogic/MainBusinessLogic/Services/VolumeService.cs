@@ -1,10 +1,7 @@
 ﻿using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
-using CoffeeShop.DataAccess;
-using CoffeeShop.DataAccess.Repositories;
 using CoffeeShop.DataAccess.Repositories.CustomRepositories.VolumeRepositories;
 using CoffeeShop.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services;
 

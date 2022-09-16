@@ -1,4 +1,4 @@
-﻿namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services.IdentityServices.Security.dto.Authenticate;
+﻿namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services.IdentityServices.Security.Dto.Authenticate;
 
 public class LoginModel
 {

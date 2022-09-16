@@ -1,17 +1,14 @@
 ﻿using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
-using CoffeeShop.DataAccess;
-using CoffeeShop.DataAccess.Repositories;
 using CoffeeShop.DataAccess.Repositories.CustomRepositories.UserRepositories;
 using CoffeeShop.Domain.Entities.Identity;
-using CoffeeShop.Domain.Entities.MtM_IntermediateEntities;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services.IdentityServices;
 
 public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
+
     public UserService(IUserRepository userRepository)
     {
         _userRepository = userRepository;

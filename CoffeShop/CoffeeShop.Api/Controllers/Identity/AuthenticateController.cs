@@ -1,7 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-using AutoMapper;
+﻿using AutoMapper;
 using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
-using CoffeeShop.BusinessLogic.MainBusinessLogic.Services.IdentityServices.Security.dto.Authenticate;
+using CoffeeShop.BusinessLogic.MainBusinessLogic.Services.IdentityServices.Security.Dto.Authenticate;
 using CoffeShop.Api.Dto.Authenticate;
 using CoffeShop.Api.ProxyExceptionHandlingLayer;
 using Microsoft.AspNetCore.Mvc;
@@ -12,10 +11,10 @@ namespace CoffeShop.Api.Controllers.Identity;
 [Route("api/[controller]")]
 public class AuthenticateController : ControllerBase
 {
-    private readonly IMapper _mapper;
-    private readonly IUserService _service;
     private readonly IAuthenticateService _authenticateService;
+    private readonly IMapper _mapper;
     private readonly IProxyExceptionHandler<IAuthenticateService> _proxyExceptionHandler;
+    private readonly IUserService _service;
 
     public AuthenticateController(
         IUserService service,

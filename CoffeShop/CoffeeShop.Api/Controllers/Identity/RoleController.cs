@@ -5,13 +5,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeShop.Api.Controllers.Identity;
+
 [ApiController]
 [Route("api/[controller]")]
-[Authorize(Roles=Roles.Admin)]
+[Authorize(Roles = Roles.Admin)]
 public class RoleController : ControllerBase
 {
-    private readonly IRoleService _service;
     private readonly IProxyExceptionHandler<IRoleService> _proxyExceptionHandler;
+    private readonly IRoleService _service;
 
     public RoleController(IRoleService service, IProxyExceptionHandler<IRoleService> proxyExceptionHandler)
     {

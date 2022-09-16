@@ -5,14 +5,19 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CoffeeShop.DataAccess.EntityConfigurations;
 
-public class OrderConfiguration : IEntityConfiguration<Order>,IDefaultDataSetter<Order>
+public class OrderConfiguration : IEntityConfiguration<Order>, IDefaultDataSetter<Order>
 {
-    public EntityTypeBuilder<Order>Configure(EntityTypeBuilder<Order> builder)
+    public EntityTypeBuilder<Order> SetDefaultData(EntityTypeBuilder<Order> builder)
     {
-        builder.ToTable(TableNameCreator.CreateDefaultTableName(()=>nameof(Order)));
+        throw new NotImplementedException();
+    }
 
-        builder.HasKey(x=>x.Id);
-        
+    public EntityTypeBuilder<Order> Configure(EntityTypeBuilder<Order> builder)
+    {
+        builder.ToTable(TableNameCreator.CreateDefaultTableName(() => nameof(Order)));
+
+        builder.HasKey(x => x.Id);
+
         builder.Ignore(x => x.OrderVolumeCoffees);
 
         builder.Property(pr => pr.TotalPrice).HasColumnType("DECIMAL(20,10)");
@@ -24,15 +29,10 @@ public class OrderConfiguration : IEntityConfiguration<Order>,IDefaultDataSetter
             .WithOne(x => x.Order)
             .HasForeignKey(x => x.OrderId);
         builder
-            .HasOne(x=>x.User)
-            .WithMany(x=>x.Orders)
-            .HasForeignKey(x=>x.UserLogin);
-        
-        return builder;
-    }
+            .HasOne(x => x.User)
+            .WithMany(x => x.Orders)
+            .HasForeignKey(x => x.UserLogin);
 
-    public EntityTypeBuilder<Order> SetDefaultData(EntityTypeBuilder<Order> builder)
-    {
-        throw new NotImplementedException();
+        return builder;
     }
 }

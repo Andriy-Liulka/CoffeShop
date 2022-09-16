@@ -13,9 +13,9 @@ namespace CoffeShop.Api.Controllers.MtM_Controllers;
 [Authorize]
 public class DiscountCoffeeController : ControllerBase
 {
-    private readonly IDiscountCoffeeService _service;
-    private readonly IProxyExceptionHandler<IDiscountService> _proxyExceptionHandler;
     private readonly IMapper _mapper;
+    private readonly IProxyExceptionHandler<IDiscountService> _proxyExceptionHandler;
+    private readonly IDiscountCoffeeService _service;
 
     public DiscountCoffeeController(
         IDiscountCoffeeService service,

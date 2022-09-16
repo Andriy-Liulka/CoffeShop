@@ -2,9 +2,10 @@
 
 internal static class ModuleConfigurator
 {
-    internal static IServiceCollection AddCustomServices(this IServiceCollection services,params Func<IServiceCollection>[] configurators)
+    internal static IServiceCollection AddCustomServices(this IServiceCollection services,
+        params Func<IServiceCollection>[] configurators)
     {
-        configurators.ToList().ForEach(x=>x.Invoke());
+        configurators.ToList().ForEach(x => x.Invoke());
         return services;
     }
 }

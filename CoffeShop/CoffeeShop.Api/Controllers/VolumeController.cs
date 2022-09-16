@@ -5,13 +5,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeShop.Api.Controllers;
+
 [ApiController]
 [Route("api/[controller]")]
 [Authorize]
 public class VolumeController : ControllerBase
 {
-    private readonly IVolumeService _service;
     private readonly IProxyExceptionHandler<IVolumeService> _proxyExceptionHandler;
+    private readonly IVolumeService _service;
 
     public VolumeController(IVolumeService service, IProxyExceptionHandler<IVolumeService> proxyExceptionHandler)
     {

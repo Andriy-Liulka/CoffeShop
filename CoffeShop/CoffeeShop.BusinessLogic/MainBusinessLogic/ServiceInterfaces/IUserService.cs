@@ -1,5 +1,4 @@
 ﻿using CoffeeShop.Domain.Entities.Identity;
-using CoffeeShop.Domain.Entities.MtM_IntermediateEntities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;

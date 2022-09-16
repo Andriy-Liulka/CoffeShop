@@ -37,7 +37,7 @@ public class Startup
         {
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "Coffee Shop", Version = "v1" });
             var securityDefinitionId = "JwtAuth";
-            var securityDefinition = new OpenApiSecurityScheme()
+            var securityDefinition = new OpenApiSecurityScheme
             {
                 Description = "Jwt access tokens",
                 Name = securityDefinitionId,
@@ -45,15 +45,15 @@ public class Startup
                 Scheme = "Bearer",
                 Type = SecuritySchemeType.Http
             };
-            var securityScheme = new OpenApiSecurityScheme()
+            var securityScheme = new OpenApiSecurityScheme
             {
-                Reference = new OpenApiReference()
+                Reference = new OpenApiReference
                 {
                     Id = securityDefinitionId,
                     Type = ReferenceType.SecurityScheme
                 }
             };
-            var securityRequirements = new OpenApiSecurityRequirement()
+            var securityRequirements = new OpenApiSecurityRequirement
             {
                 { securityScheme, new string[] { } }
             };
@@ -77,7 +77,7 @@ public class Startup
             {
                 options.SaveToken = true;
                 options.RequireHttpsMetadata = false;
-                options.TokenValidationParameters = new TokenValidationParameters()
+                options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
                     ValidateAudience = true,
@@ -123,8 +123,8 @@ public class Startup
 
         app.UseEndpoints(endpoints =>
         {
-            endpoints.MapControllerRoute(name: "default", pattern: "api/{controller}/{action}");
-            endpoints.MapHealthChecks("/health", new HealthCheckOptions()
+            endpoints.MapControllerRoute("default", "api/{controller}/{action}");
+            endpoints.MapHealthChecks("/health", new HealthCheckOptions
             {
                 ResultStatusCodes =
                 {

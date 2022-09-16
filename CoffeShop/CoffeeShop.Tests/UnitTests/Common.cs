@@ -1,8 +1,6 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using MockQueryable.FakeItEasy;
 using Moq;
-
 
 namespace CoffeeShop.Tests.UnitTests;
 
@@ -13,13 +11,13 @@ internal static class Common
         var queryable = sourceList.AsQueryable();
 
         var dbSet = new Mock<DbSet<T>>();
-        
+
         dbSet.As<IQueryable<T>>().Setup(m => m.Provider).Returns(queryable.Provider);
         dbSet.As<IQueryable<T>>().Setup(m => m.Expression).Returns(queryable.Expression);
         dbSet.As<IQueryable<T>>().Setup(m => m.ElementType).Returns(queryable.ElementType);
         dbSet.As<IQueryable<T>>().Setup(m => m.GetEnumerator()).Returns(() => queryable.GetEnumerator());
 
-        dbSet.Setup(d => d.Add(It.IsAny<T>())).Callback<T>((s) => sourceList.Add(s));
+        dbSet.Setup(d => d.Add(It.IsAny<T>())).Callback<T>(s => sourceList.Add(s));
 
         return dbSet.Object;
     }
@@ -33,7 +31,7 @@ internal static class Common
     {
         var queryable = TestDataCreator.GetTestCoffeeData().AsQueryable().BuildMock();
         var dbSet = new Mock<DbSet<T>>();
-        
+
         dbSet.As<IQueryable<T>>().Setup(m => m.Provider).Returns(queryable.Provider);
         dbSet.As<IQueryable<T>>().Setup(m => m.Expression).Returns(queryable.Expression);
         dbSet.As<IQueryable<T>>().Setup(m => m.ElementType).Returns(queryable.ElementType);

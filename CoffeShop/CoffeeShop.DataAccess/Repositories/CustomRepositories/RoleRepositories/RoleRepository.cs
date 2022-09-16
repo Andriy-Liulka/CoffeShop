@@ -3,10 +3,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CoffeeShop.DataAccess.Repositories.CustomRepositories.RoleRepositories;
 
-public class RoleRepository :Repository<Role>, IRoleRepository
+public class RoleRepository : Repository<Role>, IRoleRepository
 {
     private readonly CoffeeShopContext _context;
-    public RoleRepository(CoffeeShopContext context):base(context)
+
+    public RoleRepository(CoffeeShopContext context) : base(context)
     {
         _context = context;
     }

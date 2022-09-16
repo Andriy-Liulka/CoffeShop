@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using CoffeeShop.BusinessLogic.Dto;
-using CoffeShop.Api.Dto.Authenticate;
-using CoffeeShop.BusinessLogic.MainBusinessLogic.Services.IdentityServices.Security.dto.Authenticate;
+using CoffeeShop.BusinessLogic.MainBusinessLogic.Services.IdentityServices.Security.Dto.Authenticate;
 using CoffeShop.Api.Dto;
+using CoffeShop.Api.Dto.Authenticate;
 
 namespace CoffeShop.Api.Configurations;
 

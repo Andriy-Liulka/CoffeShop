@@ -3,10 +3,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CoffeeShop.DataAccess.Repositories.CustomRepositories.VolumeRepositories;
 
-public class VolumeRepository : Repository<Volume>,IVolumeRepository
+public class VolumeRepository : Repository<Volume>, IVolumeRepository
 {
     private readonly CoffeeShopContext _context;
-    public VolumeRepository(CoffeeShopContext context):base(context)
+
+    public VolumeRepository(CoffeeShopContext context) : base(context)
     {
         _context = context;
     }

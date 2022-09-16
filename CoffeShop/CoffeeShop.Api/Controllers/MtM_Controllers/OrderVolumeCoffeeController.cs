@@ -5,13 +5,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeShop.Api.Controllers.MtM_Controllers;
+
 [ApiController]
 [Route("api/[controller]")]
 [Authorize]
 public class OrderVolumeCoffeeController : ControllerBase
 {
-    private readonly IOrderVolumeCoffeeService _service;
     private readonly IProxyExceptionHandler<IOrderVolumeCoffeeService> _proxyExceptionHandler;
+    private readonly IOrderVolumeCoffeeService _service;
 
     public OrderVolumeCoffeeController(IOrderVolumeCoffeeService service,
         IProxyExceptionHandler<IOrderVolumeCoffeeService> proxyExceptionHandler)

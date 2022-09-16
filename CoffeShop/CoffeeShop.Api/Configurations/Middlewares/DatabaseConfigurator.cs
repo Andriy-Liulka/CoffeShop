@@ -16,6 +16,7 @@ public static class DatabaseConfigurator
                 context?.Database.Migrate();
             }
         }
+
         return app;
     }
 }

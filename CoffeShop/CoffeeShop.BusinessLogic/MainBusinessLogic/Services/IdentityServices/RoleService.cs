@@ -1,11 +1,6 @@
 ﻿using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
-using CoffeeShop.DataAccess;
-using CoffeeShop.DataAccess.Repositories;
 using CoffeeShop.DataAccess.Repositories.CustomRepositories.RoleRepositories;
-using CoffeeShop.Domain.Entities;
-using CoffeeShop.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services.IdentityServices;
 

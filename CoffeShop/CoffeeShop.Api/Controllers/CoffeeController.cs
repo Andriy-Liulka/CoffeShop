@@ -1,4 +1,3 @@
-
 using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.Domain.Entities;
 using CoffeShop.Api.ProxyExceptionHandlingLayer;
@@ -6,14 +5,15 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeShop.Api.Controllers;
+
 [ApiController]
 [Route("api/[controller]")]
 [Authorize]
 public class CoffeeController : ControllerBase
 {
     private readonly ILogger<CoffeeController> _logger;
-    private readonly ICoffeeService _service;
     private readonly IProxyExceptionHandler<ICoffeeService> _proxyExceptionHandler;
+    private readonly ICoffeeService _service;
 
     public CoffeeController(ILogger<CoffeeController> logger,
         IProxyExceptionHandler<ICoffeeService> proxyExceptionHandler, ICoffeeService service)

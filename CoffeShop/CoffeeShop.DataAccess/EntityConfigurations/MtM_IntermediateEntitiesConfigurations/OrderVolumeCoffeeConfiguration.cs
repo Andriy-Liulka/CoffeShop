@@ -5,16 +5,22 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CoffeeShop.DataAccess.EntityConfigurations.MtM_IntermediateEntitiesConfigurations;
 
-public class OrderVolumeCoffeeConfiguration : IEntityConfiguration<OrderVolumeCoffee>,IDefaultDataSetter<OrderVolumeCoffee>
+public class OrderVolumeCoffeeConfiguration : IEntityConfiguration<OrderVolumeCoffee>,
+    IDefaultDataSetter<OrderVolumeCoffee>
 {
+    public EntityTypeBuilder<OrderVolumeCoffee> SetDefaultData(EntityTypeBuilder<OrderVolumeCoffee> builder)
+    {
+        throw new NotImplementedException();
+    }
+
     public EntityTypeBuilder<OrderVolumeCoffee> Configure(EntityTypeBuilder<OrderVolumeCoffee> builder)
     {
         builder.ToTable(TableNameCreator.CreateDefaultTableName(() => nameof(OrderVolumeCoffee)));
 
-        builder.HasKey(x =>x.Id);
-        
+        builder.HasKey(x => x.Id);
+
         builder.Property(pr => pr.Price).HasColumnType("DECIMAL(15,7)");
-        
+
         builder
             .HasOne(x => x.Order)
             .WithMany(x => x.OrderVolumeCoffees)
@@ -27,12 +33,7 @@ public class OrderVolumeCoffeeConfiguration : IEntityConfiguration<OrderVolumeCo
             .HasOne(x => x.Coffee)
             .WithMany(x => x.OrderVolumeCoffees)
             .HasForeignKey(x => x.CoffeetId);
-        
-        return builder;
-    }
 
-    public EntityTypeBuilder<OrderVolumeCoffee> SetDefaultData(EntityTypeBuilder<OrderVolumeCoffee> builder)
-    {
-        throw new NotImplementedException();
+        return builder;
     }
 }

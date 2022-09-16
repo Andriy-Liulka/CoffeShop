@@ -1,5 +1,4 @@
-﻿
-using CoffeeShop.DataAccess.Configurations;
+﻿using CoffeeShop.DataAccess.Configurations;
 using CoffeeShop.DataAccess.EntityConfigurations;
 using CoffeeShop.DataAccess.EntityConfigurations.IdentityConfigurations;
 using CoffeeShop.DataAccess.EntityConfigurations.MtM_IntermediateEntitiesConfigurations;
@@ -24,9 +23,10 @@ public class CoffeeShopContext : DbContext
     public virtual DbSet<Order> Orders { get; set; }
     public virtual DbSet<Volume> Volumes { get; set; }
     public virtual DbSet<BonusCoffee> BonusCoffees { get; set; }
-    
+
     public virtual DbSet<DiscountCoffee> DiscountCoffees { get; set; }
     public virtual DbSet<OrderVolumeCoffee> OrderVolumeCoffees { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.LogTo(Console.WriteLine);
@@ -35,18 +35,24 @@ public class CoffeeShopContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<User>().Configure<UserConfiguration,User>().SetDefaultData<UserConfiguration,User>();
-        modelBuilder.Entity<IdentityCredential>().Configure<IdentityCredentialConfiguration,IdentityCredential>().SetDefaultData<IdentityCredentialConfiguration,IdentityCredential>();
-        modelBuilder.Entity<Role>().Configure<RoleConfiguration,Role>().SetDefaultData<RoleConfiguration,Role>();
-        
-        modelBuilder.Entity<Coffee>().Configure<CoffeeConfiguration,Coffee>().SetDefaultData<CoffeeConfiguration,Coffee>();
-        modelBuilder.Entity<Discount>().Configure<DiscountConfiguration,Discount>().SetDefaultData<DiscountConfiguration,Discount>();
-        modelBuilder.Entity<Order>().Configure<OrderConfiguration,Order>();
-        modelBuilder.Entity<Volume>().Configure<VolumeConfiguration,Volume>().SetDefaultData<VolumeConfiguration,Volume>();
-        modelBuilder.Entity<BonusCoffee>().Configure<BonusCoffeeConfiguration,BonusCoffee>().SetDefaultData<BonusCoffeeConfiguration,BonusCoffee>();
-        
-        modelBuilder.Entity<DiscountCoffee>().Configure<DiscountCoffeeConfiguration,DiscountCoffee>().SetDefaultData<DiscountCoffeeConfiguration,DiscountCoffee>();
-        modelBuilder.Entity<OrderVolumeCoffee>().Configure<OrderVolumeCoffeeConfiguration,OrderVolumeCoffee>();
+        modelBuilder.Entity<User>().Configure<UserConfiguration, User>().SetDefaultData<UserConfiguration, User>();
+        modelBuilder.Entity<IdentityCredential>().Configure<IdentityCredentialConfiguration, IdentityCredential>()
+            .SetDefaultData<IdentityCredentialConfiguration, IdentityCredential>();
+        modelBuilder.Entity<Role>().Configure<RoleConfiguration, Role>().SetDefaultData<RoleConfiguration, Role>();
+
+        modelBuilder.Entity<Coffee>().Configure<CoffeeConfiguration, Coffee>()
+            .SetDefaultData<CoffeeConfiguration, Coffee>();
+        modelBuilder.Entity<Discount>().Configure<DiscountConfiguration, Discount>()
+            .SetDefaultData<DiscountConfiguration, Discount>();
+        modelBuilder.Entity<Order>().Configure<OrderConfiguration, Order>();
+        modelBuilder.Entity<Volume>().Configure<VolumeConfiguration, Volume>()
+            .SetDefaultData<VolumeConfiguration, Volume>();
+        modelBuilder.Entity<BonusCoffee>().Configure<BonusCoffeeConfiguration, BonusCoffee>()
+            .SetDefaultData<BonusCoffeeConfiguration, BonusCoffee>();
+
+        modelBuilder.Entity<DiscountCoffee>().Configure<DiscountCoffeeConfiguration, DiscountCoffee>()
+            .SetDefaultData<DiscountCoffeeConfiguration, DiscountCoffee>();
+        modelBuilder.Entity<OrderVolumeCoffee>().Configure<OrderVolumeCoffeeConfiguration, OrderVolumeCoffee>();
 
         base.OnModelCreating(modelBuilder);
     }

@@ -11,8 +11,8 @@ namespace CoffeShop.Api.Controllers;
 [Authorize]
 public class BonusCoffeeController : ControllerBase
 {
-    private readonly IBonusCoffeeService _service;
     private readonly IProxyExceptionHandler<IBonusCoffeeService> _proxyExceptionHandler;
+    private readonly IBonusCoffeeService _service;
 
     public BonusCoffeeController(IBonusCoffeeService service,
         IProxyExceptionHandler<IBonusCoffeeService> proxyExceptionHandler)

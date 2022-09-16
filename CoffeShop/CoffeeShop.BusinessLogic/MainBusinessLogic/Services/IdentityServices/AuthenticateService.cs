@@ -2,25 +2,24 @@
 using CoffeeShop.BusinessLogic.Common;
 using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.BusinessLogic.MainBusinessLogic.Services.IdentityServices.Security;
-using CoffeeShop.BusinessLogic.MainBusinessLogic.Services.IdentityServices.Security.dto.Authenticate;
-using CoffeeShop.DataAccess.Repositories;
+using CoffeeShop.BusinessLogic.MainBusinessLogic.Services.IdentityServices.Security.Dto;
+using CoffeeShop.BusinessLogic.MainBusinessLogic.Services.IdentityServices.Security.Dto.Authenticate;
 using CoffeeShop.DataAccess.Repositories.CustomRepositories.IdentityCredentialRepositories;
 using CoffeeShop.DataAccess.Repositories.CustomRepositories.RoleRepositories;
 using CoffeeShop.DataAccess.Repositories.CustomRepositories.UserRepositories;
 using CoffeeShop.Domain.Constants;
 using CoffeeShop.Domain.Entities.Identity;
-using CoffeShop.Api.dto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services.IdentityServices;
 
 public class AuthenticateService : IAuthenticateService
 {
-    private readonly IUserRepository _userRepository;
-    private readonly IRoleRepository _roleRepository;
     private readonly IIdentityCredentialRepository _identityCredentialRepository;
+    private readonly IRoleRepository _roleRepository;
     private readonly TokenGenerator _tokenGenerator;
-    
+    private readonly IUserRepository _userRepository;
+
     public AuthenticateService(
         IUserRepository userRepository,
         IRoleRepository roleRepository,

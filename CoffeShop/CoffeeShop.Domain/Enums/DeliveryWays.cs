@@ -2,6 +2,6 @@
 
 public enum DeliveryWays
 {
-    InShop=1,
+    InShop = 1,
     InPoint
 }
