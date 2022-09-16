@@ -1,9 +1,7 @@
 ﻿using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
-using CoffeeShop.DataAccess;
-using CoffeeShop.DataAccess.Repositories;
 using CoffeeShop.DataAccess.Repositories.CustomRepositories.DiscountRepositories;
 using CoffeeShop.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services;
 
@@ -16,17 +14,18 @@ public class DiscountService : IDiscountService
         _discountRepository = discountRepository;
     }
 
-    public async Task<IEnumerable<Discount>> GetAllAsync()
-        => await _discountRepository.GetAllAsync();
+    public async Task<IActionResult> GetAllAsync()
+        => new OkObjectResult(await _discountRepository.GetAllAsync());
 
-    public async Task<Discount?> GetAsync(int id)
-        => await _discountRepository.GetAsync(id);
-    public async Task CreateAsync(Discount discount)
-        => await _discountRepository.CreateAsync(discount);
+    public async Task<IActionResult> GetAsync(int id)
+        => new OkObjectResult(await _discountRepository.GetAsync(id));
 
-    public async Task UpdateAsync(Discount discount)
-        => await _discountRepository.UpdateAsync(discount);
+    public async Task<IActionResult> CreateAsync(Discount discount)
+        => new OkObjectResult(await _discountRepository.CreateAsync(discount));
 
-    public async Task DeleteAsync(Discount discount)
-        => await _discountRepository.DeleteAsync(discount);
+    public async Task<IActionResult> UpdateAsync(Discount discount)
+        => new OkObjectResult(await _discountRepository.UpdateAsync(discount));
+
+    public async Task<IActionResult> DeleteAsync(Discount discount)
+        => new OkObjectResult(await _discountRepository.DeleteAsync(discount));
 }

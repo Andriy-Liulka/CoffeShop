@@ -10,6 +10,7 @@ using CoffeeShop.DataAccess.Repositories.CustomRepositories.UserRepositories;
 using CoffeeShop.Domain.Constants;
 using CoffeeShop.Domain.Entities.Identity;
 using CoffeShop.Api.dto;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services.IdentityServices;
 
@@ -32,11 +33,11 @@ public class AuthenticateService : IAuthenticateService
         _identityCredentialRepository = identityCredentialRepository;
     }
 
-    public async Task<object> Login(LoginModel model)
+    public async Task<IActionResult> Login(LoginModel model)
     {
         var user = await _userRepository.GetFullAsync(model.Username);
         if (user is null || !user.PasswordHash.Equals(model.Password))
-            return new { Message = "User credentials were failed!" };
+            return new BadRequestObjectResult("User credentials were failed!");
         var tokenModel = _tokenGenerator.JwtAccessToken(new UserClaimDto
         {
             Email = user.Email,
@@ -54,20 +55,20 @@ public class AuthenticateService : IAuthenticateService
         });
 
         await _identityCredentialRepository.UpdateAsync(user.IdentityCredential);
-        
-        return new
+
+        return new OkObjectResult(new
         {
             RefreshToken = refreshTokenModel.RefreshToken,
             AccessToken = new JwtSecurityTokenHandler().WriteToken(accessToken),
             ValidTo = validTo
-        };
+        });
     }
-    
-    public async Task<object> Register(RegisterModel model)
+
+    public async Task<IActionResult> Register(RegisterModel model)
     {
         var user = await _userRepository.GetAsync(model.Login);
         if (user is not null)
-            return new {Message="Such user exist"};
+            return new BadRequestObjectResult("Such user exist");
 
         await _userRepository.CreateAsync(new User
         {
@@ -80,24 +81,28 @@ public class AuthenticateService : IAuthenticateService
             Role = await _roleRepository.GetAsync(Roles.Customer)
         });
 
-        return new { Status = "Success", Message = "User created successfully!" };
+        return new OkObjectResult(new
+        {
+            Status = "Success",
+            Message = "User created successfully!"
+        });
     }
 
-    public async Task<object> RefreshToken(TokenModel model)
+    public async Task<IActionResult> RefreshToken(TokenModel model)
     {
         var userData = _tokenGenerator.DecryptAccessToken(model.AccessToken);
 
         var user = await _userRepository.GetFullAsync(userData.Name);
 
-        if (user is null || 
-            user.IdentityCredential?.RefreshToken != model.RefreshToken || 
-            user.IdentityCredential.ValidTo < DateTime.Now )
-            return new { Message = "Incorrect refresh or access token !" };
-        
+        if (user is null ||
+            user.IdentityCredential?.RefreshToken != model.RefreshToken ||
+            user.IdentityCredential.ValidTo < DateTime.Now)
+            return new BadRequestObjectResult("Incorrect refresh or access token !");
+
         var newAccessToken = _tokenGenerator.JwtAccessToken(userData);
 
         var newRefreshTokenModel = _tokenGenerator.RefreshToken();
-        
+
         user.IdentityCredential?.UpdateWith(() => new IdentityCredential
         {
             RefreshToken = newRefreshTokenModel.RefreshToken,
@@ -105,12 +110,12 @@ public class AuthenticateService : IAuthenticateService
         });
 
         await _identityCredentialRepository.UpdateAsync(user.IdentityCredential);
-        
-        return new
+
+        return new OkObjectResult(new
         {
             RefreshToken = newRefreshTokenModel.RefreshToken,
             AccessToken = new JwtSecurityTokenHandler().WriteToken(newAccessToken.token),
             ValidTo = newAccessToken.ValidTo
-        };
+        });
     }
 }

@@ -1,9 +1,15 @@
-﻿using CoffeeShop.DataAccess.Repositories;
+﻿using CoffeeShop.BusinessLogic.Dto;
+using CoffeeShop.DataAccess.Repositories;
 using CoffeeShop.Domain.Entities.MtM_IntermediateEntities;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 
-public interface IDiscountCoffeeService : IRepository<DiscountCoffee>
+public interface IDiscountCoffeeService
 {
-    Task<DiscountCoffee?> GetAsync(int discountId, int coffeetId);
+    public Task<IActionResult> GetAllAsync();
+    public Task<IActionResult> GetAsync(DiscountCoffeeGetAsyncDto key);
+    public Task<IActionResult> CreateAsync(DiscountCoffee discountCoffee);
+    public Task<IActionResult> UpdateAsync(DiscountCoffee discountCoffee);
+    public Task<IActionResult> DeleteAsync(DiscountCoffee discountCoffee);
 }

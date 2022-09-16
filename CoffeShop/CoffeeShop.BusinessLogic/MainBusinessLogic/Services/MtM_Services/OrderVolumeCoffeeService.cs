@@ -3,6 +3,7 @@ using CoffeeShop.DataAccess;
 using CoffeeShop.DataAccess.Repositories;
 using CoffeeShop.DataAccess.Repositories.CustomRepositories.OrderVolumeCoffeeRepositories;
 using CoffeeShop.Domain.Entities.MtM_IntermediateEntities;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services.MtM_Services;
@@ -16,18 +17,18 @@ public class OrderVolumeCoffeeService : IOrderVolumeCoffeeService
         _orderVolumeCoffeeRepository = orderVolumeCoffeeRepository;
     }
 
-    public async Task<IEnumerable<OrderVolumeCoffee>> GetAllAsync()
-        => await _orderVolumeCoffeeRepository.GetAllAsync(); 
+    public async Task<IActionResult> GetAllAsync()
+        => new OkObjectResult(await _orderVolumeCoffeeRepository.GetAllAsync());
 
-    public async Task<OrderVolumeCoffee?> GetAsync(int id) 
-        => await _orderVolumeCoffeeRepository.GetAsync(id);
+    public async Task<IActionResult> GetAsync(int id)
+        => new OkObjectResult(await _orderVolumeCoffeeRepository.GetAsync(id));
 
-    public async Task CreateAsync(OrderVolumeCoffee orderVolumeCoffee)
-        => await _orderVolumeCoffeeRepository.CreateAsync(orderVolumeCoffee);
+    public async Task<IActionResult> CreateAsync(OrderVolumeCoffee orderVolumeCoffee)
+        => new OkObjectResult(await _orderVolumeCoffeeRepository.CreateAsync(orderVolumeCoffee));
 
-    public async Task UpdateAsync(OrderVolumeCoffee orderVolumeCoffee)
-        => await _orderVolumeCoffeeRepository.UpdateAsync(orderVolumeCoffee);
+    public async Task<IActionResult> UpdateAsync(OrderVolumeCoffee orderVolumeCoffee)
+        => new OkObjectResult(await _orderVolumeCoffeeRepository.UpdateAsync(orderVolumeCoffee));
 
-    public async Task DeleteAsync(OrderVolumeCoffee orderVolumeCoffee)
-        => await _orderVolumeCoffeeRepository.DeleteAsync(orderVolumeCoffee);
+    public async Task<IActionResult> DeleteAsync(OrderVolumeCoffee orderVolumeCoffee)
+        => new OkObjectResult(await _orderVolumeCoffeeRepository.DeleteAsync(orderVolumeCoffee));
 }

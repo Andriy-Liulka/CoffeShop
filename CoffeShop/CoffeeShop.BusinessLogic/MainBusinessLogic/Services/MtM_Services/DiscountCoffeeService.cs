@@ -1,9 +1,11 @@
-﻿using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
+﻿using CoffeeShop.BusinessLogic.Dto;
+using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.DataAccess;
 using CoffeeShop.DataAccess.Repositories;
 using CoffeeShop.DataAccess.Repositories.CustomRepositories.DiscountCoffeeRepositories;
 using CoffeeShop.Domain.Entities.Identity;
 using CoffeeShop.Domain.Entities.MtM_IntermediateEntities;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services.MtM_Services;
@@ -17,17 +19,18 @@ public class DiscountCoffeeService : IDiscountCoffeeService
         _discountCoffeeRepository = discountCoffeeRepository;
     }
 
-    public async Task<IEnumerable<DiscountCoffee>> GetAllAsync()
-        => await _discountCoffeeRepository.GetAllAsync();
+    public async Task<IActionResult> GetAllAsync()
+        => new OkObjectResult(await _discountCoffeeRepository.GetAllAsync());
 
-    public async Task<DiscountCoffee?> GetAsync(int discountId,int coffeetId)
-        => await _discountCoffeeRepository.GetAsync(discountId,coffeetId);
+    public async Task<IActionResult> GetAsync(DiscountCoffeeGetAsyncDto key)
+        => new OkObjectResult(await _discountCoffeeRepository.GetAsync(key.CoffeeId, key.DiscountId));
 
-    public async Task CreateAsync(DiscountCoffee discountCoffee)
-        => await _discountCoffeeRepository.CreateAsync(discountCoffee);
-    public async Task UpdateAsync(DiscountCoffee discountCoffee)
-        => await _discountCoffeeRepository.UpdateAsync(discountCoffee);
+    public async Task<IActionResult> CreateAsync(DiscountCoffee discountCoffee)
+        => new OkObjectResult(await _discountCoffeeRepository.CreateAsync(discountCoffee));
 
-    public async Task DeleteAsync(DiscountCoffee discountCoffee)
-        => await _discountCoffeeRepository.DeleteAsync(discountCoffee);
+    public async Task<IActionResult> UpdateAsync(DiscountCoffee discountCoffee)
+        => new OkObjectResult(await _discountCoffeeRepository.UpdateAsync(discountCoffee));
+
+    public async Task<IActionResult> DeleteAsync(DiscountCoffee discountCoffee)
+        => new OkObjectResult(await _discountCoffeeRepository.DeleteAsync(discountCoffee));
 }

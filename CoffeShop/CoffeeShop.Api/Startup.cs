@@ -1,15 +1,12 @@
-﻿
-using System.Text;
+﻿using System.Text;
 using System.Text.Json.Serialization;
 using CoffeeShop.BusinessLogic;
 using CoffeeShop.DataAccess;
-using CoffeeShop.DataAccess.Repositories;
 using CoffeeShop.DataAccess.Repositories.CustomRepositories;
 using CoffeShop.Api.Configurations;
-using CoffeShop.Api.Configurations.Middlewares;
+using CoffeShop.Api.ProxyExceptionHandlingLayer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.IdentityModel.Tokens;
@@ -24,8 +21,9 @@ public class Startup
     {
         Configuration = configuration;
     }
+
     public IConfiguration Configuration { get; }
-    
+
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddLogging();
@@ -33,17 +31,17 @@ public class Startup
         services
             .AddControllers()
             .AddJsonOptions(x =>
-            x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
-        
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
         services.AddSwaggerGen(c =>
         {
-            c.SwaggerDoc("v1", new OpenApiInfo {Title = "Coffee Shop", Version = "v1"});
+            c.SwaggerDoc("v1", new OpenApiInfo { Title = "Coffee Shop", Version = "v1" });
             var securityDefinitionId = "JwtAuth";
             var securityDefinition = new OpenApiSecurityScheme()
             {
                 Description = "Jwt access tokens",
                 Name = securityDefinitionId,
-                In=ParameterLocation.Header,
+                In = ParameterLocation.Header,
                 Scheme = "Bearer",
                 Type = SecuritySchemeType.Http
             };
@@ -57,14 +55,16 @@ public class Startup
             };
             var securityRequirements = new OpenApiSecurityRequirement()
             {
-                {securityScheme,new string[]{}}
+                { securityScheme, new string[] { } }
             };
-            c.AddSecurityDefinition(securityDefinitionId,securityDefinition);
+            c.AddSecurityDefinition(securityDefinitionId, securityDefinition);
             c.AddSecurityRequirement(securityRequirements);
         });
         services.AddDbContext<CoffeeShopContext>(option =>
         {
-            option.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString") ?? throw new ArgumentNullException("ConnectionString","Your connection string is empty"));
+            option.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")
+                                ?? throw new ArgumentNullException("ConnectionString",
+                                    "Your connection string is empty"));
         });
 
         services.AddAuthentication(options =>
@@ -83,9 +83,9 @@ public class Startup
                     ValidateAudience = true,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    
+
                     ValidAudience = Configuration["JWT:Issuer"],
-                    ValidIssuer =  Configuration["JWT:Audience"],
+                    ValidIssuer = Configuration["JWT:Audience"],
                     ClockSkew = TimeSpan.Zero,
 
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Secret"]))
@@ -94,11 +94,13 @@ public class Startup
 
         services.AddHealthChecks();
 
-        services.AddCustomServices(services.AddDataAccessServices,services.AddBusinessLogicServices);
+        services.AddCustomServices(services.AddDataAccessServices, services.AddBusinessLogicServices);
 
         services.AddAutoMapper(typeof(AppMappingProfile));
+
+        services.AddScoped(typeof(IProxyExceptionHandler<>), typeof(ProxyExceptionHandler<>));
     }
-    
+
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         //app.UpdateDatabase();
@@ -109,8 +111,9 @@ public class Startup
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Coffee Shop v1"));
         }
+
         app.UseSerilogRequestLogging();
-        
+
         app.UseHttpsRedirection();
 
         app.UseRouting();
@@ -120,13 +123,13 @@ public class Startup
 
         app.UseEndpoints(endpoints =>
         {
-            endpoints.MapControllerRoute(name:"default",pattern:"api/{controller}/{action}");
+            endpoints.MapControllerRoute(name: "default", pattern: "api/{controller}/{action}");
             endpoints.MapHealthChecks("/health", new HealthCheckOptions()
             {
                 ResultStatusCodes =
                 {
-                    [HealthStatus.Healthy]=StatusCodes.Status200OK,
-                    [HealthStatus.Unhealthy]=StatusCodes.Status500InternalServerError
+                    [HealthStatus.Healthy] = StatusCodes.Status200OK,
+                    [HealthStatus.Unhealthy] = StatusCodes.Status500InternalServerError
                 }
             });
         });

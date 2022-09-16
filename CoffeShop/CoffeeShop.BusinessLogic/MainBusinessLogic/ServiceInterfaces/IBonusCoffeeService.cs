@@ -1,12 +1,13 @@
 ﻿using CoffeeShop.Domain.Entities;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 
 public interface IBonusCoffeeService
 {
-    Task<IEnumerable<BonusCoffee>> GetAllAsync();
-    Task<BonusCoffee?> GetAsync(int id);
-    Task CreateAsync(BonusCoffee bonusCoffee);
-    Task UpdateAsync(BonusCoffee bonusCoffee);
-    Task DeleteAsync(BonusCoffee bonusCoffee);
+    Task<IActionResult> GetAllAsync();
+    Task<IActionResult> GetAsync(int id);
+    Task<IActionResult> CreateAsync(BonusCoffee bonusCoffee);
+    Task<IActionResult> UpdateAsync(BonusCoffee bonusCoffee);
+    Task<IActionResult> DeleteAsync(BonusCoffee bonusCoffee);
 }

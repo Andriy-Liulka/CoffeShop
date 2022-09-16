@@ -1,17 +1,14 @@
 ﻿using CoffeeShop.Domain.Entities.Identity;
 using CoffeeShop.Domain.Entities.MtM_IntermediateEntities;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 
 public interface IUserService
 {
-    Task<IEnumerable<User>> GetAllAsync();
-
-    Task<User?> GetAsync(string login);
-
-    Task CreateAsync(User user);
-
-    Task UpdateAsync(User user);
-    
-    Task DeleteAsync(User user);
+    Task<IActionResult> GetAllAsync();
+    Task<IActionResult> GetAsync(string login);
+    Task<IActionResult> CreateAsync(User user);
+    Task<IActionResult> UpdateAsync(User user);
+    Task<IActionResult> DeleteAsync(User user);
 }

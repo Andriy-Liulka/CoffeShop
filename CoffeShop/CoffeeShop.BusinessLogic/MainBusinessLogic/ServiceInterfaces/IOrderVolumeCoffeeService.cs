@@ -1,16 +1,13 @@
 ﻿using CoffeeShop.Domain.Entities.MtM_IntermediateEntities;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 
 public interface IOrderVolumeCoffeeService
 {
-    Task<IEnumerable<OrderVolumeCoffee>> GetAllAsync();
-
-    public Task<OrderVolumeCoffee?> GetAsync(int id);
-
-    Task CreateAsync(OrderVolumeCoffee orderVolumeCoffee);
-
-    Task UpdateAsync(OrderVolumeCoffee orderVolumeCoffee);
-    
-    Task DeleteAsync(OrderVolumeCoffee orderVolumeCoffee);
+    Task<IActionResult> GetAllAsync();
+    Task<IActionResult> GetAsync(int id);
+    Task<IActionResult> CreateAsync(OrderVolumeCoffee orderVolumeCoffee);
+    Task<IActionResult> UpdateAsync(OrderVolumeCoffee orderVolumeCoffee);
+    Task<IActionResult> DeleteAsync(OrderVolumeCoffee orderVolumeCoffee);
 }

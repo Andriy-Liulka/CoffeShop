@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CoffeShop.Api.dto.Authenticate;
+namespace CoffeShop.Api.Dto.Authenticate;
 
 public class RegisterModelUi
 {

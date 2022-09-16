@@ -1,5 +1,6 @@
 ﻿using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.Domain.Entities;
+using CoffeShop.Api.ProxyExceptionHandlingLayer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,49 +10,42 @@ namespace CoffeShop.Api.Controllers;
 [Authorize]
 public class OrderController : ControllerBase
 {
-    private readonly ILogger<OrderController> _logger;
     private readonly IOrderService _service;
-    public OrderController(ILogger<OrderController> logger,IOrderService service)
+    private readonly IProxyExceptionHandler<IDiscountService> _proxyExceptionHandler;
+
+    public OrderController(IOrderService service, IProxyExceptionHandler<IDiscountService> proxyExceptionHandler)
     {
-        _logger = logger;
         _service = service;
+        _proxyExceptionHandler = proxyExceptionHandler;
     }
+
     [Route("")]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetAllAsync() 
-        => Ok(await _service.GetAllAsync());
+    public async Task<IActionResult> GetAllAsync()
+        => await _proxyExceptionHandler.ExecuteAsync(_service.GetAllAsync);
 
     [Route("{id}")]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetAsync([FromRoute]int id) 
-        => Ok(await _service.GetAsync(id));
+    public async Task<IActionResult> GetAsync([FromRoute] int id)
+        => await _proxyExceptionHandler.ExecuteAsync(_service.GetAsync, id);
 
     [Route("create")]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    public async Task<IActionResult> CreateAsync([FromBody]Order order)
-    {
-        await _service.CreateAsync(order);
-        return Created(String.Empty,order);
-    }
-    
+    public async Task<IActionResult> CreateAsync([FromBody] Order order)
+        => await _proxyExceptionHandler.ExecuteAsync(_service.CreateAsync, order);
+
     [Route("update")]
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> UpdateAsync([FromBody]Order order)
-    {
-        await _service.UpdateAsync(order);
-        return Ok();
-    }
-    
+    public async Task<IActionResult> UpdateAsync([FromBody] Order order)
+        => await _proxyExceptionHandler.ExecuteAsync(_service.UpdateAsync, order);
+
     [Route("delete")]
     [HttpDelete]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> DeleteAsync([FromBody]Order order)
-    {
-        await _service.DeleteAsync(order);
-        return Ok();
-    }
+    public async Task<IActionResult> DeleteAsync([FromBody] Order order)
+        => await _proxyExceptionHandler.ExecuteAsync(_service.DeleteAsync, order);
 }

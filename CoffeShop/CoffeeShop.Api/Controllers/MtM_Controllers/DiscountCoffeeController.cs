@@ -1,5 +1,9 @@
-﻿using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
+﻿using AutoMapper;
+using CoffeeShop.BusinessLogic.Dto;
+using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.Domain.Entities.MtM_IntermediateEntities;
+using CoffeShop.Api.Dto;
+using CoffeShop.Api.ProxyExceptionHandlingLayer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,51 +11,51 @@ namespace CoffeShop.Api.Controllers.MtM_Controllers;
 [ApiController]
 [Route("api/[controller]")]
 [Authorize]
-public class DiscountCoffeeController  : ControllerBase
+public class DiscountCoffeeController : ControllerBase
 {
-    private readonly ILogger<DiscountCoffeeController> _logger;
     private readonly IDiscountCoffeeService _service;
-    public DiscountCoffeeController(ILogger<DiscountCoffeeController> logger,IDiscountCoffeeService service)
+    private readonly IProxyExceptionHandler<IDiscountService> _proxyExceptionHandler;
+    private readonly IMapper _mapper;
+
+    public DiscountCoffeeController(
+        IDiscountCoffeeService service,
+        IMapper mapper,
+        IProxyExceptionHandler<IDiscountService> proxyExceptionHandler)
     {
-        _logger = logger;
+        _proxyExceptionHandler = proxyExceptionHandler;
         _service = service;
+        _mapper = mapper;
     }
+
     [Route("")]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetAllAsync() 
-        => Ok(await _service.GetAllAsync());
+    public async Task<IActionResult> GetAllAsync()
+        => await _proxyExceptionHandler.ExecuteAsync(_service.GetAllAsync);
 
     [Route("{coffeeId}/{discountId}")]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetAsync([FromRoute]int coffeeId,[FromRoute]int discountId) 
-        => Ok(await _service.GetAsync(coffeeId,discountId));
+    public async Task<IActionResult> GetAsync([FromRoute] DiscountCoffeeGetAsyncDtoUi key)
+        => await _proxyExceptionHandler.ExecuteAsync(
+            _service.GetAsync,
+            _mapper.Map<DiscountCoffeeGetAsyncDto>(key));
 
     [Route("create")]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    public async Task<IActionResult> CreateAsync([FromBody]DiscountCoffee discountCoffee)
-    {
-        await _service.CreateAsync(discountCoffee);
-        return Created(String.Empty,discountCoffee);
-    }
-    
+    public async Task<IActionResult> CreateAsync([FromBody] DiscountCoffee discountCoffee)
+        => await _proxyExceptionHandler.ExecuteAsync(_service.CreateAsync, discountCoffee);
+
     [Route("update")]
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> UpdateAsync([FromBody]DiscountCoffee discountCoffee)
-    {
-        await _service.UpdateAsync(discountCoffee);
-        return Ok();
-    }
-    
+    public async Task<IActionResult> UpdateAsync([FromBody] DiscountCoffee discountCoffee)
+        => await _proxyExceptionHandler.ExecuteAsync(_service.UpdateAsync, discountCoffee);
+
     [Route("delete")]
     [HttpDelete]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> DeleteAsync([FromBody]DiscountCoffee discountCoffee)
-    {
-        await _service.DeleteAsync(discountCoffee);
-        return Ok();
-    }
+    public async Task<IActionResult> DeleteAsync([FromBody] DiscountCoffee discountCoffee)
+        => await _proxyExceptionHandler.ExecuteAsync(_service.DeleteAsync, discountCoffee);
 }

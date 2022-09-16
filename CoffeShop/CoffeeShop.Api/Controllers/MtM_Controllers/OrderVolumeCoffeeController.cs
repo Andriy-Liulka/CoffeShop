@@ -1,5 +1,6 @@
 ﻿using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.Domain.Entities.MtM_IntermediateEntities;
+using CoffeShop.Api.ProxyExceptionHandlingLayer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,49 +10,43 @@ namespace CoffeShop.Api.Controllers.MtM_Controllers;
 [Authorize]
 public class OrderVolumeCoffeeController : ControllerBase
 {
-    private readonly ILogger<OrderVolumeCoffeeController> _logger;
     private readonly IOrderVolumeCoffeeService _service;
-    public OrderVolumeCoffeeController(ILogger<OrderVolumeCoffeeController> logger,IOrderVolumeCoffeeService service)
+    private readonly IProxyExceptionHandler<IOrderVolumeCoffeeService> _proxyExceptionHandler;
+
+    public OrderVolumeCoffeeController(IOrderVolumeCoffeeService service,
+        IProxyExceptionHandler<IOrderVolumeCoffeeService> proxyExceptionHandler)
     {
-        _logger = logger;
+        _proxyExceptionHandler = proxyExceptionHandler;
         _service = service;
     }
+
     [Route("")]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetAllAsync() 
-        => Ok(await _service.GetAllAsync());
+    public async Task<IActionResult> GetAllAsync()
+        => await _proxyExceptionHandler.ExecuteAsync(_service.GetAllAsync);
 
     [Route("{id}")]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetAsync([FromRoute]int id) 
-        => Ok(await _service.GetAsync(id));
+    public async Task<IActionResult> GetAsync([FromRoute] int id)
+        => await _proxyExceptionHandler.ExecuteAsync(_service.GetAsync, id);
 
     [Route("create")]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    public async Task<IActionResult> CreateAsync([FromBody]OrderVolumeCoffee orderVolumeCoffee)
-    {
-        await _service.CreateAsync(orderVolumeCoffee);
-        return Created(String.Empty,orderVolumeCoffee);
-    }
-    
+    public async Task<IActionResult> CreateAsync([FromBody] OrderVolumeCoffee orderVolumeCoffee)
+        => await _proxyExceptionHandler.ExecuteAsync(_service.CreateAsync, orderVolumeCoffee);
+
     [Route("update")]
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> UpdateAsync([FromBody]OrderVolumeCoffee orderVolumeCoffee)
-    {
-        await _service.UpdateAsync(orderVolumeCoffee);
-        return Ok();
-    }
-    
+    public async Task<IActionResult> UpdateAsync([FromBody] OrderVolumeCoffee orderVolumeCoffee)
+        => await _proxyExceptionHandler.ExecuteAsync(_service.UpdateAsync, orderVolumeCoffee);
+
     [Route("delete")]
     [HttpDelete]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> DeleteAsync([FromBody]OrderVolumeCoffee orderVolumeCoffee)
-    {
-        await _service.DeleteAsync(orderVolumeCoffee);
-        return Ok();
-    }
+    public async Task<IActionResult> DeleteAsync([FromBody] OrderVolumeCoffee orderVolumeCoffee)
+        => await _proxyExceptionHandler.ExecuteAsync(_service.DeleteAsync,orderVolumeCoffee);
 }

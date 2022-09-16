@@ -1,5 +1,6 @@
 ﻿using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.Domain.Entities;
+using CoffeShop.Api.ProxyExceptionHandlingLayer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,49 +10,42 @@ namespace CoffeShop.Api.Controllers;
 [Authorize]
 public class DiscountController : ControllerBase
 {
-    private readonly ILogger<DiscountController> _logger;
     private readonly IDiscountService _service;
-    public DiscountController(ILogger<DiscountController> logger,IDiscountService service)
+    private readonly IProxyExceptionHandler<IDiscountService> _proxyExceptionHandler;
+
+    public DiscountController(IDiscountService service, IProxyExceptionHandler<IDiscountService> proxyExceptionHandler)
     {
-        _logger = logger;
         _service = service;
+        _proxyExceptionHandler = proxyExceptionHandler;
     }
+
     [Route("")]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetAllAsync() 
-        => Ok(await _service.GetAllAsync());
+    public async Task<IActionResult> GetAllAsync()
+        => await _proxyExceptionHandler.ExecuteAsync(_service.GetAllAsync);
 
     [Route("{id}")]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetAsync([FromRoute]int id) 
-        => Ok(await _service.GetAsync(id));
+    public async Task<IActionResult> GetAsync([FromRoute] int id)
+        => await _proxyExceptionHandler.ExecuteAsync(_service.GetAsync, id);
 
     [Route("create")]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    public async Task<IActionResult> CreateAsync([FromBody]Discount discount)
-    {
-        await _service.CreateAsync(discount);
-        return Created(String.Empty,discount);
-    }
-    
+    public async Task<IActionResult> CreateAsync([FromBody] Discount discount)
+        => await _proxyExceptionHandler.ExecuteAsync(_service.CreateAsync, discount);
+
     [Route("update")]
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> UpdateAsync([FromBody]Discount discount)
-    {
-        await _service.UpdateAsync(discount);
-        return Ok();
-    }
-    
+    public async Task<IActionResult> UpdateAsync([FromBody] Discount discount)
+        => await _proxyExceptionHandler.ExecuteAsync(_service.UpdateAsync, discount);
+
     [Route("delete")]
     [HttpDelete]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> DeleteAsync([FromBody]Discount discount)
-    {
-        await _service.DeleteAsync(discount);
-        return Ok();
-    }
+    public async Task<IActionResult> DeleteAsync([FromBody] Discount discount)
+        => await _proxyExceptionHandler.ExecuteAsync(_service.DeleteAsync, discount);
 }

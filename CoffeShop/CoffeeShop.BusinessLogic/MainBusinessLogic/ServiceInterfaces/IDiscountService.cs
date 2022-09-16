@@ -1,12 +1,13 @@
 ﻿using CoffeeShop.Domain.Entities;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 
 public interface IDiscountService
 {
-    Task<IEnumerable<Discount>> GetAllAsync();
-    Task<Discount?> GetAsync(int id);
-    Task CreateAsync(Discount discount);
-    Task UpdateAsync(Discount discount);
-    Task DeleteAsync(Discount discount);
+    Task<IActionResult> GetAllAsync();
+    Task<IActionResult> GetAsync(int id);
+    Task<IActionResult> CreateAsync(Discount discount);
+    Task<IActionResult> UpdateAsync(Discount discount);
+    Task<IActionResult> DeleteAsync(Discount discount);
 }
