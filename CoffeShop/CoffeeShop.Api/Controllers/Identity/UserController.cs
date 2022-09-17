@@ -26,30 +26,35 @@ public class UserController : ControllerBase
     [Route("")]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> GetAllAsync()
         => await _proxyExceptionHandler.ExecuteAsync(_service.GetAllAsync);
 
     [Route("{login}")]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> GetAsync([FromRoute] string login)
         => await _proxyExceptionHandler.ExecuteAsync(_service.GetAsync, login);
 
     [Route("create")]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> CreateAsync([FromBody] User user)
         => await _proxyExceptionHandler.ExecuteAsync(_service.CreateAsync, user);
 
     [Route("update")]
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> UpdateAsync([FromBody] User user)
         => await _proxyExceptionHandler.ExecuteAsync(_service.UpdateAsync, user);
 
     [Route("delete")]
     [HttpDelete]
     [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> DeleteAsync([FromBody] User user)
         => await _proxyExceptionHandler.ExecuteAsync(_service.DeleteAsync, user);
 }

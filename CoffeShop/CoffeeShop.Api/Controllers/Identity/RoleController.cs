@@ -23,12 +23,14 @@ public class RoleController : ControllerBase
     [HttpGet]
     [Route("")]
     [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> GetAllAsync()
         => await _proxyExceptionHandler.ExecuteAsync(_service.GetAllAsync);
 
     [Route("{id}")]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> GetAsync([FromRoute] string name)
         => await _proxyExceptionHandler.ExecuteAsync(_service.GetAsync, name);
 }
