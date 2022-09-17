@@ -21,7 +21,7 @@ public class ProxyExceptionHandler<TService> : IProxyExceptionHandler<TService>
         catch (Exception e)
         {
             _logger.LogError(e.Message);
-            return new BadRequestObjectResult($"Type->{e.GetType()} \n Message->{e.Message}");
+            return new BadRequestObjectResult($"Type-> {e.GetType()} \n Message-> {e.Message}");
         }
     }
 
@@ -34,7 +34,7 @@ public class ProxyExceptionHandler<TService> : IProxyExceptionHandler<TService>
         catch (Exception e)
         {
             _logger.LogError(e.Message);
-            return new BadRequestObjectResult($"Type->{e.GetType()} \n Message->{e.Message}");
+            return new BadRequestObjectResult($"Type-> {e.GetType()} \n Message-> {e.Message}");
         }
     }
 }
