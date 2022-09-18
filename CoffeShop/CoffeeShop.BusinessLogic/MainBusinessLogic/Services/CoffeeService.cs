@@ -22,20 +22,12 @@ public class CoffeeService : ICoffeeService
         => new OkObjectResult(await _coffeeRepository.GetAsync(id));
 
     public async Task<IActionResult> CreateAsync(Coffee coffee)
-    {
-        await _coffeeRepository.CreateAsync(coffee);
-        return new CreatedResult("Object was successfully created", coffee);
-    }
+         => new CreatedResult("Object was successfully created", await _coffeeRepository.CreateAsync(coffee));
+
 
     public async Task<IActionResult> UpdateAsync(Coffee coffee)
-    {
-        await _coffeeRepository.UpdateAsync(coffee);
-        return new OkResult();
-    }
+        =>  new OkObjectResult(await _coffeeRepository.UpdateAsync(coffee));
 
     public async Task<IActionResult> DeleteAsync(Coffee coffee)
-    {
-        await _coffeeRepository.DeleteAsync(coffee);
-        return new OkResult();
-    }
+        => new OkObjectResult(await _coffeeRepository.DeleteAsync(coffee));
 }
