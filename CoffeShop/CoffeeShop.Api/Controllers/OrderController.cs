@@ -1,4 +1,5 @@
-﻿using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
+﻿using AutoMapper;
+using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.Domain.Entities;
 using CoffeShop.Api.ProxyExceptionHandlingLayer;
 using Microsoft.AspNetCore.Authorization;
@@ -13,11 +14,13 @@ public class OrderController : ControllerBase
 {
     private readonly IProxyExceptionHandler<IDiscountService> _proxyExceptionHandler;
     private readonly IOrderService _service;
+    private readonly IMapper _mapper;
 
-    public OrderController(IOrderService service, IProxyExceptionHandler<IDiscountService> proxyExceptionHandler)
+    public OrderController(IOrderService service, IProxyExceptionHandler<IDiscountService> proxyExceptionHandler, IMapper mapper)
     {
         _service = service;
         _proxyExceptionHandler = proxyExceptionHandler;
+        _mapper = mapper;
     }
 
     [Route("")]
@@ -39,19 +42,19 @@ public class OrderController : ControllerBase
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> CreateAsync([FromBody] Order order)
-        => await _proxyExceptionHandler.ExecuteAsync(_service.CreateAsync, order);
+        => await _proxyExceptionHandler.ExecuteAsync(_service.CreateAsync, _mapper.Map<Order>(order));
 
     [Route("update")]
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> UpdateAsync([FromBody] Order order)
-        => await _proxyExceptionHandler.ExecuteAsync(_service.UpdateAsync, order);
+        => await _proxyExceptionHandler.ExecuteAsync(_service.UpdateAsync, _mapper.Map<Order>(order));
 
     [Route("delete")]
     [HttpDelete]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> DeleteAsync([FromBody] Order order)
-        => await _proxyExceptionHandler.ExecuteAsync(_service.DeleteAsync, order);
+        => await _proxyExceptionHandler.ExecuteAsync(_service.DeleteAsync, _mapper.Map<Order>(order));
 }

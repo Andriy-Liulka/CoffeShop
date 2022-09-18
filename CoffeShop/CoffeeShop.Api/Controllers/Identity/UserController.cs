@@ -1,5 +1,7 @@
-﻿using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
+﻿using AutoMapper;
+using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.Domain.Entities.Identity;
+using CoffeShop.Api.dto.Ui;
 using CoffeShop.Api.ProxyExceptionHandlingLayer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,13 +16,15 @@ public class UserController : ControllerBase
     private readonly ILogger<UserController> _logger;
     private readonly IProxyExceptionHandler<IUserService> _proxyExceptionHandler;
     private readonly IUserService _service;
+    private readonly IMapper _mapper;
 
     public UserController(ILogger<UserController> logger, IUserService service,
-        IProxyExceptionHandler<IUserService> proxyExceptionHandler)
+        IProxyExceptionHandler<IUserService> proxyExceptionHandler, IMapper mapper)
     {
         _logger = logger;
         _service = service;
         _proxyExceptionHandler = proxyExceptionHandler;
+        _mapper = mapper;
     }
 
     [Route("")]
@@ -41,20 +45,20 @@ public class UserController : ControllerBase
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> CreateAsync([FromBody] User user)
-        => await _proxyExceptionHandler.ExecuteAsync(_service.CreateAsync, user);
+    public async Task<IActionResult> CreateAsync([FromBody] UserUi user)
+        => await _proxyExceptionHandler.ExecuteAsync(_service.CreateAsync, _mapper.Map<User>(user));
 
     [Route("update")]
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> UpdateAsync([FromBody] User user)
-        => await _proxyExceptionHandler.ExecuteAsync(_service.UpdateAsync, user);
+    public async Task<IActionResult> UpdateAsync([FromBody] UserUi user)
+        => await _proxyExceptionHandler.ExecuteAsync(_service.UpdateAsync, _mapper.Map<User>(user));
 
     [Route("delete")]
     [HttpDelete]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> DeleteAsync([FromBody] User user)
-        => await _proxyExceptionHandler.ExecuteAsync(_service.DeleteAsync, user);
+    public async Task<IActionResult> DeleteAsync([FromBody] UserUi user)
+        => await _proxyExceptionHandler.ExecuteAsync(_service.DeleteAsync, _mapper.Map<User>(user));
 }

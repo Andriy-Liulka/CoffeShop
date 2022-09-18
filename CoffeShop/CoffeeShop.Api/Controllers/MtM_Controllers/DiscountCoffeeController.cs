@@ -3,6 +3,7 @@ using CoffeeShop.BusinessLogic.Dto;
 using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.Domain.Entities.MtM_IntermediateEntities;
 using CoffeShop.Api.dto.Common;
+using CoffeShop.Api.dto.Ui;
 using CoffeShop.Api.ProxyExceptionHandlingLayer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -47,20 +48,20 @@ public class DiscountCoffeeController : ControllerBase
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> CreateAsync([FromBody] DiscountCoffee discountCoffee)
-        => await _proxyExceptionHandler.ExecuteAsync(_service.CreateAsync, discountCoffee);
+    public async Task<IActionResult> CreateAsync([FromBody] DiscountCoffeeUi discountCoffee)
+        => await _proxyExceptionHandler.ExecuteAsync(_service.CreateAsync, _mapper.Map<DiscountCoffee>(discountCoffee));
 
     [Route("update")]
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> UpdateAsync([FromBody] DiscountCoffee discountCoffee)
-        => await _proxyExceptionHandler.ExecuteAsync(_service.UpdateAsync, discountCoffee);
+    public async Task<IActionResult> UpdateAsync([FromBody] DiscountCoffeeUi discountCoffee)
+        => await _proxyExceptionHandler.ExecuteAsync(_service.UpdateAsync, _mapper.Map<DiscountCoffee>(discountCoffee));
 
     [Route("delete")]
     [HttpDelete]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> DeleteAsync([FromBody] DiscountCoffee discountCoffee)
-        => await _proxyExceptionHandler.ExecuteAsync(_service.DeleteAsync, discountCoffee);
+    public async Task<IActionResult> DeleteAsync([FromBody] DiscountCoffeeUi discountCoffee)
+        => await _proxyExceptionHandler.ExecuteAsync(_service.DeleteAsync, _mapper.Map<DiscountCoffee>(discountCoffee));
 }
