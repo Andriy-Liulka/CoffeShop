@@ -1,4 +1,4 @@
-﻿namespace CoffeShop.Api.Dto;
+﻿namespace CoffeShop.Api.dto.Common;
 
 public class DiscountCoffeeGetAsyncDtoUi
 {

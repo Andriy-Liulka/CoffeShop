@@ -2,7 +2,7 @@
 using CoffeeShop.BusinessLogic.Dto;
 using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.Domain.Entities.MtM_IntermediateEntities;
-using CoffeShop.Api.Dto;
+using CoffeShop.Api.dto.Common;
 using CoffeShop.Api.ProxyExceptionHandlingLayer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
