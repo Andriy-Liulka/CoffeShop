@@ -8,7 +8,6 @@ public class IdentityCredentialUi
 
     public string? Login { get; set; }
 
-    public virtual UserUi? User { get; set; }
     public string? RefreshToken { get; set; }
 
     public DateTimeOffset? ValidTo { get; set; }

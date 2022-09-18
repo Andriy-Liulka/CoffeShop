@@ -19,7 +19,6 @@ public class UserUi
     public string PasswordHash { get; set; }
 
     public string? IdentityCredentialLogin { get; set; }
-    public virtual IdentityCredentialUi? IdentityCredential { get; set; }
 
     public bool IsBlocked { get; set; }
 
@@ -27,7 +26,5 @@ public class UserUi
 
     public long Bonuses { get; set; }
     public string? RoleName { get; set; }
-    public virtual RoleUi? Role { get; set; }
-    public virtual IList<OrderUi>? Orders { get; set; }
 }
 

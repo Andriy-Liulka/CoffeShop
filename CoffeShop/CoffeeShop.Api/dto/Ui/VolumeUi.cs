@@ -10,9 +10,5 @@ public class VolumeUi
     public int Capacity { get; set; }
 
     public string Name { get; set; }
-
-    public virtual IList<OrderVolumeCoffeeUi>? OrderVolumeCoffees { get; set; }
-
-    public virtual IList<BonusCoffeeUi>? BonusCoffees { get; set; }
 }
 

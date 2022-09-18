@@ -8,6 +8,5 @@ public class DiscountUi
 
     public float Percent { get; set; }
 
-    public virtual IList<DiscountCoffeeUi>? DiscountCoffees { get; set; }
 }
 

@@ -13,11 +13,5 @@ public class CoffeeUi
     public string Provider { get; set; }
 
     public long BonusesSize { get; set; }
-
-    public virtual IList<BonusCoffeeUi>? BonusCoffees { get; set; }
-
-    public virtual IList<OrderVolumeCoffeeUi>? OrderVolumeCoffees { get; set; }
-
-    public virtual IList<DiscountCoffeeUi>? DiscountCoffees { get; set; }
 }
 

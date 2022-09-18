@@ -20,8 +20,5 @@ public class OrderUi
 
     public string UserLogin { get; set; }
 
-    public virtual UserUi? User { get; set; }
-
-    public virtual IList<OrderVolumeCoffeeUi>? OrderVolumeCoffees { get; set; }
 }
 
