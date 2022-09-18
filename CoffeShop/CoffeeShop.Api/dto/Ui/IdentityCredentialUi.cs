@@ -1,6 +1,16 @@
-﻿namespace CoffeShop.Api.dto.Ui;
+﻿using CoffeeShop.Domain.Entities.Identity;
 
-    public class IdentityCredentialUi
-    {
-    }
+namespace CoffeShop.Api.dto.Ui;
+
+public class IdentityCredentialUi
+{
+    public long Id { get; set; }
+
+    public string? Login { get; set; }
+
+    public virtual UserUi? User { get; set; }
+    public string? RefreshToken { get; set; }
+
+    public DateTimeOffset? ValidTo { get; set; }
+}
 
