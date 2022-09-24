@@ -1,17 +1,18 @@
 ﻿using CoffeeShop.DataAccess.EntityConfigurations;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.Extensions.Configuration;
 
 namespace CoffeeShop.DataAccess.Configurations;
 
 public static class Configurator
 {
-    public static EntityTypeBuilder<TEntityType> Configure<TEntity,TEntityType>(this EntityTypeBuilder<TEntityType> entity) 
-        where TEntity : IEntityConfiguration<TEntityType>, new()
-        where TEntityType : class
-    => new TEntity().Configure(entity);
+    public static EntityTypeBuilder<TEntity> Configure<TConfiguration,TEntity>(this EntityTypeBuilder<TEntity> entity) 
+        where TConfiguration : IEntityConfiguration<TEntity>, new()
+        where TEntity : class
+    => new TConfiguration().Configure(entity);
     
-    public static EntityTypeBuilder<TEntityType> SetDefaultData<TEntity,TEntityType>(this EntityTypeBuilder<TEntityType> entity) 
-        where TEntity : IDefaultDataSetter<TEntityType>, new()
-        where TEntityType : class
-        => new TEntity().SetDefaultData(entity);
+    public static EntityTypeBuilder<TEntity> SetDefaultData<TConfiguration, TEntity>(this EntityTypeBuilder<TEntity> entity) 
+        where TConfiguration : IDefaultDataSetter<TEntity>, new()
+        where TEntity : class
+        => new TConfiguration().SetDefaultData(entity);
 }
