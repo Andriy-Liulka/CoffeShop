@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CoffeShop.Api.Common;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeShop.Api.ProxyExceptionHandlingLayer;
 
@@ -21,7 +22,7 @@ public class ProxyExceptionHandler<TService> : IProxyExceptionHandler<TService>
         catch (Exception e)
         {
             _logger.LogError(e.Message);
-            return new BadRequestObjectResult($"Type-> {e.GetType()} \n Message-> {e.Message}");
+            return new BadRequestObjectResult(String.Format(Translation.BadRequestObjectResultMessage,e.GetType(),e.Message));
         }
     }
 
@@ -34,7 +35,7 @@ public class ProxyExceptionHandler<TService> : IProxyExceptionHandler<TService>
         catch (Exception e)
         {
             _logger.LogError(e.Message);
-            return new BadRequestObjectResult($"Type-> {e.GetType()} \n Message-> {e.Message}");
+            return new BadRequestObjectResult(String.Format(Translation.BadRequestObjectResultMessage,e.GetType(),e.Message));
         }
     }
 }

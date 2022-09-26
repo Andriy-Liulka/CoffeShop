@@ -3,7 +3,9 @@ using System.Text.Json.Serialization;
 using CoffeeShop.BusinessLogic;
 using CoffeeShop.DataAccess;
 using CoffeeShop.DataAccess.Repositories.CustomRepositories;
+using CoffeShop.Api.Common;
 using CoffeShop.Api.Configurations;
+using CoffeShop.Api.Configurations.Middlewares;
 using CoffeShop.Api.ProxyExceptionHandlingLayer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -64,7 +66,7 @@ public class Startup
         {
             option.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")
                                 ?? throw new ArgumentNullException("ConnectionString",
-                                    "Your connection string is empty"));
+                                    Translation.EmptyStringMessage));
         });
 
         services.AddAuthentication(options =>
@@ -120,6 +122,8 @@ public class Startup
 
         app.UseAuthentication();
         app.UseAuthorization();
+
+        app.UseMiddleware<ErrorHandlerMiddleware>();
 
         app.UseEndpoints(endpoints =>
         {
