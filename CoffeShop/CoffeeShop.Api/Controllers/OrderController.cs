@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.Domain.Entities;
+using CoffeShop.Api.dto.Ui;
 using CoffeShop.Api.ProxyExceptionHandlingLayer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -41,20 +42,20 @@ public class OrderController : ControllerBase
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> CreateAsync([FromBody] Order order)
+    public async Task<IActionResult> CreateAsync([FromBody] OrderUi order)
         => await _proxyExceptionHandler.ExecuteAsync(_service.CreateAsync, _mapper.Map<Order>(order));
 
     [Route("update")]
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> UpdateAsync([FromBody] Order order)
+    public async Task<IActionResult> UpdateAsync([FromBody] OrderUi order)
         => await _proxyExceptionHandler.ExecuteAsync(_service.UpdateAsync, _mapper.Map<Order>(order));
 
     [Route("delete")]
     [HttpDelete]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> DeleteAsync([FromBody] Order order)
+    public async Task<IActionResult> DeleteAsync([FromBody] OrderUi order)
         => await _proxyExceptionHandler.ExecuteAsync(_service.DeleteAsync, _mapper.Map<Order>(order));
 }
