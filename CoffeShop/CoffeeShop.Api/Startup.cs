@@ -3,6 +3,7 @@ using System.Text.Json.Serialization;
 using CoffeeShop.BusinessLogic;
 using CoffeeShop.DataAccess;
 using CoffeeShop.DataAccess.Repositories.CustomRepositories;
+using CoffeShop.Api.Authentication;
 using CoffeShop.Api.Common;
 using CoffeShop.Api.Configurations;
 using CoffeShop.Api.Configurations.Middlewares;
@@ -101,6 +102,9 @@ public class Startup
         services.AddAutoMapper(typeof(AppMappingProfile));
 
         services.AddScoped(typeof(IProxyExceptionHandler<>), typeof(ProxyExceptionHandler<>));
+
+        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+        services.AddSingleton<IUserIdentityProfileProvider, UserIdentityProfileProvider>();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
