@@ -19,7 +19,7 @@ internal class UserConfiguration : IEntityConfiguration<User>, IDefaultDataSette
             RoleName = Roles.Admin,
             Bonuses = 0,
             IdentityCredentialLogin = "AdminAdmin",
-            PasswordHash = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"
+            PasswordHash = "99020f0c7a3c89db3327840236da5da44c79cab9f7d1f7ba740fc00bccaee965"
         });
         return builder;
     }

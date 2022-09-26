@@ -18,24 +18,28 @@ public class AuthenticateService : IAuthenticateService
     private readonly IIdentityCredentialRepository _identityCredentialRepository;
     private readonly IRoleRepository _roleRepository;
     private readonly TokenGenerator _tokenGenerator;
+    private readonly HashGenerator _hashGenerator;
     private readonly IUserRepository _userRepository;
 
     public AuthenticateService(
         IUserRepository userRepository,
         IRoleRepository roleRepository,
         IIdentityCredentialRepository identityCredentialRepository,
-        TokenGenerator tokenGenerator)
+        TokenGenerator tokenGenerator,
+        HashGenerator hashGenerator)
     {
         _userRepository = userRepository;
         _tokenGenerator = tokenGenerator;
         _roleRepository = roleRepository;
         _identityCredentialRepository = identityCredentialRepository;
+        _hashGenerator = hashGenerator;
     }
 
     public async Task<IActionResult> Login(LoginModel model)
     {
         var user = await _userRepository.GetFullAsync(model.Username);
-        if (user is null || !user.PasswordHash.Equals(model.Password))
+        if (user is null || !user.PasswordHash.Equals(_hashGenerator.GenerateHash(model.Password 
+            ?? throw new ArgumentNullException())))
             return new BadRequestObjectResult("User credentials were failed!");
         var tokenModel = _tokenGenerator.JwtAccessToken(new UserClaimDto
         {
@@ -74,7 +78,7 @@ public class AuthenticateService : IAuthenticateService
             Email = model.Email,
             FirstName = model.FirstName,
             LastName = model.LastName,
-            PasswordHash = model.Password,
+            PasswordHash = _hashGenerator.GenerateHash(model.Password),
             IdentityCredentialLogin = model.Login,
             IdentityCredential = new IdentityCredential(),
             Role = await _roleRepository.GetAsync(Roles.Customer)

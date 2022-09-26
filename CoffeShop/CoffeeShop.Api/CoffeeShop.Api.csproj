@@ -5,6 +5,7 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <RootNamespace>CoffeShop.Api</RootNamespace>
+        <UserSecretsId>c3dc9c38-ada6-4730-bad9-1c60ca47f2fd</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>

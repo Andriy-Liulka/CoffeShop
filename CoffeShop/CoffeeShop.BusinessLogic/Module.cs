@@ -11,6 +11,7 @@ public static class Module
 {
     public static IServiceCollection AddBusinessLogicServices(this IServiceCollection services)
     {
+        services.AddScoped<HashGenerator>();
         services.AddScoped<TokenGenerator>();
         services.AddScoped<IAuthenticateService, AuthenticateService>();
         services.AddScoped<IBonusCoffeeService, BonusCoffeeService>();
