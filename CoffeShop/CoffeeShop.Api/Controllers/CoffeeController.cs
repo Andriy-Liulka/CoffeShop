@@ -26,7 +26,6 @@ public class CoffeeController : ControllerBase
         _service = service;
         _mapper = mapper;
     }
-    [AllowAnonymous]
     [Route("")]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -47,8 +46,7 @@ public class CoffeeController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> CreateAsync([FromBody] CoffeeUi coffee)
         => await _proxyExceptionHandler.ExecuteAsync(_service.CreateAsync, _mapper.Map<Coffee>(coffee));
-
-    [AllowAnonymous]
+    
     [Route("update")]
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK)]
