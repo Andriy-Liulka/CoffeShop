@@ -7,8 +7,11 @@ using CoffeShop.Api.Authentication;
 using CoffeShop.Api.Common;
 using CoffeShop.Api.Configurations;
 using CoffeShop.Api.Configurations.Middlewares;
+using CoffeShop.Api.Controllers.Identity.Authorization;
+using CoffeShop.Api.Controllers.Identity.Authorization.Policies;
 using CoffeShop.Api.ProxyExceptionHandlingLayer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -105,6 +108,10 @@ public class Startup
 
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         services.AddSingleton<IUserIdentityProfileProvider, UserIdentityProfileProvider>();
+        
+        services.AddSingleton<IAuthorizationHandler, PermissionRequirementHandler>();
+        services.AddSingleton<IAuthorizationPolicyProvider, PermissionPolicyProvider>();
+        services.AddSingleton<IPolicyResolver, PolicyResolver>();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
