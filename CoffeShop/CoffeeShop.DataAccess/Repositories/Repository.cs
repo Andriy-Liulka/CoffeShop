@@ -5,7 +5,7 @@ namespace CoffeeShop.DataAccess.Repositories;
 
 public abstract class Repository<T> : IRepository<T> where T : class
 {
-    private readonly CoffeeShopContext _context;
+    protected readonly CoffeeShopContext _context;
     private DbSet<T> _dbSet;
 
     public Repository(CoffeeShopContext context)

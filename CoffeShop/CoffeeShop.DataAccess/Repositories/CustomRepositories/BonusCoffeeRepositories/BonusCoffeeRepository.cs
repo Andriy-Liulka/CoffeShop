@@ -5,12 +5,7 @@ namespace CoffeeShop.DataAccess.Repositories.CustomRepositories.BonusCoffeeRepos
 
 public class BonusCoffeeRepository : Repository<BonusCoffee>, IBonusCoffeeRepository
 {
-    private readonly CoffeeShopContext _context;
-
-    public BonusCoffeeRepository(CoffeeShopContext context) : base(context)
-    {
-        _context = context;
-    }
+    public BonusCoffeeRepository(CoffeeShopContext context) : base(context) { }
 
     public async Task<BonusCoffee> GetAsync(int id)
         => await _context.BonusCoffees.FirstOrDefaultAsync(x => x.Id.Equals(id)) 

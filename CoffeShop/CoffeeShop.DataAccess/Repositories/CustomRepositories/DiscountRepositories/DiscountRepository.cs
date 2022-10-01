@@ -5,12 +5,8 @@ namespace CoffeeShop.DataAccess.Repositories.CustomRepositories.DiscountReposito
 
 public class DiscountRepository : Repository<Discount>, IDiscountRepository
 {
-    private readonly CoffeeShopContext _context;
 
-    public DiscountRepository(CoffeeShopContext context) : base(context)
-    {
-        _context = context;
-    }
+    public DiscountRepository(CoffeeShopContext context) : base(context) { }
 
     public async Task<Discount> GetAsync(int id)
         => await _context.Discounts.FirstOrDefaultAsync(x => x.Id.Equals(id)) 

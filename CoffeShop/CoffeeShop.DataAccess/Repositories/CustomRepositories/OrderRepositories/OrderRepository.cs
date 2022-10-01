@@ -5,12 +5,7 @@ namespace CoffeeShop.DataAccess.Repositories.CustomRepositories.OrderRepositorie
 
 public class OrderRepository : Repository<Order>, IOrderRepository
 {
-    private readonly CoffeeShopContext _context;
-
-    public OrderRepository(CoffeeShopContext context) : base(context)
-    {
-        _context = context;
-    }
+    public OrderRepository(CoffeeShopContext context) : base(context) { }
 
     public async Task<Order> GetAsync(int id)
         => await _context.Orders.FirstOrDefaultAsync(x => x.Id.Equals(id))
