@@ -2,7 +2,7 @@
 
 namespace CoffeeShop.BusinessLogic.Common;
 
-public static class UpdateIdentityCredentialExtension
+public static class IdentityCredentialExtension
 {
     public static IdentityCredential UpdateWith(this IdentityCredential obj, Func<IdentityCredential> assigner)
     {
