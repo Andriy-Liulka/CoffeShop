@@ -18,8 +18,8 @@ public class DiscountCoffeeService : IDiscountCoffeeService
     public async Task<IEnumerable<DiscountCoffee>> GetAllAsync()
         => await _discountCoffeeRepository.GetAllAsync();
 
-    public async Task<DiscountCoffee> GetAsync(DiscountCoffeeGetAsyncDto key)
-        => await _discountCoffeeRepository.GetAsync(key.CoffeeId, key.DiscountId);
+    public async Task<DiscountCoffee> GetAsync( int coffeeId, int discountId)
+        => await _discountCoffeeRepository.GetAsync(coffeeId, discountId);
 
     public async Task<string> CreateAsync(DiscountCoffee discountCoffee)
         => await _discountCoffeeRepository.CreateAsync(discountCoffee);

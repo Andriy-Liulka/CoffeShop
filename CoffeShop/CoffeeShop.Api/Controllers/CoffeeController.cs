@@ -3,7 +3,7 @@ using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.Domain.Entities;
 using CoffeShop.Api.Controllers.Identity.Authorization;
 using CoffeShop.Api.Controllers.Identity.Authorization.Policies;
-using CoffeShop.Api.dto.Ui;
+using CoffeShop.Api.Dto.Input;
 using CoffeShop.Api.ProxyExceptionHandlingLayer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

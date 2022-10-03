@@ -30,21 +30,21 @@ public class AuthenticateController : ControllerBase
 
     [HttpPost]
     [Route("/login")]
-    public async Task<IActionResult> Login([FromBody] LoginModelUi? loginModelUi)
+    public async Task<IActionResult> Login([FromBody] LoginModelDto? loginModelUi)
         => await _proxyExceptionHandler.ExecuteAsync(
             _authenticateService.Login,
             _mapper.Map<LoginModel>(loginModelUi));
 
     [HttpPost]
     [Route("/register")]
-    public async Task<IActionResult> Register([FromBody] RegisterModelUi? registerModelUi)
+    public async Task<IActionResult> Register([FromBody] RegisterModelDto? registerModelUi)
         => await _proxyExceptionHandler.ExecuteAsync(
             _authenticateService.Register,
             _mapper.Map<RegisterModel>(registerModelUi));
 
     [HttpPost]
     [Route("/refresh-token")]
-    public async Task<IActionResult> RefreshToken([FromBody] TokenModelUi? tokenModelUi)
+    public async Task<IActionResult> RefreshToken([FromBody] TokenModelDto? tokenModelUi)
         => await _proxyExceptionHandler.ExecuteAsync(
             _authenticateService.RefreshToken,
             _mapper.Map<TokenModel>(tokenModelUi));

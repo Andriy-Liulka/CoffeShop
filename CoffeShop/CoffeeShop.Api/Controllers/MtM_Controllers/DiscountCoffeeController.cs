@@ -3,7 +3,7 @@ using CoffeeShop.BusinessLogic.Dto;
 using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.Domain.Entities.MtM_IntermediateEntities;
 using CoffeShop.Api.dto.Common;
-using CoffeShop.Api.dto.Ui;
+using CoffeShop.Api.Dto.Input;
 using CoffeShop.Api.ProxyExceptionHandlingLayer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -39,10 +39,9 @@ public class DiscountCoffeeController : ControllerBase
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> GetAsync([FromRoute] DiscountCoffeeGetAsyncDtoUi key)
+    public async Task<IActionResult> GetAsync([FromRoute] int coffeeId, [FromRoute] int discountId)
         => await _proxyExceptionHandler.ExecuteAsync(
-            _service.GetAsync,
-            _mapper.Map<DiscountCoffeeGetAsyncDto>(key));
+            _service.GetAsync,coffeeId,discountId);
 
     [Route("create")]
     [HttpPost]
