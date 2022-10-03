@@ -11,7 +11,6 @@ public class ProxyExceptionHandler<TService> : IProxyExceptionHandler<TService>
     {
         _logger = logger;
     }
-
     public async Task<IActionResult> ExecuteAsync<TEntity,TResult>(Func<TEntity, Task<TResult>> serviceFunc,
         TEntity param)
     {
@@ -25,7 +24,18 @@ public class ProxyExceptionHandler<TService> : IProxyExceptionHandler<TService>
             return new BadRequestObjectResult(String.Format(Translation.BadRequestObjectResultMessage,e.GetType(),e.Message));
         }
     }
-
+    public async Task<IActionResult> ExecuteAsync<TEntity1, TEntity2, TResult>(Func<TEntity1, TEntity2, Task<TResult>> serviceFunc, TEntity1 param1, TEntity2 param2)
+    {
+        try
+        {
+            return new OkObjectResult(await serviceFunc.Invoke(param1,param2));
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e.Message);
+            return new BadRequestObjectResult(String.Format(Translation.BadRequestObjectResultMessage,e.GetType(),e.Message));
+        }
+    }
     public async Task<IActionResult> ExecuteAsync<TResult>(Func<Task<TResult>> serviceFunc)
     {
         try
