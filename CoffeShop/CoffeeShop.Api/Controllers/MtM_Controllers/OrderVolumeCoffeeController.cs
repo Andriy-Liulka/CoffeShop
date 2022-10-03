@@ -43,20 +43,20 @@ public class OrderVolumeCoffeeController : ControllerBase
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> CreateAsync([FromBody] OrderVolumeCoffeeUi orderVolumeCoffee)
+    public async Task<IActionResult> CreateAsync([FromBody] OrderVolumeCoffeeDto orderVolumeCoffee)
         => await _proxyExceptionHandler.ExecuteAsync(_service.CreateAsync, _mapper.Map<OrderVolumeCoffee>(orderVolumeCoffee));
 
     [Route("update")]
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> UpdateAsync([FromBody] OrderVolumeCoffeeUi orderVolumeCoffee)
+    public async Task<IActionResult> UpdateAsync([FromBody] OrderVolumeCoffeeDto orderVolumeCoffee)
         => await _proxyExceptionHandler.ExecuteAsync(_service.UpdateAsync, _mapper.Map<OrderVolumeCoffee>(orderVolumeCoffee));
 
     [Route("delete")]
     [HttpDelete]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> DeleteAsync([FromBody] OrderVolumeCoffeeUi orderVolumeCoffee)
+    public async Task<IActionResult> DeleteAsync([FromBody] OrderVolumeCoffeeDto orderVolumeCoffee)
         => await _proxyExceptionHandler.ExecuteAsync(_service.DeleteAsync, _mapper.Map<OrderVolumeCoffee>(orderVolumeCoffee));
 }

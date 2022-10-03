@@ -42,20 +42,20 @@ public class OrderController : ControllerBase
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> CreateAsync([FromBody] OrderUi order)
+    public async Task<IActionResult> CreateAsync([FromBody] OrderDto order)
         => await _proxyExceptionHandler.ExecuteAsync(_service.CreateAsync, _mapper.Map<Order>(order));
 
     [Route("update")]
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> UpdateAsync([FromBody] OrderUi order)
+    public async Task<IActionResult> UpdateAsync([FromBody] OrderDto order)
         => await _proxyExceptionHandler.ExecuteAsync(_service.UpdateAsync, _mapper.Map<Order>(order));
 
     [Route("delete")]
     [HttpDelete]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> DeleteAsync([FromBody] OrderUi order)
+    public async Task<IActionResult> DeleteAsync([FromBody] OrderDto order)
         => await _proxyExceptionHandler.ExecuteAsync(_service.DeleteAsync, _mapper.Map<Order>(order));
 }

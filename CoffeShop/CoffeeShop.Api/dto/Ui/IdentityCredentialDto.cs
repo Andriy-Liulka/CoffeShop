@@ -2,7 +2,7 @@
 
 namespace CoffeShop.Api.dto.Ui;
 
-public class IdentityCredentialUi
+public class IdentityCredentialDto
 {
     public long Id { get; set; }
 

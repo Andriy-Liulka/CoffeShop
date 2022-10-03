@@ -45,20 +45,20 @@ public class UserController : ControllerBase
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> CreateAsync([FromBody] UserUi user)
+    public async Task<IActionResult> CreateAsync([FromBody] UserDto user)
         => await _proxyExceptionHandler.ExecuteAsync(_service.CreateAsync, _mapper.Map<User>(user));
 
     [Route("update")]
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> UpdateAsync([FromBody] UserUi user)
+    public async Task<IActionResult> UpdateAsync([FromBody] UserDto user)
         => await _proxyExceptionHandler.ExecuteAsync(_service.UpdateAsync, _mapper.Map<User>(user));
 
     [Route("delete")]
     [HttpDelete]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> DeleteAsync([FromBody] UserUi user)
+    public async Task<IActionResult> DeleteAsync([FromBody] UserDto user)
         => await _proxyExceptionHandler.ExecuteAsync(_service.DeleteAsync, _mapper.Map<User>(user));
 }

@@ -48,20 +48,20 @@ public class DiscountCoffeeController : ControllerBase
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> CreateAsync([FromBody] DiscountCoffeeUi discountCoffee)
+    public async Task<IActionResult> CreateAsync([FromBody] DiscountCoffeeDto discountCoffee)
         => await _proxyExceptionHandler.ExecuteAsync(_service.CreateAsync, _mapper.Map<DiscountCoffee>(discountCoffee));
 
     [Route("update")]
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> UpdateAsync([FromBody] DiscountCoffeeUi discountCoffee)
+    public async Task<IActionResult> UpdateAsync([FromBody] DiscountCoffeeDto discountCoffee)
         => await _proxyExceptionHandler.ExecuteAsync(_service.UpdateAsync, _mapper.Map<DiscountCoffee>(discountCoffee));
 
     [Route("delete")]
     [HttpDelete]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> DeleteAsync([FromBody] DiscountCoffeeUi discountCoffee)
+    public async Task<IActionResult> DeleteAsync([FromBody] DiscountCoffeeDto discountCoffee)
         => await _proxyExceptionHandler.ExecuteAsync(_service.DeleteAsync, _mapper.Map<DiscountCoffee>(discountCoffee));
 }

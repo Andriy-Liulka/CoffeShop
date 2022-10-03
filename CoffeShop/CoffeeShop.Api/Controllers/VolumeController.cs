@@ -42,20 +42,20 @@ public class VolumeController : ControllerBase
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> CreateAsync([FromBody] VolumeUi volume)
+    public async Task<IActionResult> CreateAsync([FromBody] VolumeDto volume)
         => await _proxyExceptionHandler.ExecuteAsync(_service.CreateAsync, _mapper.Map<Volume>(volume));
 
     [Route("update")]
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> UpdateAsync([FromBody] VolumeUi volume)
+    public async Task<IActionResult> UpdateAsync([FromBody] VolumeDto volume)
         => await _proxyExceptionHandler.ExecuteAsync(_service.UpdateAsync, _mapper.Map<Volume>(volume));
 
     [Route("delete")]
     [HttpDelete]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> DeleteAsync([FromBody] VolumeUi volume)
+    public async Task<IActionResult> DeleteAsync([FromBody] VolumeDto volume)
         => await _proxyExceptionHandler.ExecuteAsync(_service.DeleteAsync, _mapper.Map<Volume>(volume));
 }

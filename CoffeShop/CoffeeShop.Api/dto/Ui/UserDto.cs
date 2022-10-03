@@ -3,7 +3,7 @@ using CoffeeShop.Domain.Entities;
 
 namespace CoffeShop.Api.dto.Ui;
 
-public class UserUi
+public class UserDto
 {
     public string Login
     {

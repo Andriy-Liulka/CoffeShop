@@ -43,20 +43,20 @@ public class BonusCoffeeController : ControllerBase
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> CreateAsync([FromBody] BonusCoffeeUi bonusCoffee)
+    public async Task<IActionResult> CreateAsync([FromBody] BonusCoffeeDto bonusCoffee)
         => await _proxyExceptionHandler.ExecuteAsync(_service.CreateAsync, _mapper.Map<BonusCoffee>(bonusCoffee));
 
     [Route("update")]
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> UpdateAsync([FromBody] BonusCoffeeUi bonusCoffee)
+    public async Task<IActionResult> UpdateAsync([FromBody] BonusCoffeeDto bonusCoffee)
         => await _proxyExceptionHandler.ExecuteAsync(_service.UpdateAsync, _mapper.Map<BonusCoffee>(bonusCoffee));
 
     [Route("delete")]
     [HttpDelete]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> DeleteAsync([FromBody] BonusCoffeeUi bonusCoffee)
+    public async Task<IActionResult> DeleteAsync([FromBody] BonusCoffeeDto bonusCoffee)
         => await _proxyExceptionHandler.ExecuteAsync(_service.DeleteAsync, _mapper.Map<BonusCoffee>(bonusCoffee));
 }

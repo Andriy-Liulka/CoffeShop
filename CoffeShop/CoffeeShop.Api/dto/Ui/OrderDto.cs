@@ -4,7 +4,7 @@ using CoffeeShop.Domain.Enums;
 
 namespace CoffeShop.Api.dto.Ui;
 
-public class OrderUi
+public class OrderDto
 {
     public long Id { get; set; }
 

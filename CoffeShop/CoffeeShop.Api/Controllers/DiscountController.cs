@@ -42,20 +42,20 @@ public class DiscountController : ControllerBase
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> CreateAsync([FromBody] DiscountUi discount)
+    public async Task<IActionResult> CreateAsync([FromBody] DiscountDto discount)
         => await _proxyExceptionHandler.ExecuteAsync(_service.CreateAsync, _mapper.Map<Discount>(discount));
 
     [Route("update")]
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> UpdateAsync([FromBody] DiscountUi discount)
+    public async Task<IActionResult> UpdateAsync([FromBody] DiscountDto discount)
         => await _proxyExceptionHandler.ExecuteAsync(_service.UpdateAsync, _mapper.Map<Discount>(discount));
 
     [Route("delete")]
     [HttpDelete]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> DeleteAsync([FromBody] DiscountUi discount)
+    public async Task<IActionResult> DeleteAsync([FromBody] DiscountDto discount)
         => await _proxyExceptionHandler.ExecuteAsync(_service.DeleteAsync, _mapper.Map<Discount>(discount));
 }

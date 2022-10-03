@@ -2,7 +2,7 @@
 
 namespace CoffeShop.Api.dto.Ui;
 
-public class RoleUi
+public class RoleDto
 {
     public string Name { get; set; }
 }

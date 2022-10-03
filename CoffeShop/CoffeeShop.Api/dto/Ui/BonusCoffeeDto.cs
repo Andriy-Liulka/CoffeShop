@@ -2,7 +2,7 @@
 
 namespace CoffeShop.Api.dto.Ui;
 
-public class BonusCoffeeUi
+public class BonusCoffeeDto
 {
     public long Id { get; set; }
 

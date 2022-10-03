@@ -18,15 +18,15 @@ public class AppMappingProfile : Profile
         CreateMap<RegisterModelUi, RegisterModel>();
         CreateMap<TokenModelUi, TokenModel>();
         CreateMap<DiscountCoffeeGetAsyncDtoUi, DiscountCoffeeGetAsyncDto>();
-        CreateMap<BonusCoffeeUi, BonusCoffee>();
-        CreateMap<CoffeeUi, Coffee>();
-        CreateMap<DiscountCoffeeUi, DiscountCoffee>();
-        CreateMap<DiscountUi, Discount>();
-        CreateMap<IdentityCredentialUi, IdentityCredential>();
-        CreateMap<OrderUi, Order>();
-        CreateMap<OrderVolumeCoffeeUi, OrderVolumeCoffee>();
-        CreateMap<RoleUi, Role>();
-        CreateMap<UserUi, User>();
-        CreateMap<VolumeUi,Volume>();
+        CreateMap<BonusCoffeeDto, BonusCoffee>();
+        CreateMap<CoffeeDto, Coffee>();
+        CreateMap<DiscountCoffeeDto, DiscountCoffee>();
+        CreateMap<DiscountDto, Discount>();
+        CreateMap<IdentityCredentialDto, IdentityCredential>();
+        CreateMap<OrderDto, Order>();
+        CreateMap<OrderVolumeCoffeeDto, OrderVolumeCoffee>();
+        CreateMap<RoleDto, Role>();
+        CreateMap<UserDto, User>();
+        CreateMap<VolumeDto,Volume>();
     }
 }
