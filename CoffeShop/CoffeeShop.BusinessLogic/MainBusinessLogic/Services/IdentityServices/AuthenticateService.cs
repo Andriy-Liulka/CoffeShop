@@ -59,12 +59,12 @@ public class AuthenticateService : IAuthenticateService
 
         await _identityCredentialRepository.UpdateAsync(user.IdentityCredential);
 
-        return new OkObjectResult(new
+        return new
         {
             RefreshToken = refreshTokenModel.RefreshToken,
             AccessToken = new JwtSecurityTokenHandler().WriteToken(accessToken),
             ValidTo = validTo
-        });
+        };
     }
 
     public async Task<object> Register(RegisterModel model)
@@ -84,11 +84,11 @@ public class AuthenticateService : IAuthenticateService
             Role = await _roleRepository.GetAsync(Roles.Customer)
         });
 
-        return new OkObjectResult(new
+        return new
         {
             Status = "Success",
             Message = "User created successfully!"
-        });
+        };
     }
 
     public async Task<object> RefreshToken(TokenModel model)
@@ -114,11 +114,11 @@ public class AuthenticateService : IAuthenticateService
 
         await _identityCredentialRepository.UpdateAsync(user.IdentityCredential);
 
-        return new OkObjectResult(new
+        return new
         {
             RefreshToken = newRefreshTokenModel.RefreshToken,
             AccessToken = new JwtSecurityTokenHandler().WriteToken(newAccessToken.token),
             ValidTo = newAccessToken.ValidTo
-        });
+        };
     }
 }
