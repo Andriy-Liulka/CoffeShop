@@ -1,7 +1,4 @@
-﻿using CoffeeShop.Domain.Entities.MtM_IntermediateEntities;
-using CoffeeShop.Domain.Entities;
-
-namespace CoffeShop.Api.dto.Ui;
+﻿namespace CoffeShop.Api.Dto.Input;
 
 public class VolumeDto
 {

@@ -1,6 +1,4 @@
-﻿using CoffeeShop.Domain.Entities;
-
-namespace CoffeShop.Api.dto.Ui;
+﻿namespace CoffeShop.Api.Dto.Input;
 
 public class OrderVolumeCoffeeDto
 {

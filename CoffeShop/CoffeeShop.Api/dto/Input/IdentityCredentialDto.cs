@@ -1,6 +1,4 @@
-﻿using CoffeeShop.Domain.Entities.Identity;
-
-namespace CoffeShop.Api.dto.Ui;
+﻿namespace CoffeShop.Api.Dto.Input;
 
 public class IdentityCredentialDto
 {

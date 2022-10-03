@@ -2,7 +2,7 @@
 
 namespace CoffeShop.Api.Dto.Authenticate;
 
-public class RegisterModelUi
+public class RegisterModelDto
 {
     [Required(ErrorMessage = "FirstName is required")]
     public string? FirstName { get; set; }

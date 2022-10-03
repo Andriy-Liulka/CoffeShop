@@ -1,6 +1,6 @@
 ﻿namespace CoffeShop.Api.Dto.Authenticate;
 
-public class TokenModelUi
+public class TokenModelDto
 {
     public string AccessToken { get; set; }
 

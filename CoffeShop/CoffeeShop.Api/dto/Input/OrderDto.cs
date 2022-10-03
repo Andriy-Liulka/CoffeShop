@@ -1,8 +1,6 @@
-﻿using CoffeeShop.Domain.Entities.Identity;
-using CoffeeShop.Domain.Entities.MtM_IntermediateEntities;
-using CoffeeShop.Domain.Enums;
+﻿using CoffeeShop.Domain.Enums;
 
-namespace CoffeShop.Api.dto.Ui;
+namespace CoffeShop.Api.Dto.Input;
 
 public class OrderDto
 {
@@ -17,8 +15,6 @@ public class OrderDto
     public bool IsDelivered { get; set; }
 
     public DeliveryWays DeliveryWay { get; set; }
-
-    public string UserLogin { get; set; }
 
 }
 
