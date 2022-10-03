@@ -35,7 +35,7 @@ public class AuthenticateService : IAuthenticateService
         _hashGenerator = hashGenerator;
     }
 
-    public async Task<IActionResult> Login(LoginModel model)
+    public async Task<object> Login(LoginModel model)
     {
         var user = await _userRepository.GetFullAsync(model.Username);
         if (user is null || !user.PasswordHash.Equals(_hashGenerator.GenerateHash(model.Password 
@@ -67,7 +67,7 @@ public class AuthenticateService : IAuthenticateService
         });
     }
 
-    public async Task<IActionResult> Register(RegisterModel model)
+    public async Task<object> Register(RegisterModel model)
     {
         var user = await _userRepository.GetAsync(model.Login);
         if (user is not null)
@@ -91,7 +91,7 @@ public class AuthenticateService : IAuthenticateService
         });
     }
 
-    public async Task<IActionResult> RefreshToken(TokenModel model)
+    public async Task<object> RefreshToken(TokenModel model)
     {
         var userData = _tokenGenerator.DecryptAccessToken(model.AccessToken);
 

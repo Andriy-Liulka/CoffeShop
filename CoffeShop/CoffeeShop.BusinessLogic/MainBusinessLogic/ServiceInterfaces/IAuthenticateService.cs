@@ -5,7 +5,7 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 
 public interface IAuthenticateService
 {
-    Task<IActionResult> Login(LoginModel model);
-    Task<IActionResult> Register(RegisterModel model);
-    Task<IActionResult> RefreshToken(TokenModel model);
+    Task<object> Login(LoginModel model);
+    Task<object> Register(RegisterModel model);
+    Task<object> RefreshToken(TokenModel model);
 }

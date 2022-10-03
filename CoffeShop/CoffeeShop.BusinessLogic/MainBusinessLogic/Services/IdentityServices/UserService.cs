@@ -14,18 +14,18 @@ public class UserService : IUserService
         _userRepository = userRepository;
     }
 
-    public async Task<IActionResult> GetAllAsync()
-        => new OkObjectResult(await _userRepository.GetAllAsync());
+    public async Task<IEnumerable<User>> GetAllAsync()
+        => await _userRepository.GetAllAsync();
 
-    public async Task<IActionResult> GetAsync(string login)
-        => new OkObjectResult(await _userRepository.GetAsync(login));
+    public async Task<User?> GetAsync(string login)
+        => await _userRepository.GetAsync(login);
 
-    public async Task<IActionResult> CreateAsync(User user)
-        => new OkObjectResult(await _userRepository.CreateAsync(user));
+    public async Task<string> CreateAsync(User user)
+        => await _userRepository.CreateAsync(user);
 
-    public async Task<IActionResult> UpdateAsync(User user)
-        => new OkObjectResult(await _userRepository.UpdateAsync(user));
+    public async Task<string> UpdateAsync(User user)
+        => await _userRepository.UpdateAsync(user);
 
-    public async Task<IActionResult> DeleteAsync(User user)
-        => new OkObjectResult(await _userRepository.DeleteAsync(user));
+    public async Task<string> DeleteAsync(User user)
+        => await _userRepository.DeleteAsync(user);
 }

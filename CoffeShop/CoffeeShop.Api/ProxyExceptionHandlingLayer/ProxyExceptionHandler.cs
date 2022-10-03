@@ -12,12 +12,12 @@ public class ProxyExceptionHandler<TService> : IProxyExceptionHandler<TService>
         _logger = logger;
     }
 
-    public async Task<IActionResult> ExecuteAsync<TEntity>(Func<TEntity, Task<IActionResult>> serviceFunc,
+    public async Task<IActionResult> ExecuteAsync<TEntity,TResult>(Func<TEntity, Task<TResult>> serviceFunc,
         TEntity param)
     {
         try
         {
-            return await serviceFunc.Invoke(param);
+            return new OkObjectResult(await serviceFunc.Invoke(param));
         }
         catch (Exception e)
         {
@@ -26,11 +26,11 @@ public class ProxyExceptionHandler<TService> : IProxyExceptionHandler<TService>
         }
     }
 
-    public async Task<IActionResult> ExecuteAsync(Func<Task<IActionResult>> serviceFunc)
+    public async Task<IActionResult> ExecuteAsync<TResult>(Func<Task<TResult>> serviceFunc)
     {
         try
         {
-            return await serviceFunc.Invoke();
+            return new OkObjectResult(await serviceFunc.Invoke());
         }
         catch (Exception e)
         {

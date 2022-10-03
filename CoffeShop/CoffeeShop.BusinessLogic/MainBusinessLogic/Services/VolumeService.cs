@@ -14,18 +14,18 @@ public class VolumeService : IVolumeService
         _orderRepository = orderRepository;
     }
 
-    public async Task<IActionResult> GetAllAsync()
-        => new OkObjectResult(await _orderRepository.GetAllAsync());
+    public async Task<IEnumerable<Volume>> GetAllAsync()
+        => await _orderRepository.GetAllAsync();
 
-    public async Task<IActionResult> GetAsync(int id)
-        => new OkObjectResult(await _orderRepository.GetAsync(id));
+    public async Task<Volume> GetAsync(int id)
+        => await _orderRepository.GetAsync(id);
 
-    public async Task<IActionResult> CreateAsync(Volume volume)
-        => new OkObjectResult(await _orderRepository.CreateAsync(volume));
+    public async Task<string> CreateAsync(Volume volume)
+        => await _orderRepository.CreateAsync(volume);
 
-    public async Task<IActionResult> UpdateAsync(Volume volume)
-        => new OkObjectResult(await _orderRepository.UpdateAsync(volume));
+    public async Task<string> UpdateAsync(Volume volume)
+        => await _orderRepository.UpdateAsync(volume);
 
-    public async Task<IActionResult> DeleteAsync(Volume volume)
-        => new OkObjectResult(await _orderRepository.DeleteAsync(volume));
+    public async Task<string> DeleteAsync(Volume volume)
+        => await _orderRepository.DeleteAsync(volume);
 }

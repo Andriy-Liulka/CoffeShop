@@ -15,18 +15,18 @@ public class DiscountCoffeeService : IDiscountCoffeeService
         _discountCoffeeRepository = discountCoffeeRepository;
     }
 
-    public async Task<IActionResult> GetAllAsync()
-        => new OkObjectResult(await _discountCoffeeRepository.GetAllAsync());
+    public async Task<IEnumerable<DiscountCoffee>> GetAllAsync()
+        => await _discountCoffeeRepository.GetAllAsync();
 
-    public async Task<IActionResult> GetAsync(DiscountCoffeeGetAsyncDto key)
-        => new OkObjectResult(await _discountCoffeeRepository.GetAsync(key.CoffeeId, key.DiscountId));
+    public async Task<DiscountCoffee> GetAsync(DiscountCoffeeGetAsyncDto key)
+        => await _discountCoffeeRepository.GetAsync(key.CoffeeId, key.DiscountId);
 
-    public async Task<IActionResult> CreateAsync(DiscountCoffee discountCoffee)
-        => new OkObjectResult(await _discountCoffeeRepository.CreateAsync(discountCoffee));
+    public async Task<string> CreateAsync(DiscountCoffee discountCoffee)
+        => await _discountCoffeeRepository.CreateAsync(discountCoffee);
 
-    public async Task<IActionResult> UpdateAsync(DiscountCoffee discountCoffee)
-        => new OkObjectResult(await _discountCoffeeRepository.UpdateAsync(discountCoffee));
+    public async Task<string> UpdateAsync(DiscountCoffee discountCoffee)
+        => await _discountCoffeeRepository.UpdateAsync(discountCoffee);
 
-    public async Task<IActionResult> DeleteAsync(DiscountCoffee discountCoffee)
-        => new OkObjectResult(await _discountCoffeeRepository.DeleteAsync(discountCoffee));
+    public async Task<string> DeleteAsync(DiscountCoffee discountCoffee)
+        => await _discountCoffeeRepository.DeleteAsync(discountCoffee);
 }

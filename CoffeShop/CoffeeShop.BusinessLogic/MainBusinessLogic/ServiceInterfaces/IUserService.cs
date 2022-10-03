@@ -5,9 +5,9 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 
 public interface IUserService
 {
-    Task<IActionResult> GetAllAsync();
-    Task<IActionResult> GetAsync(string login);
-    Task<IActionResult> CreateAsync(User user);
-    Task<IActionResult> UpdateAsync(User user);
-    Task<IActionResult> DeleteAsync(User user);
+    Task<IEnumerable<User>> GetAllAsync();
+    Task<User?> GetAsync(string login);
+    Task<string> CreateAsync(User user);
+    Task<string> UpdateAsync(User user);
+    Task<string> DeleteAsync(User user);
 }

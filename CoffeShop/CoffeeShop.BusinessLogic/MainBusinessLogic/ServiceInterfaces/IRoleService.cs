@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CoffeeShop.Domain.Entities.Identity;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 
 public interface IRoleService
 {
-    Task<IActionResult> GetAllAsync();
-    Task<IActionResult> GetAsync(string name);
+    Task<IEnumerable<Role>> GetAllAsync();
+    Task<Role> GetAsync(string name);
 }

@@ -5,9 +5,9 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 
 public interface IDiscountService
 {
-    Task<IActionResult> GetAllAsync();
-    Task<IActionResult> GetAsync(int id);
-    Task<IActionResult> CreateAsync(Discount discount);
-    Task<IActionResult> UpdateAsync(Discount discount);
-    Task<IActionResult> DeleteAsync(Discount discount);
+    Task<IEnumerable<Discount>> GetAllAsync();
+    Task<Discount> GetAsync(int id);
+    Task<string> CreateAsync(Discount discount);
+    Task<string> UpdateAsync(Discount discount);
+    Task<string> DeleteAsync(Discount discount);
 }

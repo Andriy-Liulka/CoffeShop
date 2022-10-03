@@ -5,9 +5,9 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 
 public interface IOrderVolumeCoffeeService
 {
-    Task<IActionResult> GetAllAsync();
-    Task<IActionResult> GetAsync(int id);
-    Task<IActionResult> CreateAsync(OrderVolumeCoffee orderVolumeCoffee);
-    Task<IActionResult> UpdateAsync(OrderVolumeCoffee orderVolumeCoffee);
-    Task<IActionResult> DeleteAsync(OrderVolumeCoffee orderVolumeCoffee);
+    Task<IEnumerable<OrderVolumeCoffee>> GetAllAsync();
+    Task<OrderVolumeCoffee?> GetAsync(int id);
+    Task<string> CreateAsync(OrderVolumeCoffee orderVolumeCoffee);
+    Task<string> UpdateAsync(OrderVolumeCoffee orderVolumeCoffee);
+    Task<string> DeleteAsync(OrderVolumeCoffee orderVolumeCoffee);
 }

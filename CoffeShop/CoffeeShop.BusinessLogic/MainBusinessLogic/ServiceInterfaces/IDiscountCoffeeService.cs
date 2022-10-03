@@ -6,9 +6,9 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 
 public interface IDiscountCoffeeService
 {
-    public Task<IActionResult> GetAllAsync();
-    public Task<IActionResult> GetAsync(DiscountCoffeeGetAsyncDto key);
-    public Task<IActionResult> CreateAsync(DiscountCoffee discountCoffee);
-    public Task<IActionResult> UpdateAsync(DiscountCoffee discountCoffee);
-    public Task<IActionResult> DeleteAsync(DiscountCoffee discountCoffee);
+    public Task<IEnumerable<DiscountCoffee>> GetAllAsync();
+    public Task<DiscountCoffee> GetAsync(DiscountCoffeeGetAsyncDto key);
+    public Task<string> CreateAsync(DiscountCoffee discountCoffee);
+    public Task<string> UpdateAsync(DiscountCoffee discountCoffee);
+    public Task<string> DeleteAsync(DiscountCoffee discountCoffee);
 }

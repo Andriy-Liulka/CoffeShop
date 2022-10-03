@@ -5,9 +5,9 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 
 public interface IOrderService
 {
-    Task<IActionResult> GetAllAsync();
-    Task<IActionResult> GetAsync(int id);
-    Task<IActionResult> CreateAsync(Order order);
-    Task<IActionResult> UpdateAsync(Order order);
-    Task<IActionResult> DeleteAsync(Order order);
+    Task<IEnumerable<Order>> GetAllAsync();
+    Task<Order> GetAsync(int id);
+    Task<string> CreateAsync(Order order);
+    Task<string> UpdateAsync(Order order);
+    Task<string> DeleteAsync(Order order);
 }

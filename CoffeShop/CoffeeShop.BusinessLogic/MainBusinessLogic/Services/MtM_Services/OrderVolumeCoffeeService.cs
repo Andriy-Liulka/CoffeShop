@@ -14,18 +14,18 @@ public class OrderVolumeCoffeeService : IOrderVolumeCoffeeService
         _orderVolumeCoffeeRepository = orderVolumeCoffeeRepository;
     }
 
-    public async Task<IActionResult> GetAllAsync()
-        => new OkObjectResult(await _orderVolumeCoffeeRepository.GetAllAsync());
+    public async Task<IEnumerable<OrderVolumeCoffee>> GetAllAsync()
+        => await _orderVolumeCoffeeRepository.GetAllAsync();
 
-    public async Task<IActionResult> GetAsync(int id)
-        => new OkObjectResult(await _orderVolumeCoffeeRepository.GetAsync(id));
+    public async Task<OrderVolumeCoffee?> GetAsync(int id)
+        => await _orderVolumeCoffeeRepository.GetAsync(id);
 
-    public async Task<IActionResult> CreateAsync(OrderVolumeCoffee orderVolumeCoffee)
-        => new OkObjectResult(await _orderVolumeCoffeeRepository.CreateAsync(orderVolumeCoffee));
+    public async Task<string> CreateAsync(OrderVolumeCoffee orderVolumeCoffee)
+        => await _orderVolumeCoffeeRepository.CreateAsync(orderVolumeCoffee);
 
-    public async Task<IActionResult> UpdateAsync(OrderVolumeCoffee orderVolumeCoffee)
-        => new OkObjectResult(await _orderVolumeCoffeeRepository.UpdateAsync(orderVolumeCoffee));
+    public async Task<string> UpdateAsync(OrderVolumeCoffee orderVolumeCoffee)
+        => await _orderVolumeCoffeeRepository.UpdateAsync(orderVolumeCoffee);
 
-    public async Task<IActionResult> DeleteAsync(OrderVolumeCoffee orderVolumeCoffee)
-        => new OkObjectResult(await _orderVolumeCoffeeRepository.DeleteAsync(orderVolumeCoffee));
+    public async Task<string> DeleteAsync(OrderVolumeCoffee orderVolumeCoffee)
+        => await _orderVolumeCoffeeRepository.DeleteAsync(orderVolumeCoffee);
 }

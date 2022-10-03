@@ -1,4 +1,5 @@
-﻿using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
+﻿using CoffeeShop.BusinessLogic.Common;
+using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.DataAccess.Repositories.CustomRepositories.CoffeeRepositories;
 using CoffeeShop.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -14,20 +15,21 @@ public class CoffeeService : ICoffeeService
         _coffeeRepository = coffeeRepository;
     }
 
-    public async Task<IActionResult> GetAllAsync()
-        => new OkObjectResult(await _coffeeRepository.GetAllAsync());
+    public async Task<IEnumerable<Coffee>> GetAllAsync()
+        => await _coffeeRepository.GetAllAsync();
 
 
-    public async Task<IActionResult> GetAsync(int id)
-        => new OkObjectResult(await _coffeeRepository.GetAsync(id));
+    public async Task<Coffee> GetAsync(int id)
+        => await _coffeeRepository.GetAsync(id);
 
-    public async Task<IActionResult> CreateAsync(Coffee coffee)
-         => new CreatedResult("Object was successfully created", await _coffeeRepository.CreateAsync(coffee));
+    public async Task<string> CreateAsync(Coffee coffee)
+        => await _coffeeRepository.CreateAsync(coffee);
 
 
-    public async Task<IActionResult> UpdateAsync(Coffee coffee)
-        =>  new OkObjectResult(await _coffeeRepository.UpdateAsync(coffee));
+    public async Task<string> UpdateAsync(Coffee coffee)
+        => await _coffeeRepository.UpdateAsync(coffee);
+    
 
-    public async Task<IActionResult> DeleteAsync(Coffee coffee)
-        => new OkObjectResult(await _coffeeRepository.DeleteAsync(coffee));
+    public async Task<string> DeleteAsync(Coffee coffee)
+        => await _coffeeRepository.DeleteAsync(coffee);
 }
