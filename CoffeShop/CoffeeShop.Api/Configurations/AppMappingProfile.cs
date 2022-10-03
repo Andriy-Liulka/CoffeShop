@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
-using CoffeeShop.BusinessLogic.Dto;
 using CoffeeShop.BusinessLogic.MainBusinessLogic.Services.IdentityServices.Security.Dto.Authenticate;
 using CoffeeShop.Domain.Entities;
 using CoffeeShop.Domain.Entities.Identity;
 using CoffeeShop.Domain.Entities.MtM_IntermediateEntities;
-using CoffeShop.Api.dto.Common;
 using CoffeShop.Api.Dto.Authenticate;
 using CoffeShop.Api.Dto.Input;
 
@@ -17,7 +15,6 @@ public class AppMappingProfile : Profile
         CreateMap<LoginModelDto, LoginModel>();
         CreateMap<RegisterModelDto, RegisterModel>();
         CreateMap<TokenModelDto, TokenModel>();
-        CreateMap<DiscountCoffeeGetAsyncDtoUi, DiscountCoffeeGetAsyncDto>();
         CreateMap<BonusCoffeeDto, BonusCoffee>();
         CreateMap<CoffeeDto, Coffee>();
         CreateMap<DiscountCoffeeDto, DiscountCoffee>();

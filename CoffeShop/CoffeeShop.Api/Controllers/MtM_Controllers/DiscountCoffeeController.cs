@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
-using CoffeeShop.BusinessLogic.Dto;
 using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.Domain.Entities.MtM_IntermediateEntities;
-using CoffeShop.Api.dto.Common;
 using CoffeShop.Api.Dto.Input;
 using CoffeShop.Api.ProxyExceptionHandlingLayer;
 using Microsoft.AspNetCore.Authorization;

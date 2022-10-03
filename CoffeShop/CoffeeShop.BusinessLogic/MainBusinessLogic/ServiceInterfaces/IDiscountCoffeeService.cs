@@ -1,6 +1,4 @@
-﻿using CoffeeShop.BusinessLogic.Dto;
-using CoffeeShop.Domain.Entities.MtM_IntermediateEntities;
-using Microsoft.AspNetCore.Mvc;
+﻿using CoffeeShop.Domain.Entities.MtM_IntermediateEntities;
 
 namespace CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 

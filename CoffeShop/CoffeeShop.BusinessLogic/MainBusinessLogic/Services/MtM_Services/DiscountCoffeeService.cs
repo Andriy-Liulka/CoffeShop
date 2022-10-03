@@ -1,8 +1,6 @@
-﻿using CoffeeShop.BusinessLogic.Dto;
-using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
+﻿using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.DataAccess.Repositories.CustomRepositories.DiscountCoffeeRepositories;
 using CoffeeShop.Domain.Entities.MtM_IntermediateEntities;
-using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services.MtM_Services;
 
