@@ -6,8 +6,8 @@ public static class MessageCreator
         => $"Object {typeof(T)} was created successfully !";
 
     public static string SuccessfulUpdateMessage<T>()
-        => $"Object {typeof(T)} was created successfully !";
+        => $"Object {typeof(T)} was updated successfully !";
 
     public static string SuccessfulDeleteMessage<T>()
-        => $"Object {typeof(T)} was created successfully !";
+        => $"Object {typeof(T)} was deleted successfully !";
 }
