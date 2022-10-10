@@ -3,6 +3,7 @@ using CoffeeShop.BusinessLogic.MainBusinessLogic.Services;
 using CoffeeShop.BusinessLogic.MainBusinessLogic.Services.IdentityServices;
 using CoffeeShop.BusinessLogic.MainBusinessLogic.Services.IdentityServices.Security;
 using CoffeeShop.BusinessLogic.MainBusinessLogic.Services.MtM_Services;
+using CoffeeShop.BusinessLogic.Validation;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CoffeeShop.BusinessLogic;
@@ -23,6 +24,9 @@ public static class Module
         services.AddScoped<IRoleService, RoleService>();
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IVolumeService, VolumeService>();
+
+        services.AddSingleton<IValidatorsFactory, ValidatorsFactory>();
+        services.AddSingleton<MainValidator>();
         return services;
     }
 }

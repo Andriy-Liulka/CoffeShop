@@ -1,5 +1,7 @@
 ﻿using CoffeeShop.BusinessLogic.Common;
 using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
+using CoffeeShop.BusinessLogic.Validation;
+using CoffeeShop.BusinessLogic.Validation.Validators;
 using CoffeeShop.DataAccess.Repositories.CustomRepositories.CoffeeRepositories;
 using CoffeeShop.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -9,10 +11,11 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services;
 public class CoffeeService : ICoffeeService
 {
     private readonly ICoffeeRepository _coffeeRepository;
-
-    public CoffeeService(ICoffeeRepository coffeeRepository)
+    private readonly MainValidator _validator;
+    public CoffeeService(ICoffeeRepository coffeeRepository,MainValidator validator)
     {
         _coffeeRepository = coffeeRepository;
+        _validator = validator;
     }
 
     public async Task<IEnumerable<Coffee>> GetAllAsync()
@@ -23,13 +26,20 @@ public class CoffeeService : ICoffeeService
         => await _coffeeRepository.GetAsync(id);
 
     public async Task<string> CreateAsync(Coffee coffee)
-        => await _coffeeRepository.CreateAsync(coffee);
-
-
-    public async Task<string> UpdateAsync(Coffee coffee)
-        => await _coffeeRepository.UpdateAsync(coffee);
+    {
+        _validator.Validate<Coffee, CoffeeValidator>(coffee);
+        return await _coffeeRepository.CreateAsync(coffee);
+    }
     
+    public async Task<string> UpdateAsync(Coffee coffee)
+    {
+        _validator.Validate<Coffee, CoffeeValidator>(coffee);
+        return await _coffeeRepository.UpdateAsync(coffee);
+    }
 
     public async Task<string> DeleteAsync(Coffee coffee)
-        => await _coffeeRepository.DeleteAsync(coffee);
+    {
+        _validator.Validate<Coffee, CoffeeValidator>(coffee);
+        return await _coffeeRepository.DeleteAsync(coffee);
+    }
 }

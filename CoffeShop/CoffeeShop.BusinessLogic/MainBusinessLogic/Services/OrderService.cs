@@ -1,4 +1,6 @@
 ﻿using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
+using CoffeeShop.BusinessLogic.Validation;
+using CoffeeShop.BusinessLogic.Validation.Validators;
 using CoffeeShop.DataAccess.Repositories.CustomRepositories.OrderRepositories;
 using CoffeeShop.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -8,10 +10,12 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services;
 public class OrderService : IOrderService
 {
     private readonly IOrderRepository _orderRepository;
+    private readonly MainValidator _validator;
 
-    public OrderService(IOrderRepository orderRepository)
+    public OrderService(IOrderRepository orderRepository,MainValidator validator)
     {
         _orderRepository = orderRepository;
+        _validator = validator;
     }
 
     public async Task<IEnumerable<Order>> GetAllAsync()
@@ -21,11 +25,20 @@ public class OrderService : IOrderService
         => await _orderRepository.GetAsync(id);
 
     public async Task<string> CreateAsync(Order order)
-        => await _orderRepository.CreateAsync(order);
+    {
+        _validator.Validate<Order, OrderValidator>(order);
+        return await _orderRepository.CreateAsync(order);
+    }
 
     public async Task<string> UpdateAsync(Order order)
-        => await _orderRepository.UpdateAsync(order);
+    {
+        _validator.Validate<Order, OrderValidator>(order);
+        return await _orderRepository.UpdateAsync(order);
+    }
 
     public async Task<string> DeleteAsync(Order order)
-        => await _orderRepository.DeleteAsync(order);
+    {
+        _validator.Validate<Order, OrderValidator>(order);
+        return await _orderRepository.DeleteAsync(order);
+    }
 }

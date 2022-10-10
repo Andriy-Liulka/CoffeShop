@@ -1,4 +1,6 @@
 ﻿using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
+using CoffeeShop.BusinessLogic.Validation;
+using CoffeeShop.BusinessLogic.Validation.Validators;
 using CoffeeShop.DataAccess.Repositories.CustomRepositories.VolumeRepositories;
 using CoffeeShop.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -8,10 +10,12 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services;
 public class VolumeService : IVolumeService
 {
     private readonly IVolumeRepository _orderRepository;
+    private readonly MainValidator _validator;
 
-    public VolumeService(IVolumeRepository orderRepository)
+    public VolumeService(IVolumeRepository orderRepository,MainValidator validator)
     {
         _orderRepository = orderRepository;
+        _validator = validator;
     }
 
     public async Task<IEnumerable<Volume>> GetAllAsync()
@@ -21,11 +25,20 @@ public class VolumeService : IVolumeService
         => await _orderRepository.GetAsync(id);
 
     public async Task<string> CreateAsync(Volume volume)
-        => await _orderRepository.CreateAsync(volume);
+    {
+        _validator.Validate<Volume, VolumeValidator>(volume);
+        return await _orderRepository.CreateAsync(volume);
+    }
 
     public async Task<string> UpdateAsync(Volume volume)
-        => await _orderRepository.UpdateAsync(volume);
+    {
+        _validator.Validate<Volume, VolumeValidator>(volume);
+        return await _orderRepository.UpdateAsync(volume);
+    }
 
     public async Task<string> DeleteAsync(Volume volume)
-        => await _orderRepository.DeleteAsync(volume);
+    {
+        _validator.Validate<Volume, VolumeValidator>(volume);
+        return await _orderRepository.DeleteAsync(volume);
+    }
 }
