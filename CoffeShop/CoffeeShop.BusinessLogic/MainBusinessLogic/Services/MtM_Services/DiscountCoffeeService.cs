@@ -1,4 +1,6 @@
 ﻿using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
+using CoffeeShop.BusinessLogic.Validation;
+using CoffeeShop.BusinessLogic.Validation.Validators;
 using CoffeeShop.DataAccess.Repositories.CustomRepositories.DiscountCoffeeRepositories;
 using CoffeeShop.Domain.Entities.MtM_IntermediateEntities;
 
@@ -7,10 +9,12 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services.MtM_Services;
 public class DiscountCoffeeService : IDiscountCoffeeService
 {
     private readonly IDiscountCoffeeRepository _discountCoffeeRepository;
+    private readonly MainValidator _validator;
 
-    public DiscountCoffeeService(IDiscountCoffeeRepository discountCoffeeRepository)
+    public DiscountCoffeeService(IDiscountCoffeeRepository discountCoffeeRepository,MainValidator validator)
     {
         _discountCoffeeRepository = discountCoffeeRepository;
+        _validator = validator;
     }
 
     public async Task<IEnumerable<DiscountCoffee>> GetAllAsync()
@@ -20,11 +24,20 @@ public class DiscountCoffeeService : IDiscountCoffeeService
         => await _discountCoffeeRepository.GetAsync(coffeeId, discountId);
 
     public async Task<string> CreateAsync(DiscountCoffee discountCoffee)
-        => await _discountCoffeeRepository.CreateAsync(discountCoffee);
+    {
+        _validator.Validate<DiscountCoffee, DiscountCoffeeValidator>(discountCoffee);
+        return await _discountCoffeeRepository.CreateAsync(discountCoffee);
+    }
 
     public async Task<string> UpdateAsync(DiscountCoffee discountCoffee)
-        => await _discountCoffeeRepository.UpdateAsync(discountCoffee);
+    {
+        _validator.Validate<DiscountCoffee, DiscountCoffeeValidator>(discountCoffee);
+        return await _discountCoffeeRepository.UpdateAsync(discountCoffee);
+    }
 
     public async Task<string> DeleteAsync(DiscountCoffee discountCoffee)
-        => await _discountCoffeeRepository.DeleteAsync(discountCoffee);
+    {
+        _validator.Validate<DiscountCoffee, DiscountCoffeeValidator>(discountCoffee);
+        return await _discountCoffeeRepository.DeleteAsync(discountCoffee);
+    }
 }

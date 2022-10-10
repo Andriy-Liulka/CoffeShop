@@ -4,6 +4,8 @@ using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.BusinessLogic.MainBusinessLogic.Services.IdentityServices.Security;
 using CoffeeShop.BusinessLogic.MainBusinessLogic.Services.IdentityServices.Security.Dto;
 using CoffeeShop.BusinessLogic.MainBusinessLogic.Services.IdentityServices.Security.Dto.Authenticate;
+using CoffeeShop.BusinessLogic.Validation;
+using CoffeeShop.BusinessLogic.Validation.Validators;
 using CoffeeShop.DataAccess.Repositories.CustomRepositories.IdentityCredentialRepositories;
 using CoffeeShop.DataAccess.Repositories.CustomRepositories.RoleRepositories;
 using CoffeeShop.DataAccess.Repositories.CustomRepositories.UserRepositories;
@@ -20,23 +22,27 @@ public class AuthenticateService : IAuthenticateService
     private readonly TokenGenerator _tokenGenerator;
     private readonly HashGenerator _hashGenerator;
     private readonly IUserRepository _userRepository;
+    private readonly MainValidator _validator;
 
     public AuthenticateService(
         IUserRepository userRepository,
         IRoleRepository roleRepository,
         IIdentityCredentialRepository identityCredentialRepository,
         TokenGenerator tokenGenerator,
-        HashGenerator hashGenerator)
+        HashGenerator hashGenerator,
+        MainValidator validator)
     {
         _userRepository = userRepository;
         _tokenGenerator = tokenGenerator;
         _roleRepository = roleRepository;
         _identityCredentialRepository = identityCredentialRepository;
         _hashGenerator = hashGenerator;
+        _validator = validator;
     }
 
     public async Task<object> Login(LoginModel model)
     {
+        _validator.Validate<LoginModel, LoginModelValidator>(model);
         var user = await _userRepository.GetFullAsync(model.Username);
         if (user is null || !user.PasswordHash.Equals(_hashGenerator.GenerateHash(model.Password 
             ?? throw new ArgumentNullException())))
@@ -69,6 +75,7 @@ public class AuthenticateService : IAuthenticateService
 
     public async Task<object> Register(RegisterModel model)
     {
+        _validator.Validate<RegisterModel, RegisterModelValidator>(model);
         var user = await _userRepository.GetAsync(model.Login);
         if (user is not null)
             return new BadRequestObjectResult("Such user exist");
