@@ -46,7 +46,8 @@ public class AuthenticateService : IAuthenticateService
         var user = await _userRepository.GetFullAsync(model.Username);
         if (user is null || !user.PasswordHash.Equals(_hashGenerator.GenerateHash(model.Password 
             ?? throw new ArgumentNullException())))
-            return new BadRequestObjectResult("User credentials were failed!");
+            return new {ErrorMessage = "User credentials were failed!"};
+        
         var tokenModel = _tokenGenerator.JwtAccessToken(new UserClaimDto
         {
             Email = user.Email,
@@ -78,8 +79,8 @@ public class AuthenticateService : IAuthenticateService
         _validator.Validate<RegisterModel, RegisterModelValidator>(model);
         var user = await _userRepository.GetAsync(model.Login);
         if (user is not null)
-            return new BadRequestObjectResult("Such user exist");
-
+            return new {ErrorMessage = "Such user exist"};
+        
         await _userRepository.CreateAsync(new User
         {
             Email = model.Email,
@@ -107,8 +108,8 @@ public class AuthenticateService : IAuthenticateService
         if (user is null ||
             user.IdentityCredential?.RefreshToken != model.RefreshToken ||
             user.IdentityCredential.ValidTo < DateTime.Now)
-            return new BadRequestObjectResult("Incorrect refresh or access token !");
-
+            return new {ErrorMessage = "Incorrect refresh or access token !"};
+        
         var newAccessToken = _tokenGenerator.JwtAccessToken(userData);
 
         var newRefreshTokenModel = _tokenGenerator.RefreshToken();

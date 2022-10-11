@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace CoffeShop.Api.Controllers.Identity;
 
 [ApiController]
-[Route("api/[controller]")]
 public class AuthenticateController : ControllerBase
 {
     private readonly IAuthenticateService _authenticateService;
@@ -30,22 +29,22 @@ public class AuthenticateController : ControllerBase
 
     [HttpPost]
     [Route("/login")]
-    public async Task<IActionResult> Login([FromBody] LoginModelDto? loginModelUi)
+    public async Task<IActionResult> Login([FromBody] LoginModelDto? loginModelDto)
         => await _proxyExceptionHandler.ExecuteAsync(
             _authenticateService.Login,
-            _mapper.Map<LoginModel>(loginModelUi));
+            _mapper.Map<LoginModel>(loginModelDto));
 
     [HttpPost]
     [Route("/register")]
-    public async Task<IActionResult> Register([FromBody] RegisterModelDto? registerModelUi)
+    public async Task<IActionResult> Register([FromBody] RegisterModelDto? registerModelDto)
         => await _proxyExceptionHandler.ExecuteAsync(
             _authenticateService.Register,
-            _mapper.Map<RegisterModel>(registerModelUi));
+            _mapper.Map<RegisterModel>(registerModelDto));
 
     [HttpPost]
     [Route("/refresh-token")]
-    public async Task<IActionResult> RefreshToken([FromBody] TokenModelDto? tokenModelUi)
+    public async Task<IActionResult> RefreshToken([FromBody] TokenModelDto? tokenModelDto)
         => await _proxyExceptionHandler.ExecuteAsync(
             _authenticateService.RefreshToken,
-            _mapper.Map<TokenModel>(tokenModelUi));
+            _mapper.Map<TokenModel>(tokenModelDto));
 }

@@ -12,10 +12,9 @@ public class IdentityCredentialConfiguration : IEntityConfiguration<IdentityCred
     {
         builder.HasData(new IdentityCredential
         {
-            Id = 1,
+            Login = "AdminAdmin",
             RefreshToken = null,
-            ValidTo = null,
-            Login = "AdminAdmin"
+            ValidTo = null
         });
         return builder;
     }
@@ -24,7 +23,7 @@ public class IdentityCredentialConfiguration : IEntityConfiguration<IdentityCred
     {
         builder.ToTable(TableNameCreator.CreateDefaultTableName(() => nameof(IdentityCredential)));
 
-        builder.HasKey(x => x.Id);
+        builder.HasKey(x => x.Login);
 
         builder.Ignore(x => x.User);
 

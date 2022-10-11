@@ -8,6 +8,6 @@ public class IdentityCredentialRepository : Repository<IdentityCredential>, IIde
     public IdentityCredentialRepository(CoffeeShopContext context) : base(context) { }
 
     public async Task<IdentityCredential> GetAsync(string login)
-        => await _context.IdentityCredentials.FirstOrDefaultAsync(x => x.Id.Equals(login)) 
+        => await _context.IdentityCredentials.FirstOrDefaultAsync(x => x.Login.Equals(login)) 
            ?? throw new NullReferenceException();
 }
