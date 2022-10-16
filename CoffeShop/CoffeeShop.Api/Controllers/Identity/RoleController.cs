@@ -1,5 +1,7 @@
 ﻿using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.Domain.Constants;
+using CoffeShop.Api.Controllers.Identity.Authorization;
+using CoffeShop.Api.Controllers.Identity.Authorization.Policies;
 using CoffeShop.Api.ProxyExceptionHandlingLayer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +10,7 @@ namespace CoffeShop.Api.Controllers.Identity;
 
 [ApiController]
 [Route("api/[controller]")]
-[Authorize(Roles = Roles.Admin)]
+[Permission(PoliciesNames.AdminPolicy)]
 public class RoleController : ControllerBase
 {
     private readonly IProxyExceptionHandler<IRoleService> _proxyExceptionHandler;

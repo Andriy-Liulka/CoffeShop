@@ -1,5 +1,5 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
-using CoffeeShop.BusinessLogic.Common;
+using CoffeeShop.BusinessLogic.Extensions;
 using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.BusinessLogic.MainBusinessLogic.Services.IdentityServices.Security;
 using CoffeeShop.BusinessLogic.MainBusinessLogic.Services.IdentityServices.Security.Dto;

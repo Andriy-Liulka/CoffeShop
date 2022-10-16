@@ -1,4 +1,5 @@
-﻿using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
+﻿using CoffeeShop.BusinessLogic.Common;
+using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.BusinessLogic.MainBusinessLogic.Services;
 using CoffeeShop.BusinessLogic.MainBusinessLogic.Services.IdentityServices;
 using CoffeeShop.BusinessLogic.MainBusinessLogic.Services.IdentityServices.Security;
@@ -12,6 +13,7 @@ public static class Module
 {
     public static IServiceCollection AddBusinessLogicServices(this IServiceCollection services)
     {
+        services.AddScoped<CommonChecker>();
         services.AddScoped<HashGenerator>();
         services.AddScoped<TokenGenerator>();
         services.AddScoped<IAuthenticateService, AuthenticateService>();

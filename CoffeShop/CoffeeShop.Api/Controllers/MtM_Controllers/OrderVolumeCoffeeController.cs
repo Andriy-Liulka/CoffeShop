@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.Domain.Entities.MtM_IntermediateEntities;
+using CoffeShop.Api.Controllers.Identity.Authorization;
+using CoffeShop.Api.Controllers.Identity.Authorization.Policies;
 using CoffeShop.Api.Dto.Input;
 using CoffeShop.Api.ProxyExceptionHandlingLayer;
 using Microsoft.AspNetCore.Authorization;
@@ -10,7 +12,7 @@ namespace CoffeShop.Api.Controllers.MtM_Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-[Authorize]
+[Permission(PoliciesNames.UserPolicy)]
 public class OrderVolumeCoffeeController : ControllerBase
 {
     private readonly IProxyExceptionHandler<IOrderVolumeCoffeeService> _proxyExceptionHandler;

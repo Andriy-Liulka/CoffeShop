@@ -1,6 +1,8 @@
 ﻿using System.Reflection.Metadata;
 using Azure;
+using CoffeeShop.BusinessLogic.Exceptions;
 using CoffeShop.Api.Common;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeShop.Api.Configurations.Middlewares
 {
@@ -19,10 +21,17 @@ namespace CoffeShop.Api.Configurations.Middlewares
             {
                 await _next.Invoke(context);
             }
-            catch (Exception ex)
+            catch (BusinessLogicException e)
             {
-                _logger.LogError(ex.Message);
-                await context.Response.WriteAsync(String.Format(Translation.ErrorMiddlewareHandlingMessage,ex.Message));
+                _logger.LogError(e.Message);
+                context.Response.StatusCode = StatusCodes.Status400BadRequest;
+                await context.Response.WriteAsync(String.Format(Translation.BadRequestObjectResultMessage, e.GetType(), e.Message));
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+                context.Response.StatusCode = StatusCodes.Status400BadRequest;
+                await context.Response.WriteAsync(Translation.InternalServerErrorMessage);
             }
         }
     }

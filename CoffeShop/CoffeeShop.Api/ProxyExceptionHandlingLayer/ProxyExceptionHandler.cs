@@ -1,4 +1,5 @@
-﻿using CoffeShop.Api.Common;
+﻿using CoffeeShop.BusinessLogic.Exceptions;
+using CoffeShop.Api.Common;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeShop.Api.ProxyExceptionHandlingLayer;
@@ -18,10 +19,15 @@ public class ProxyExceptionHandler<TService> : IProxyExceptionHandler<TService>
         {
             return new OkObjectResult(await serviceFunc.Invoke(param));
         }
+        catch (BusinessLogicException e)
+        {
+            _logger.LogError(e.Message);
+            return new BadRequestObjectResult(String.Format(Translation.BadRequestObjectResultMessage, e.GetType(), e.Message));
+        }
         catch (Exception e)
         {
             _logger.LogError(e.Message);
-            return new BadRequestObjectResult(String.Format(Translation.BadRequestObjectResultMessage,e.GetType(),e.Message));
+            return new BadRequestObjectResult(Translation.InternalServerErrorMessage);
         }
     }
     public async Task<IActionResult> ExecuteAsync<TEntity1, TEntity2, TResult>(Func<TEntity1, TEntity2, Task<TResult>> serviceFunc, TEntity1 param1, TEntity2 param2)
@@ -30,10 +36,15 @@ public class ProxyExceptionHandler<TService> : IProxyExceptionHandler<TService>
         {
             return new OkObjectResult(await serviceFunc.Invoke(param1,param2));
         }
+        catch (BusinessLogicException e)
+        {
+            _logger.LogError(e.Message);
+            return new BadRequestObjectResult(String.Format(Translation.BadRequestObjectResultMessage, e.GetType(), e.Message));
+        }
         catch (Exception e)
         {
             _logger.LogError(e.Message);
-            return new BadRequestObjectResult(String.Format(Translation.BadRequestObjectResultMessage,e.GetType(),e.Message));
+            return new BadRequestObjectResult(Translation.InternalServerErrorMessage);
         }
     }
     public async Task<IActionResult> ExecuteAsync<TResult>(Func<Task<TResult>> serviceFunc)
@@ -42,10 +53,15 @@ public class ProxyExceptionHandler<TService> : IProxyExceptionHandler<TService>
         {
             return new OkObjectResult(await serviceFunc.Invoke());
         }
+        catch (BusinessLogicException e)
+        {
+            _logger.LogError(e.Message);
+            return new BadRequestObjectResult(String.Format(Translation.BadRequestObjectResultMessage, e.GetType(), e.Message));
+        }
         catch (Exception e)
         {
             _logger.LogError(e.Message);
-            return new BadRequestObjectResult(String.Format(Translation.BadRequestObjectResultMessage,e.GetType(),e.Message));
+            return new BadRequestObjectResult(Translation.InternalServerErrorMessage);
         }
     }
 }

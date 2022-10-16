@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.Domain.Entities.MtM_IntermediateEntities;
+using CoffeShop.Api.Controllers.Identity.Authorization;
+using CoffeShop.Api.Controllers.Identity.Authorization.Policies;
 using CoffeShop.Api.Dto.Input;
 using CoffeShop.Api.ProxyExceptionHandlingLayer;
 using Microsoft.AspNetCore.Authorization;
@@ -9,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CoffeShop.Api.Controllers.MtM_Controllers;
 [ApiController]
 [Route("api/[controller]")]
-[Authorize]
+[Permission(PoliciesNames.UserPolicy)]
 public class DiscountCoffeeController : ControllerBase
 {
     private readonly IMapper _mapper;

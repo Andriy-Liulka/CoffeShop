@@ -1,8 +1,10 @@
 ﻿using System.Security.Claims;
-using CoffeShop.Api.Common;
-using CoffeShop.Api.Configurations.Extensions;
+using CoffeeShop.BusinessLogic.Common;
+using CoffeeShop.BusinessLogic.Extensions;
+using CoffeShop.Api.Authentication;
+using Microsoft.AspNetCore.Http;
 
-namespace CoffeShop.Api.Authentication;
+namespace CoffeeShop.BusinessLogic.Authentication;
 
 public class UserIdentityProfileProvider : IUserIdentityProfileProvider
 {

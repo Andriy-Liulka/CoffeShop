@@ -12,7 +12,7 @@ namespace CoffeShop.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-//[Authorize]
+[Permission(PoliciesNames.UserPolicy)]
 public class CoffeeController : ControllerBase
 {
     private readonly ILogger<CoffeeController> _logger;
@@ -30,7 +30,6 @@ public class CoffeeController : ControllerBase
     }
     [Route("")]
     [HttpGet]
-    [Permission(PoliciesNames.UserPolicy)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> GetAllAsync()
@@ -38,7 +37,6 @@ public class CoffeeController : ControllerBase
 
     [Route("{id}")]
     [HttpGet]
-    //[Permission(PoliciesNames.AdminPolicy)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> GetAsync([FromRoute] int id)

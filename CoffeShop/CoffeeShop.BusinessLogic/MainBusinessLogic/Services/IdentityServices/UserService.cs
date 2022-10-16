@@ -1,4 +1,6 @@
-﻿using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
+﻿using CoffeeShop.BusinessLogic.Common;
+using CoffeeShop.BusinessLogic.Exceptions;
+using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.BusinessLogic.Validation;
 using CoffeeShop.BusinessLogic.Validation.Validators;
 using CoffeeShop.DataAccess.Repositories.CustomRepositories.UserRepositories;
@@ -11,11 +13,13 @@ public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
     private readonly MainValidator _validator;
+    private readonly CommonChecker _commonChecker;
 
-    public UserService(IUserRepository userRepository,MainValidator validator)
+    public UserService(IUserRepository userRepository,MainValidator validator,CommonChecker commonChecker)
     {
         _userRepository = userRepository;
         _validator = validator;
+        _commonChecker = commonChecker;
     }
 
     public async Task<IEnumerable<User>> GetAllAsync()
@@ -32,12 +36,16 @@ public class UserService : IUserService
 
     public async Task<string> UpdateAsync(User user)
     {
+        if (!_commonChecker.CouldChangeUserData(user))
+            throw new UnavailableChangesException();
         _validator.Validate<User, UserValidator>(user);
         return await _userRepository.UpdateAsync(user);
     }
 
     public async Task<string> DeleteAsync(User user)
     {
+        if (!_commonChecker.CouldChangeUserData(user))
+            throw new UnavailableChangesException();
         _validator.Validate<User, UserValidator>(user);
         return await _userRepository.DeleteAsync(user);
     }

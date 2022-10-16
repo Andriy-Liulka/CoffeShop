@@ -1,6 +1,6 @@
 ﻿using CoffeeShop.Domain.Entities.Identity;
 
-namespace CoffeeShop.BusinessLogic.Common;
+namespace CoffeeShop.BusinessLogic.Extensions;
 
 public static class IdentityCredentialExtension
 {

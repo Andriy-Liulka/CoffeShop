@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 
-namespace CoffeShop.Api.Configurations.Extensions;
+namespace CoffeeShop.BusinessLogic.Extensions;
 
 public static class ClaimsPrincipalExtension
 {

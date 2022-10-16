@@ -1,10 +1,11 @@
 ﻿using System.Text;
 using System.Text.Json.Serialization;
 using CoffeeShop.BusinessLogic;
+using CoffeeShop.BusinessLogic.Authentication;
+using CoffeShop.Api.Common;
 using CoffeeShop.DataAccess;
 using CoffeeShop.DataAccess.Repositories.CustomRepositories;
 using CoffeShop.Api.Authentication;
-using CoffeShop.Api.Common;
 using CoffeShop.Api.Configurations;
 using CoffeShop.Api.Configurations.Middlewares;
 using CoffeShop.Api.Controllers.Identity.Authorization;
@@ -105,10 +106,9 @@ public class Startup
         services.AddAutoMapper(typeof(AppMappingProfile));
 
         services.AddScoped(typeof(IProxyExceptionHandler<>), typeof(ProxyExceptionHandler<>));
-
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         services.AddSingleton<IUserIdentityProfileProvider, UserIdentityProfileProvider>();
-        
+
         services.AddSingleton<IAuthorizationHandler, PermissionRequirementHandler>();
         services.AddSingleton<IAuthorizationPolicyProvider, PermissionPolicyProvider>();
         services.AddSingleton<IPolicyResolver, PolicyResolver>();
