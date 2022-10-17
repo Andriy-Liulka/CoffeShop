@@ -19,6 +19,8 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
+using CoffeeShop.BusinessLogic.Validation;
+using FluentValidation.Validators;
 
 namespace CoffeShop.Api;
 
@@ -71,7 +73,8 @@ public class Startup
         {
             option.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")
                                 ?? throw new ArgumentNullException("ConnectionString",
-                                    Translation.EmptyStringMessage));
+                                    Translation.EmptyStringMessage),
+                                x => x.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
         });
 
         services.AddAuthentication(options =>
