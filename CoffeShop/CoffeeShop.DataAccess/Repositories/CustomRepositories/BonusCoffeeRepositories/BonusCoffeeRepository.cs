@@ -7,7 +7,7 @@ public class BonusCoffeeRepository : Repository<BonusCoffee>, IBonusCoffeeReposi
 {
     public BonusCoffeeRepository(CoffeeShopContext context) : base(context) { }
 
-    public async Task<BonusCoffee> GetAsync(int id)
+    public async Task<BonusCoffee> GetAsync(long id)
         => await _context.BonusCoffees.FirstOrDefaultAsync(x => x.Id.Equals(id)) 
            ?? throw new NullReferenceException();
 }

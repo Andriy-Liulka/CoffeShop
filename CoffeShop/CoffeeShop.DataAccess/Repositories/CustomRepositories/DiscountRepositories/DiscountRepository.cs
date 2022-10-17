@@ -8,7 +8,7 @@ public class DiscountRepository : Repository<Discount>, IDiscountRepository
 
     public DiscountRepository(CoffeeShopContext context) : base(context) { }
 
-    public async Task<Discount> GetAsync(int id)
+    public async Task<Discount> GetAsync(long id)
         => await _context.Discounts.FirstOrDefaultAsync(x => x.Id.Equals(id)) 
            ?? throw new NullReferenceException();
 }

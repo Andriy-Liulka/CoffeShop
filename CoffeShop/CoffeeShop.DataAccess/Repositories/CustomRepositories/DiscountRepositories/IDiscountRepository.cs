@@ -4,5 +4,5 @@ namespace CoffeeShop.DataAccess.Repositories.CustomRepositories.DiscountReposito
 
 public interface IDiscountRepository : IRepository<Discount>
 {
-    public Task<Discount> GetAsync(int id);
+    public Task<Discount> GetAsync(long id);
 }

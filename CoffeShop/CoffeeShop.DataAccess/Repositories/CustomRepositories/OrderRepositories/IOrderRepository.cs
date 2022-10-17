@@ -4,5 +4,5 @@ namespace CoffeeShop.DataAccess.Repositories.CustomRepositories.OrderRepositorie
 
 public interface IOrderRepository : IRepository<Order>
 {
-    public Task<Order> GetAsync(int id);
+    public Task<Order> GetAsync(long id);
 }

@@ -4,5 +4,5 @@ namespace CoffeeShop.DataAccess.Repositories.CustomRepositories.VolumeRepositori
 
 public interface IVolumeRepository : IRepository<Volume>
 {
-    Task<Volume> GetAsync(int id);
+    Task<Volume> GetAsync(long id);
 }

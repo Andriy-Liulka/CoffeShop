@@ -6,7 +6,7 @@ namespace CoffeeShop.DataAccess.Repositories.CustomRepositories.OrderVolumeCoffe
 public class OrderVolumeCoffeeRepository : Repository<OrderVolumeCoffee>, IOrderVolumeCoffeeRepository
 {
     public OrderVolumeCoffeeRepository(CoffeeShopContext context) : base(context) { }
-    public async Task<OrderVolumeCoffee?> GetAsync(int id) 
+    public async Task<OrderVolumeCoffee?> GetAsync(long id) 
         => await _context.OrderVolumeCoffees.FirstOrDefaultAsync(x=>x.Id.Equals(id)) 
            ?? throw new NullReferenceException();
 }

@@ -7,7 +7,7 @@ public class DiscountCoffeeRepository : Repository<DiscountCoffee>, IDiscountCof
 {
     public DiscountCoffeeRepository(CoffeeShopContext context) : base(context) { }
 
-    public async Task<DiscountCoffee> GetAsync(int discountId, int coffeetId)
+    public async Task<DiscountCoffee> GetAsync(long discountId, long coffeetId)
         => await _context.DiscountCoffees.FirstOrDefaultAsync(x => 
             x.DiscountId.Equals(discountId)
             && 

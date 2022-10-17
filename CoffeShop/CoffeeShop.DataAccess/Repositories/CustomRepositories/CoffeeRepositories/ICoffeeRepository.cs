@@ -4,5 +4,5 @@ namespace CoffeeShop.DataAccess.Repositories.CustomRepositories.CoffeeRepositori
 
 public interface ICoffeeRepository : IRepository<Coffee>
 {
-    public Task<Coffee> GetAsync(int id);
+    public Task<Coffee> GetAsync(long id);
 }
