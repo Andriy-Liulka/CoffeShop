@@ -9,9 +9,9 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services.MtM_Services;
 public class DiscountCoffeeService : IDiscountCoffeeService
 {
     private readonly IDiscountCoffeeRepository _discountCoffeeRepository;
-    private readonly MainValidator _validator;
+    private readonly IMainValidator _validator;
 
-    public DiscountCoffeeService(IDiscountCoffeeRepository discountCoffeeRepository,MainValidator validator)
+    public DiscountCoffeeService(IDiscountCoffeeRepository discountCoffeeRepository, IMainValidator validator)
     {
         _discountCoffeeRepository = discountCoffeeRepository;
         _validator = validator;

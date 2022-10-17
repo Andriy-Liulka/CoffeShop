@@ -11,7 +11,7 @@ namespace CoffeeShop.BusinessLogic.Validation.Common
     internal static class CustomRules
     {
         internal static bool StringLengthRule(string str)
-        => str.Length <= Constants.MaxStringLength;
+        => str?.Length <= Constants.MaxStringLength;
 
         internal static bool PercentageRule(float number)
             => number >= 0 && number <= 100;

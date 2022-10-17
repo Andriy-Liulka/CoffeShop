@@ -22,7 +22,7 @@ public class AuthenticateService : IAuthenticateService
     private readonly TokenGenerator _tokenGenerator;
     private readonly HashGenerator _hashGenerator;
     private readonly IUserRepository _userRepository;
-    private readonly MainValidator _validator;
+    private readonly IMainValidator _validator;
 
     public AuthenticateService(
         IUserRepository userRepository,
@@ -30,7 +30,7 @@ public class AuthenticateService : IAuthenticateService
         IIdentityCredentialRepository identityCredentialRepository,
         TokenGenerator tokenGenerator,
         HashGenerator hashGenerator,
-        MainValidator validator)
+        IMainValidator validator)
     {
         _userRepository = userRepository;
         _tokenGenerator = tokenGenerator;

@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace CoffeeShop.BusinessLogic.Validation;
 
-public sealed class ValidatorsFactory : IValidatorsFactory
+public class ValidatorsFactory : IValidatorsFactory
 {
     public TFactory?  Generate<TEntity,TFactory>() 
         where TEntity :class,new()

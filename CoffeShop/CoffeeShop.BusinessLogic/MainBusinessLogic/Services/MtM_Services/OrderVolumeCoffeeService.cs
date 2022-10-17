@@ -11,9 +11,9 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services.MtM_Services;
 public class OrderVolumeCoffeeService : IOrderVolumeCoffeeService
 {
     private readonly IOrderVolumeCoffeeRepository _orderVolumeCoffeeRepository;
-    private readonly MainValidator _validator;
+    private readonly IMainValidator _validator;
 
-    public OrderVolumeCoffeeService(IOrderVolumeCoffeeRepository orderVolumeCoffeeRepository,MainValidator validator)
+    public OrderVolumeCoffeeService(IOrderVolumeCoffeeRepository orderVolumeCoffeeRepository, IMainValidator validator)
     {
         _orderVolumeCoffeeRepository = orderVolumeCoffeeRepository;
         _validator = validator;

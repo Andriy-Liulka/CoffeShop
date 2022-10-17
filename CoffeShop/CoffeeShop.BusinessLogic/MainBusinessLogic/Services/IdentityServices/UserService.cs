@@ -12,10 +12,10 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services.IdentityServices;
 public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
-    private readonly MainValidator _validator;
+    private readonly IMainValidator _validator;
     private readonly CommonChecker _commonChecker;
 
-    public UserService(IUserRepository userRepository,MainValidator validator,CommonChecker commonChecker)
+    public UserService(IUserRepository userRepository, IMainValidator validator,CommonChecker commonChecker)
     {
         _userRepository = userRepository;
         _validator = validator;

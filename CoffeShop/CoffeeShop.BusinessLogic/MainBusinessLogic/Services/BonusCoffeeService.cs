@@ -10,9 +10,9 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services;
 public class BonusCoffeeService : IBonusCoffeeService
 {
     private readonly IBonusCoffeeRepository _bonusCoffeeRepository;
-    private readonly MainValidator _validator;
+    private readonly IMainValidator _validator;
 
-    public BonusCoffeeService(IBonusCoffeeRepository bonusCoffeeRepository,MainValidator validator)
+    public BonusCoffeeService(IBonusCoffeeRepository bonusCoffeeRepository, IMainValidator validator)
     {
         _bonusCoffeeRepository = bonusCoffeeRepository;
         _validator = validator;

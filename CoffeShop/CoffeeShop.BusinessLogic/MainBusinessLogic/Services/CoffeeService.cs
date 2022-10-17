@@ -11,8 +11,8 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services;
 public class CoffeeService : ICoffeeService
 {
     private readonly ICoffeeRepository _coffeeRepository;
-    private readonly MainValidator _validator;
-    public CoffeeService(ICoffeeRepository coffeeRepository,MainValidator validator)
+    private readonly IMainValidator _validator;
+    public CoffeeService(ICoffeeRepository coffeeRepository, IMainValidator validator)
     {
         _coffeeRepository = coffeeRepository;
         _validator = validator;

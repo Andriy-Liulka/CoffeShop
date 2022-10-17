@@ -10,8 +10,8 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services;
 public class DiscountService : IDiscountService
 {
     private readonly IDiscountRepository _discountRepository;
-    private readonly MainValidator _validator;
-    public DiscountService(IDiscountRepository discountRepository,MainValidator validator)
+    private readonly IMainValidator _validator;
+    public DiscountService(IDiscountRepository discountRepository, IMainValidator validator)
     {
         _discountRepository = discountRepository;
         _validator = validator;

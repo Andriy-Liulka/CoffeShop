@@ -10,9 +10,9 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services;
 public class VolumeService : IVolumeService
 {
     private readonly IVolumeRepository _orderRepository;
-    private readonly MainValidator _validator;
+    private readonly IMainValidator _validator;
 
-    public VolumeService(IVolumeRepository orderRepository,MainValidator validator)
+    public VolumeService(IVolumeRepository orderRepository, IMainValidator validator)
     {
         _orderRepository = orderRepository;
         _validator = validator;

@@ -10,9 +10,9 @@ namespace CoffeeShop.BusinessLogic.MainBusinessLogic.Services;
 public class OrderService : IOrderService
 {
     private readonly IOrderRepository _orderRepository;
-    private readonly MainValidator _validator;
+    private readonly IMainValidator _validator;
 
-    public OrderService(IOrderRepository orderRepository,MainValidator validator)
+    public OrderService(IOrderRepository orderRepository, IMainValidator validator)
     {
         _orderRepository = orderRepository;
         _validator = validator;
