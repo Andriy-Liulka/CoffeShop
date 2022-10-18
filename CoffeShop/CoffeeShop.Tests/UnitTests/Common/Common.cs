@@ -2,7 +2,7 @@
 using MockQueryable.FakeItEasy;
 using Moq;
 
-namespace CoffeeShop.Tests.UnitTests;
+namespace CoffeeShop.Tests.UnitTests.Common;
 
 internal static class Common
 {
@@ -21,12 +21,12 @@ internal static class Common
 
         return dbSet.Object;
     }
-    
-    
-    internal static DbSet<T> GetQueryableMockDbSetAsync<T>(List<T> sourceList) where T : class 
+
+
+    internal static DbSet<T> GetQueryableMockDbSetAsync<T>(List<T> sourceList) where T : class
         => sourceList.AsQueryable().BuildMockDbSet();
 
-    
+
     internal static DbSet<T> GetQueryableMockDbSetAsyncCompleteImpl<T>(List<T> sourceList) where T : class
     {
         var queryable = TestDataCreator.GetTestCoffeeData().AsQueryable().BuildMock();

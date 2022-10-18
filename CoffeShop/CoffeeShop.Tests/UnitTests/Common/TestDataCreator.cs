@@ -1,6 +1,6 @@
 ﻿using CoffeeShop.Domain.Entities;
 
-namespace CoffeeShop.Tests.UnitTests;
+namespace CoffeeShop.Tests.UnitTests.Common;
 
 internal static class TestDataCreator
 {

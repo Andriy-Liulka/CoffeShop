@@ -1,83 +1,137 @@
 
-using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.BusinessLogic.MainBusinessLogic.Services;
-using CoffeeShop.DataAccess;
 using CoffeeShop.Domain.Entities;
 using Moq;
 using FluentAssertions;
+using CoffeeShop.DataAccess.Repositories.CustomRepositories.CoffeeRepositories;
+using CoffeeShop.BusinessLogic.Validation;
+using CoffeeShop.DataAccess.Common;
+using FluentValidation;
+using FluentValidation.TestHelper;
+using CoffeeShop.BusinessLogic.Validation.Validators;
 
 namespace CoffeeShop.Tests.UnitTests;
-
-public class UnitTest1
+public class CoffeeTests
 {
     private readonly Fixture _fixture;
-
-    public UnitTest1()
+    private Mock<CoffeeService> _coffeeService;
+    private readonly Mock<ICoffeeRepository> _mockRepository;
+    private readonly Mock<MainValidator> _mockValidator;
+    public CoffeeTests()
     {
         _fixture = new Fixture();
         _fixture.Behaviors.Remove(new ThrowingRecursionBehavior());
         _fixture.Behaviors.Add(new OmitOnRecursionBehavior());
+        _mockRepository = new Mock<ICoffeeRepository>();
+        _mockValidator = new Mock<MainValidator>(new Mock<ValidatorsFactory>().Object);
     }
     [Fact]
     public async void GetAsyncTest()
     {
-        var mockCoffeeDbSet = Common.GetQueryableMockDbSetAsync(TestDataCreator.GetTestCoffeeData());
-        
-        var mockContext = new Mock<CoffeeShopContext>();
+        //Arrange
+        var coffee = _fixture.Create<Coffee>();
 
-        mockContext.Setup(x=>x.Coffees).Returns(mockCoffeeDbSet);
+        _mockRepository.Setup( x =>  x.GetAsync(coffee.Id)).ReturnsAsync(coffee);
 
-        ICoffeeService coffeeService = new CoffeeService(context:mockContext.Object);
+        _coffeeService = new Mock<CoffeeService>(_mockRepository.Object, _mockValidator.Object);
 
-        var data = await coffeeService.GetAsync(1);
+        //Act
+        var coffeeObj = await _coffeeService.Object.GetAsync((int)coffee.Id);
 
-        Assert.Equal("Latte",data?.Name);
+        //Assert
+        coffeeObj.Should().BeOfType<Coffee>();
+        coffeeObj.Should().NotBeNull();
+        Assert.True(coffeeObj.Equals(coffee));
+        _mockRepository.Verify(service => service.GetAsync(coffee.Id));
     }
-    
     [Fact]
-    public async void GetAsyncTest2()
+    public void ValidatorTest()
     {
-        var mockCoffeeDbSet = Common.GetQueryableMockDbSetAsyncCompleteImpl(TestDataCreator.GetTestCoffeeData());
-        
-        var mockContext = new Mock<CoffeeShopContext>();
-        
-        mockContext.Setup(x=>x.Coffees).Returns(mockCoffeeDbSet);
+        var coffee = _fixture.Create<Coffee>();
+        coffee.Name = "gggggfgffffffffffffffffffffffffffffgfgfgghghghghghghghgghghghhghghghhghhghghghghghghhghghghghghghghghghghghghghghghghghghhg";
 
-        ICoffeeService coffeeService = new CoffeeService(context:mockContext.Object);
+        var validator = _mockValidator.Object.GetValidator<Coffee, CoffeeValidator>();
 
-        var data = await coffeeService.GetAsync(1);
-        Assert.Equal("Latte",data?.Name);
-        
-        Assert.Equal("Americano", coffeeService.GetAsync(2).Result?.Name);
-        Assert.Equal("Australia",coffeeService.GetAsync(5).Result?.Provider);
-        Assert.Equal("Efiopia",coffeeService.GetAsync(7).Result?.Provider);
+        var validationResult = validator.TestValidate(coffee);
 
-        var coffeService =(await coffeeService.GetAsync(2))?.Name;
-        //TODO unpacking tasks 
-        coffeService.Should().Be("Americano");
+        validationResult.ShouldHaveValidationErrorFor(x => x.Name);
     }
-
     [Fact]
     public async void GetAllAsyncTest()
     {
-        var mockCoffeeDbSet = Common.GetQueryableMockDbSetAsync(TestDataCreator.GetTestCoffeeData());
-        var mockContext = new Mock<CoffeeShopContext>();
+        //Arrange
+        var coffees = _fixture.CreateMany<Coffee>(10);
 
-        mockContext.Setup(x=>x.Coffees).Returns(mockCoffeeDbSet);
+        _mockRepository.Setup(x => x.GetAllAsync()).ReturnsAsync(coffees);
 
-        ICoffeeService coffeeService = new CoffeeService(context:mockContext.Object);
+        _coffeeService = new Mock<CoffeeService>(_mockRepository.Object, _mockValidator.Object);
 
-        var data=await coffeeService.GetAllAsync();
+        //Act
+        var producedCoffees = await _coffeeService.Object.GetAllAsync();
 
-        data.Should().BeOfType<List<Coffee>>().And.BeInAscendingOrder(x=>x.Id);
+        //Assert
+        _mockRepository.Verify(service => service.GetAllAsync());
+        Assert.Equal(coffees, producedCoffees);
     }
-    
+
+    [Fact]
+    public async void CreateAsyncCoffeeTest()
+    {
+        var coffee = _fixture.Create<Coffee>();
+
+        _mockRepository
+            .Setup(x => x.CreateAsync(coffee))
+            .ReturnsAsync(MessageCreator.SuccessfulCreateMessage<Coffee>());
+
+        _coffeeService = new Mock<CoffeeService>(_mockRepository.Object, _mockValidator.Object);
+        
+        var result = await _coffeeService.Object.CreateAsync(coffee);
+
+        _mockRepository.Verify(service => service.CreateAsync(coffee));
+
+        Assert.Equal(MessageCreator.SuccessfulCreateMessage<Coffee>(), result);
+    }
+
+    [Fact]
+    public async void UpdateAsyncCoffeeTest()
+    {
+        var coffee = _fixture.Create<Coffee>();
+
+        _mockRepository
+            .Setup(x => x.UpdateAsync(coffee))
+            .ReturnsAsync(MessageCreator.SuccessfulUpdateMessage<Coffee>());
+
+        _coffeeService = new Mock<CoffeeService>(_mockRepository.Object, _mockValidator.Object);
+
+        var result = await _coffeeService.Object.UpdateAsync(coffee);
+
+        _mockRepository.Verify(service => service.UpdateAsync(coffee));
+
+        Assert.Equal(MessageCreator.SuccessfulUpdateMessage<Coffee>(), result);
+    }
+
+    [Fact]
+    public async void DeleteAsyncCoffeeTest()
+    {
+        var coffee = _fixture.Create<Coffee>();
+
+        _mockRepository
+            .Setup(x => x.DeleteAsync(coffee))
+            .ReturnsAsync(MessageCreator.SuccessfulDeleteMessage<Coffee>());
+
+        _coffeeService = new Mock<CoffeeService>(_mockRepository.Object, _mockValidator.Object);
+
+        var result = await _coffeeService.Object.DeleteAsync(coffee);
+
+        _mockRepository.Verify(service => service.DeleteAsync(coffee));
+
+        Assert.Equal(MessageCreator.SuccessfulDeleteMessage<Coffee>(), result);
+    }
+
     [Fact]
     public void GetAllAsyncFixtureTest()
     {
-        var coffees = _fixture.CreateMany<Coffee>();
-        
-       // _fixture.Create<Coffee>().
+        var coffees = _fixture.CreateMany<Coffee>(100).OrderBy(x=>x.Id);
 
         coffees.Should().BeInAscendingOrder(x => x.Id);
     }
