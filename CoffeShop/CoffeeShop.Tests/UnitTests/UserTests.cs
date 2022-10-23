@@ -1,12 +1,9 @@
-﻿using CoffeeShop.BusinessLogic.Authentication;
-using CoffeeShop.BusinessLogic.Common;
-using CoffeeShop.BusinessLogic.MainBusinessLogic.Services;
+﻿using CoffeeShop.BusinessLogic.Common.CommonChecker;
 using CoffeeShop.BusinessLogic.MainBusinessLogic.Services.IdentityServices;
 using CoffeeShop.BusinessLogic.Validation;
 using CoffeeShop.BusinessLogic.Validation.Validators;
 using CoffeeShop.DataAccess.Common;
 using CoffeeShop.DataAccess.Repositories.CustomRepositories.UserRepositories;
-using CoffeeShop.Domain.Entities;
 using CoffeeShop.Domain.Entities.Identity;
 using CoffeShop.Api.Authentication;
 using FluentAssertions;
@@ -21,7 +18,7 @@ public class UserTests
     private Mock<UserService> _userService;
     private readonly Mock<IUserRepository> _mockRepository;
     private readonly Mock<MainValidator> _mockValidator;
-    private readonly Mock<CommonChecker> _commonChecker;
+    private readonly Mock<ICommonChecker> _commonChecker;
     public UserTests()
     {
         _fixture = new Fixture();
@@ -29,7 +26,7 @@ public class UserTests
         _fixture.Behaviors.Add(new OmitOnRecursionBehavior());
         _mockRepository = new Mock<IUserRepository>();
         _mockValidator = new Mock<MainValidator>(new Mock<ValidatorsFactory>().Object);
-        _commonChecker = new Mock<CommonChecker>(new Mock<IUserIdentityProfileProvider>().Object);
+        _commonChecker = new Mock<ICommonChecker>();
     }
     [Fact]
     public async void GetAsyncTest()
@@ -38,8 +35,8 @@ public class UserTests
         var user = _fixture.Create<User>();
 
         _mockRepository.Setup(x => x.GetAsync(user.Login)).ReturnsAsync(user);
-        var mockUserIdentityProfileProvider = new Mock<IUserIdentityProfileProvider>();
-        var mockCommonChecker = new Mock<CommonChecker>(mockUserIdentityProfileProvider.Object);
+
+        var mockCommonChecker = new Mock<ICommonChecker>();
         _userService = new Mock<UserService>(
             _mockRepository.Object,
             _mockValidator.Object,
@@ -66,84 +63,92 @@ public class UserTests
         validationResult.ShouldHaveValidationErrorFor(x => x.LastName);
         validationResult.ShouldHaveValidationErrorFor(x => x.Login);
     }
-    //[Fact]
-    //public async void GetAllAsyncTest()
-    //{
-    //    //Arrange
-    //    var coffees = _fixture.CreateMany<Coffee>(10);
+    [Fact]
+    public async void GetAllAsyncTest()
+    {
+        //Arrange
+        var users = _fixture.CreateMany<User>(10);
 
-    //    _mockRepository.Setup(x => x.GetAllAsync()).ReturnsAsync(coffees);
+        _mockRepository.Setup(x => x.GetAllAsync()).ReturnsAsync(users);
 
-    //    _userService = new Mock<CoffeeService>(_mockRepository.Object, _mockValidator.Object);
+        _userService = new Mock<UserService>(_mockRepository.Object, _mockValidator.Object, _commonChecker.Object);
 
-    //    //Act
-    //    var producedCoffees = await _userService.Object.GetAllAsync();
+        //Act
+        var producedCoffees = await _userService.Object.GetAllAsync();
 
-    //    //Assert
-    //    _mockRepository.Verify(service => service.GetAllAsync());
-    //    Assert.Equal(coffees, producedCoffees);
-    //}
+        //Assert
+        _mockRepository.Verify(service => service.GetAllAsync());
+        Assert.Equal(users, producedCoffees);
+    }
 
-    //[Fact]
-    //public async void CreateAsyncCoffeeTest()
-    //{
-    //    var coffee = _fixture.Create<Coffee>();
+    [Fact]
+    public async void CreateAsyncUserTest()
+    {
+        var user = _fixture.Create<User>();
 
-    //    _mockRepository
-    //        .Setup(x => x.CreateAsync(coffee))
-    //        .ReturnsAsync(MessageCreator.SuccessfulCreateMessage<Coffee>());
+        _mockRepository
+            .Setup(x => x.CreateAsync(user))
+            .ReturnsAsync(MessageCreator.SuccessfulCreateMessage<User>());
 
-    //    _userService = new Mock<CoffeeService>(_mockRepository.Object, _mockValidator.Object);
+        _userService = new Mock<UserService>(_mockRepository.Object, _mockValidator.Object, _commonChecker.Object);
 
-    //    var result = await _userService.Object.CreateAsync(coffee);
+        var result = await _userService.Object.CreateAsync(user);
 
-    //    _mockRepository.Verify(service => service.CreateAsync(coffee));
+        _mockRepository.Verify(service => service.CreateAsync(user));
 
-    //    Assert.Equal(MessageCreator.SuccessfulCreateMessage<Coffee>(), result);
-    //}
+        Assert.Equal(MessageCreator.SuccessfulCreateMessage<User>(), result);
+    }
 
-    //[Fact]
-    //public async void UpdateAsyncCoffeeTest()
-    //{
-    //    var coffee = _fixture.Create<Coffee>();
+    [Fact]
+    public async void UpdateAsyncCoffeeTest()
+    {
+        var user = _fixture.Create<User>();
 
-    //    _mockRepository
-    //        .Setup(x => x.UpdateAsync(coffee))
-    //        .ReturnsAsync(MessageCreator.SuccessfulUpdateMessage<Coffee>());
+        _mockRepository
+            .Setup(x => x.UpdateAsync(user))
+            .ReturnsAsync(MessageCreator.SuccessfulUpdateMessage<User>());
 
-    //    _userService = new Mock<CoffeeService>(_mockRepository.Object, _mockValidator.Object);
+        _commonChecker
+            .Setup(x => x.CouldChangeUserData(user))
+            .Returns(true);
 
-    //    var result = await _userService.Object.UpdateAsync(coffee);
+        _userService = new Mock<UserService>(_mockRepository.Object, _mockValidator.Object, _commonChecker.Object);
 
-    //    _mockRepository.Verify(service => service.UpdateAsync(coffee));
+        var result = await _userService.Object.UpdateAsync(user);
 
-    //    Assert.Equal(MessageCreator.SuccessfulUpdateMessage<Coffee>(), result);
-    //}
+        _mockRepository.Verify(service => service.UpdateAsync(user));
 
-    //[Fact]
-    //public async void DeleteAsyncCoffeeTest()
-    //{
-    //    var coffee = _fixture.Create<Coffee>();
+        Assert.Equal(MessageCreator.SuccessfulUpdateMessage<User>(), result);
+    }
 
-    //    _mockRepository
-    //        .Setup(x => x.DeleteAsync(coffee))
-    //        .ReturnsAsync(MessageCreator.SuccessfulDeleteMessage<Coffee>());
+    [Fact]
+    public async void DeleteAsyncCoffeeTest()
+    {
+        var user = _fixture.Create<User>();
 
-    //    _userService = new Mock<CoffeeService>(_mockRepository.Object, _mockValidator.Object);
+        _mockRepository
+            .Setup(x => x.DeleteAsync(user))
+            .ReturnsAsync(MessageCreator.SuccessfulDeleteMessage<User>());
 
-    //    var result = await _userService.Object.DeleteAsync(coffee);
+        _commonChecker
+            .Setup(x => x.CouldChangeUserData(user))
+            .Returns(true);
 
-    //    _mockRepository.Verify(service => service.DeleteAsync(coffee));
+        _userService = new Mock<UserService>(_mockRepository.Object, _mockValidator.Object, _commonChecker.Object);
 
-    //    Assert.Equal(MessageCreator.SuccessfulDeleteMessage<Coffee>(), result);
-    //}
+        var result = await _userService.Object.DeleteAsync(user);
 
-    //[Fact]
-    //public void GetAllAsyncFixtureTest()
-    //{
-    //    var coffees = _fixture.CreateMany<Coffee>(100).OrderBy(x => x.Id);
+        _mockRepository.Verify(service => service.DeleteAsync(user));
 
-    //    coffees.Should().BeInAscendingOrder(x => x.Id);
-    //}
+        Assert.Equal(MessageCreator.SuccessfulDeleteMessage<User>(), result);
+    }
+
+    [Fact]
+    public void GetAllAsyncFixtureTest()
+    {
+        var coffees = _fixture.CreateMany<User>(100).OrderBy(x => x.Login);
+
+        coffees.Should().BeInAscendingOrder(x => x.Login);
+    }
 }
 
