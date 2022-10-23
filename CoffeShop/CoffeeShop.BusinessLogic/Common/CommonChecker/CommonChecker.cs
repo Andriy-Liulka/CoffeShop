@@ -2,9 +2,9 @@
 using CoffeeShop.Domain.Entities.Identity;
 using CoffeShop.Api.Authentication;
 
-namespace CoffeeShop.BusinessLogic.Common;
+namespace CoffeeShop.BusinessLogic.Common.CommonChecker;
 
-public class CommonChecker
+public class CommonChecker : ICommonChecker
 {
     private readonly IUserIdentityProfileProvider _identityProfileProvider;
     public CommonChecker(IUserIdentityProfileProvider identityProfileProvider)

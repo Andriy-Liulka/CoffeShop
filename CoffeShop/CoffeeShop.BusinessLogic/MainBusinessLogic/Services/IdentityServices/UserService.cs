@@ -1,4 +1,4 @@
-﻿using CoffeeShop.BusinessLogic.Common;
+﻿using CoffeeShop.BusinessLogic.Common.CommonChecker;
 using CoffeeShop.BusinessLogic.Exceptions;
 using CoffeeShop.BusinessLogic.MainBusinessLogic.ServiceInterfaces;
 using CoffeeShop.BusinessLogic.Validation;
@@ -13,9 +13,9 @@ public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
     private readonly IMainValidator _validator;
-    private readonly CommonChecker _commonChecker;
+    private readonly ICommonChecker _commonChecker;
 
-    public UserService(IUserRepository userRepository, IMainValidator validator,CommonChecker commonChecker)
+    public UserService(IUserRepository userRepository, IMainValidator validator, ICommonChecker commonChecker)
     {
         _userRepository = userRepository;
         _validator = validator;
