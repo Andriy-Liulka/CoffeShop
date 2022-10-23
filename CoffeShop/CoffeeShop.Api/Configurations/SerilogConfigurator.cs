@@ -5,7 +5,8 @@ namespace CoffeShop.Api.Configurations;
 
 public static class SerilogConfigurator
 {
-    public static void ConfigureSerilog(HostBuilderContext hostContext, IServiceProvider serviceProvider,
+    public static void ConfigureSerilog(HostBuilderContext hostContext,
+        IServiceProvider serviceProvider,
         LoggerConfiguration configuration)
     {
         File.WriteAllText("log.txt", String.Empty);
