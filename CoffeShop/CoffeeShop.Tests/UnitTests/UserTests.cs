@@ -5,7 +5,6 @@ using CoffeeShop.BusinessLogic.Validation.Validators;
 using CoffeeShop.DataAccess.Common;
 using CoffeeShop.DataAccess.Repositories.CustomRepositories.UserRepositories;
 using CoffeeShop.Domain.Entities.Identity;
-using CoffeShop.Api.Authentication;
 using FluentAssertions;
 using FluentValidation.TestHelper;
 using Moq;
