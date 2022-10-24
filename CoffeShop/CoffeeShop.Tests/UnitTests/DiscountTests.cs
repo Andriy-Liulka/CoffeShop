@@ -8,134 +8,134 @@ using FluentAssertions;
 using Moq;
 using FluentValidation.TestHelper;
 
-namespace CoffeeShop.Tests.UnitTests
+namespace CoffeeShop.Tests.UnitTests;
+
+public class DiscountTests
 {
-    public class DiscountTests
+    private readonly Fixture _fixture;
+    private Mock<DiscountService> _discountService;
+    private readonly Mock<IDiscountRepository> _mockRepository;
+    private readonly Mock<MainValidator> _mockValidator;
+    public DiscountTests()
     {
-        private readonly Fixture _fixture;
-        private Mock<DiscountService> _discountService;
-        private readonly Mock<IDiscountRepository> _mockRepository;
-        private readonly Mock<MainValidator> _mockValidator;
-        public DiscountTests()
-        {
-            _fixture = new Fixture();
-            _fixture.Behaviors.Remove(new ThrowingRecursionBehavior());
-            _fixture.Behaviors.Add(new OmitOnRecursionBehavior());
-            _mockRepository = new Mock<IDiscountRepository>();
-            _mockValidator = new Mock<MainValidator>(new Mock<ValidatorsFactory>().Object);
-        }
-        [Fact]
-        public async void GetAsyncTest()
-        {
-            //Arrange
-            var volume = _fixture.Create<Discount>();
+        _fixture = new Fixture();
+        _fixture.Behaviors.Remove(new ThrowingRecursionBehavior());
+        _fixture.Behaviors.Add(new OmitOnRecursionBehavior());
+        _mockRepository = new Mock<IDiscountRepository>();
+        _mockValidator = new Mock<MainValidator>(new Mock<ValidatorsFactory>().Object);
+    }
+    [Fact]
+    public async void GetAsyncTest()
+    {
+        //Arrange
+        var volume = _fixture.Create<Discount>();
 
-            _mockRepository.Setup(x => x.GetAsync(volume.Id)).ReturnsAsync(volume);
+        _mockRepository.Setup(x => x.GetAsync(volume.Id)).ReturnsAsync(volume);
 
-            _discountService = new Mock<DiscountService>(_mockRepository.Object, _mockValidator.Object);
+        _discountService = new Mock<DiscountService>(_mockRepository.Object, _mockValidator.Object);
 
-            //Act
-            var volumeObj = await _discountService.Object.GetAsync((int)volume.Id);
+        //Act
+        var volumeObj = await _discountService.Object.GetAsync((int)volume.Id);
 
-            //Assert
-            volumeObj.Should().BeOfType<Discount>();
-            volumeObj.Should().NotBeNull();
-            Assert.True(volumeObj.Equals(volume));
-            _mockRepository.Verify(service => service.GetAsync(volume.Id));
-        }
-        [Fact]
-        public void ValidatorTest()
-        {
-            var discount = _fixture.Create<Discount>();
-            discount.Percent = 100;
+        //Assert
+        volumeObj.Should().BeOfType<Discount>();
+        volumeObj.Should().NotBeNull();
+        Assert.True(volumeObj.Equals(volume));
+        _mockRepository.Verify(service => service.GetAsync(volume.Id));
+    }
+    [Fact]
+    public void ValidatorTest()
+    {
+        var discount = _fixture.Create<Discount>();
+        discount.Percent = 100;
 
-            var validator = _mockValidator.Object.GetValidator<Discount, DiscountValidator>();
+        var validator = _mockValidator.Object.GetValidator<Discount, DiscountValidator>();
 
-            var validationResult = validator.TestValidate(discount);
+        var validationResult = validator.TestValidate(discount);
 
-            validationResult.ShouldNotHaveAnyValidationErrors();
-        }
-        [Fact]
-        public async void GetAllAsyncTest()
-        {
-            //Arrange
-            var discounts = _fixture.CreateMany<Discount>(10);
+        validationResult.ShouldNotHaveAnyValidationErrors();
+    }
+    [Fact]
+    public async void GetAllAsyncTest()
+    {
+        //Arrange
+        var discounts = _fixture.CreateMany<Discount>(10);
 
-            _mockRepository.Setup(x => x.GetAllAsync()).ReturnsAsync(discounts);
+        _mockRepository.Setup(x => x.GetAllAsync()).ReturnsAsync(discounts);
 
-            _discountService = new Mock<DiscountService>(_mockRepository.Object, _mockValidator.Object);
+        _discountService = new Mock<DiscountService>(_mockRepository.Object, _mockValidator.Object);
 
-            //Act
-            var producedDiscounts = await _discountService.Object.GetAllAsync();
+        //Act
+        var producedDiscounts = await _discountService.Object.GetAllAsync();
 
-            //Assert
-            _mockRepository.Verify(service => service.GetAllAsync());
-            Assert.Equal(discounts, producedDiscounts);
-        }
+        //Assert
+        _mockRepository.Verify(service => service.GetAllAsync());
+        Assert.Equal(discounts, producedDiscounts);
+    }
 
-        [Fact]
-        public async void CreateAsyncDiscountTest()
-        {
-            var discount = _fixture.Create<Discount>();
-            discount.Percent = 100;
+    [Fact]
+    public async void CreateAsyncDiscountTest()
+    {
+        var discount = _fixture.Create<Discount>();
+        discount.Percent = 100;
 
-            _mockRepository
-                .Setup(x => x.CreateAsync(discount))
-                .ReturnsAsync(MessageCreator.SuccessfulCreateMessage<Discount>());
+        _mockRepository
+            .Setup(x => x.CreateAsync(discount))
+            .ReturnsAsync(MessageCreator.SuccessfulCreateMessage<Discount>());
 
-            _discountService = new Mock<DiscountService>(_mockRepository.Object, _mockValidator.Object);
+        _discountService = new Mock<DiscountService>(_mockRepository.Object, _mockValidator.Object);
 
-            var result = await _discountService.Object.CreateAsync(discount);
+        var result = await _discountService.Object.CreateAsync(discount);
 
-            _mockRepository.Verify(service => service.CreateAsync(discount));
+        _mockRepository.Verify(service => service.CreateAsync(discount));
 
-            Assert.Equal(MessageCreator.SuccessfulCreateMessage<Discount>(), result);
-        }
+        Assert.Equal(MessageCreator.SuccessfulCreateMessage<Discount>(), result);
+    }
 
-        [Fact]
-        public async void UpdateAsyncDiscountTest()
-        {
-            var discount = _fixture.Create<Discount>();
-            discount.Percent = 100;
+    [Fact]
+    public async void UpdateAsyncDiscountTest()
+    {
+        var discount = _fixture.Create<Discount>();
+        discount.Percent = 100;
 
-            _mockRepository
-                .Setup(x => x.UpdateAsync(discount))
-                .ReturnsAsync(MessageCreator.SuccessfulUpdateMessage<Discount>());
+        _mockRepository
+            .Setup(x => x.UpdateAsync(discount))
+            .ReturnsAsync(MessageCreator.SuccessfulUpdateMessage<Discount>());
 
-            _discountService = new Mock<DiscountService>(_mockRepository.Object, _mockValidator.Object);
+        _discountService = new Mock<DiscountService>(_mockRepository.Object, _mockValidator.Object);
 
-            var result = await _discountService.Object.UpdateAsync(discount);
+        var result = await _discountService.Object.UpdateAsync(discount);
 
-            _mockRepository.Verify(service => service.UpdateAsync(discount));
+        _mockRepository.Verify(service => service.UpdateAsync(discount));
 
-            Assert.Equal(MessageCreator.SuccessfulUpdateMessage<Discount>(), result);
-        }
+        Assert.Equal(MessageCreator.SuccessfulUpdateMessage<Discount>(), result);
+    }
 
-        [Fact]
-        public async void DeleteAsyncDiscountTest()
-        {
-            var discount = _fixture.Create<Discount>();
-            discount.Percent = 100;
+    [Fact]
+    public async void DeleteAsyncDiscountTest()
+    {
+        var discount = _fixture.Create<Discount>();
+        discount.Percent = 100;
 
-            _mockRepository
-                .Setup(x => x.DeleteAsync(discount))
-                .ReturnsAsync(MessageCreator.SuccessfulDeleteMessage<Discount>());
+        _mockRepository
+            .Setup(x => x.DeleteAsync(discount))
+            .ReturnsAsync(MessageCreator.SuccessfulDeleteMessage<Discount>());
 
-            _discountService = new Mock<DiscountService>(_mockRepository.Object, _mockValidator.Object);
+        _discountService = new Mock<DiscountService>(_mockRepository.Object, _mockValidator.Object);
 
-            var result = await _discountService.Object.DeleteAsync(discount);
+        var result = await _discountService.Object.DeleteAsync(discount);
 
-            _mockRepository.Verify(service => service.DeleteAsync(discount));
+        _mockRepository.Verify(service => service.DeleteAsync(discount));
 
-            Assert.Equal(MessageCreator.SuccessfulDeleteMessage<Discount>(), result);
-        }
+        Assert.Equal(MessageCreator.SuccessfulDeleteMessage<Discount>(), result);
+    }
 
-        [Fact]
-        public void GetAllAsyncFixtureTest()
-        {
-            var discounts = _fixture.CreateMany<Discount>(100).OrderBy(x => x.Id);
+    [Fact]
+    public void GetAllAsyncFixtureTest()
+    {
+        var discounts = _fixture.CreateMany<Discount>(100).OrderBy(x => x.Id);
 
-            discounts.Should().BeInAscendingOrder(x => x.Id);
-        }
+        discounts.Should().BeInAscendingOrder(x => x.Id);
     }
 }
+
