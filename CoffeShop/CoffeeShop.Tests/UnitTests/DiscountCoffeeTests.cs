@@ -6,6 +6,8 @@ using Moq;
 using CoffeeShop.BusinessLogic.MainBusinessLogic.Services.MtM_Services;
 using CoffeeShop.DataAccess.Repositories.CustomRepositories.DiscountCoffeeRepositories;
 using CoffeeShop.Domain.Entities.MtM_IntermediateEntities;
+using CoffeeShop.BusinessLogic.Validation.Validators;
+using FluentValidation.TestHelper;
 
 namespace CoffeeShop.Tests.UnitTests;
 
@@ -43,7 +45,17 @@ public class DiscountCoffeeTests
         Assert.True(volumeObj.Equals(discountCoffee));
         _mockRepository.Verify(service => service.GetAsync((int)discountCoffee.CoffeeId, (int)discountCoffee.DiscountId));
     }
+    [Fact]
+    public void ValidatorTest()
+    {
+        var discountCoffee = _fixture.Create<DiscountCoffee>();
 
+        var validator = _mockValidator.Object.GetValidator<DiscountCoffee, DiscountCoffeeValidator>();
+
+        var validationResult = validator.TestValidate(discountCoffee);
+
+        validationResult.ShouldNotHaveAnyValidationErrors();
+    }
     [Fact]
     public async void GetAllAsyncTest()
     {
