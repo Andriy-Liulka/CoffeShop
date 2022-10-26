@@ -137,7 +137,7 @@ public class Startup
         app.UseAuthentication();
         app.UseAuthorization();
 
-        app.UseMiddleware<ErrorHandlerMiddleware>();
+        //app.UseMiddleware<ErrorHandlerMiddleware>();
 
         app.UseEndpoints(endpoints =>
         {

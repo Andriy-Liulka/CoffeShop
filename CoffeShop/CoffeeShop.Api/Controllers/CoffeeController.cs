@@ -4,9 +4,11 @@ using CoffeeShop.Domain.Entities;
 using CoffeShop.Api.Controllers.Identity.Authorization;
 using CoffeShop.Api.Controllers.Identity.Authorization.Policies;
 using CoffeShop.Api.Dto.Input;
+using CoffeShop.Api.Filters.ExceptionFilters;
 using CoffeShop.Api.ProxyExceptionHandlingLayer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Web.Http.Filters;
 
 namespace CoffeShop.Api.Controllers;
 
@@ -35,12 +37,14 @@ public class CoffeeController : ControllerBase
     public async Task<IActionResult> GetAllAsync()
         => await _proxyExceptionHandler.ExecuteAsync(_service.GetAllAsync);
 
+    [CustomExceptionFilter]
+    [AllowAnonymous]
     [Route("{id}")]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> GetAsync([FromRoute] int id)
-        => await _proxyExceptionHandler.ExecuteAsync(_service.GetAsync, id);
+        =>  Ok(await _service.GetAsync(id));
 
     [Route("create")]
     [HttpPost]
